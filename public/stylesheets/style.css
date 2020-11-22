@@ -470,9 +470,6 @@ h1.single{
 	width: 100%;
 }
 
-#sidebar .calendar table tr {
-}
-
 #sidebar .calendar th {
 	font-family: 'BebasNeue';
 	font-size: 18px;
@@ -1206,8 +1203,6 @@ a.btn.blue,
 	z-index: 8030;
 }
 
-.fancybox-opened .fancybox-skin {
-}
 
 .fancybox-outer, .fancybox-inner {
 	position: relative;
