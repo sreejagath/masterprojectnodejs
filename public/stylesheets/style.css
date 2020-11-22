@@ -186,7 +186,7 @@ a:hover {
 	cursor: pointer;
 	margin: 0 auto -82px;
 	text-indent: -9999em;
-	background: url(../images/logo.png) no-repeat;
+	background: url(../images/logo-main.png) no-repeat;
 	position: relative;
 	z-index: 3;
 }
@@ -470,7 +470,8 @@ h1.single{
 	width: 100%;
 }
 
-
+#sidebar .calendar table tr {
+}
 
 #sidebar .calendar th {
 	font-family: 'BebasNeue';
@@ -1205,7 +1206,8 @@ a.btn.blue,
 	z-index: 8030;
 }
 
-
+.fancybox-opened .fancybox-skin {
+}
 
 .fancybox-outer, .fancybox-inner {
 	position: relative;
