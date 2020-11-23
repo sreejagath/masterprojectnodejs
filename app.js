@@ -9,6 +9,7 @@ var tutorRouter = require('./routes/tutor');
 var studentRouter = require('./routes/student');
 var hbs = require('express-handlebars')
 var db=require('./config/connection')
+var session=require('express-session')
 var app = express();
 
 // view engine setup
@@ -20,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(session({secret:"Key",cookie:{maxAge:600000000}}));
 db.connect((err)=>{
   if(err) console.log("Error"+err);
   console.log("Database connected to port");
