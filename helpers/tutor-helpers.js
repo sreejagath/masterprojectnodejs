@@ -15,14 +15,11 @@ module.exports={
         return new Promise(async(resolve,reject)=>{
             let loginStatus=false
             let response={}
-            let tutor=await db.get().collection(collection.TUTOR_COLLECTION).findOne({user:tutorData.username})
+            let tutor=await db.get().collection(collection.TUTOR_COLLECTION).findOne({username:tutorData.username})
             if(tutor){
                 bcrypt.compare(tutorData.password,tutor.password).then((status)=>{
                     if(status){
                         console.log("Login Success")
-                        response.tutor=tutor
-                        response.status=true
-                        resolve(response)
                     }else{
                         console.log("Login Failed")
                         resolve({status:false})
