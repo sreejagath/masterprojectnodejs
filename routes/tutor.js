@@ -27,11 +27,14 @@ router.get('/tutor-login', function(req, res, next) {
     })
   })
 router.get('/tutor-home', function(req, res, next) {
+    let tutor=req.session.tutor
     console.log("login");
-    res.render('tutor/tutor-home');
+    res.render('tutor/tutor-home',{tutor});
   });
   router.get('/tutor-signup', function(req, res, next) {
+    
     console.log("login page");
+   
     res.render('tutor/tutor-signup');
   }); 
 

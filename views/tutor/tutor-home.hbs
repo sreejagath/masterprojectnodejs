@@ -2,8 +2,11 @@
       <div class="templatemo-sidebar">
         <header class="templatemo-site-header">
           <div class="square"></div>
-          <h1>Hi , Tutor!</h1>
-        </header>
+          {{#if tutor}}
+         
+          <h1>Hi ,{{tutor.tutorname}}</h1>
+          {{/if}}
+          </header>
         <!-- Search box -->
         
         <div class="mobile-menu-icon">
