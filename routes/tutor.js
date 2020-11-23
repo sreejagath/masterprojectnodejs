@@ -15,6 +15,8 @@ router.get('/tutor-login', function(req, res, next) {
     tutorHelpers.doLogin(req.body).then((response)=>{
       console.log(response);
       if(response.status){
+      req.session.loggedIn=true
+      req.session.tutor=response.tutor
       res.render('tutor/tutor-home');
       }
     })
