@@ -20,6 +20,9 @@ module.exports={
                 bcrypt.compare(tutorData.password,tutor.password).then((status)=>{
                     if(status){
                         console.log("Login Success")
+                        response.tutor=tutor
+                        response.status=true
+                        resolve(response)
                     }else{
                         console.log("Login Failed")
                         resolve({status:false})

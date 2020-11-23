@@ -14,7 +14,9 @@ router.get('/tutor-login', function(req, res, next) {
   router.post('/tutor-login', function(req, res, next) {
     tutorHelpers.doLogin(req.body).then((response)=>{
       console.log(response);
-      res.render('tutor/tutor-login');
+      if(response.status){
+      res.render('tutor/tutor-home');
+      }
     })
   });
   router.post('/tutor-signup',(req,res)=>{
