@@ -11,6 +11,11 @@ router.get('/tutor-login', function(req, res, next) {
     console.log("login page");
     res.render('tutor/tutor-login');
   });
+  router.post('/tutor-login', function(req, res, next) {
+    tutorHelpers.doLogin(req.body).then((response)=>{
+      console.log(response);
+    })
+  });
   router.post('/tutor-signup',(req,res)=>{
     tutorHelpers.doSignup(req.body).then((response)=>{
       console.log(response);
@@ -24,5 +29,5 @@ router.get('/tutor-home', function(req, res, next) {
     console.log("login page");
     res.render('tutor/tutor-signup');
   }); 
-  
+
 module.exports = router;
