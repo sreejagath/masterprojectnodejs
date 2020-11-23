@@ -10,7 +10,7 @@ router.get('/tutor-login', function(req, res, next) {
     console.log("login page");
     res.render('tutor/tutor-login');
   });
-  router.post('/tutor/login', function(req, res, next) {
+  router.post('/tutor/tutor-signup', function(req, res, next) {
     console.log("login vb");
     res.render('tutor/tutor-login');
   });
