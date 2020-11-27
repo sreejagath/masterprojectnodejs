@@ -43,4 +43,13 @@ router.get('/logout',function(req,res,next){
   req.session.destroy()
   res.render('index')
 })
+router.get('/student/student-login',function(req,res,next){
+  if(req.session.tutorLoggedIn){
+    console.log('not logged');
+    res.render('tutor/view-students');
+  }else{
+    console.log("not logged in as tutor");
+    res.render('student/student-login');
+  }
+})
 module.exports = router;
