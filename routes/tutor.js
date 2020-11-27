@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 router.get('/tutor-login', function(req, res, next) {
-  if(req.session.loggedIn){
+  if(req.session.tutorLoggedIn){
     res.render('tutor/tutor-home');
   }else{
     console.log("login page");
@@ -19,7 +19,7 @@ router.get('/tutor-login', function(req, res, next) {
     tutorHelpers.doLogin(req.body).then((response)=>{
       console.log(response);
       if(response.status){
-      req.session.loggedIn=true
+      req.session.tutorLoggedIn=true
       req.session.tutor=response.tutor
       res.render('tutor/tutor-home');
       }
