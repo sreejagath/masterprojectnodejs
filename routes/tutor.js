@@ -8,8 +8,12 @@ router.get('/', function(req, res, next) {
   res.render('tutor/tutor-main');
 });
 router.get('/tutor-login', function(req, res, next) {
+  if(req.session.loggedIn){
+    res.render('tutor/tutor-home');
+  }else{
     console.log("login page");
     res.render('tutor/tutor-login');
+  }
   });
   router.post('/tutor-login', function(req, res, next) {
     tutorHelpers.doLogin(req.body).then((response)=>{
