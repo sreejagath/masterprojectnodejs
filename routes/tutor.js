@@ -5,7 +5,7 @@ const tutorHelpers=require('../helpers/tutor-helpers');
 /* GET users listing. */
 
 router.get('/', function(req, res, next) {
-  res.render('tutor/tutor-main');
+  res.render('index');
 });
 router.get('/tutor-login', function(req, res, next) {
   if(req.session.loggedIn){
@@ -41,6 +41,6 @@ router.get('/tutor-home', function(req, res, next) {
   })
 router.get('/logout',function(req,res,next){
   req.session.destroy()
-  res.render('tutor/tutor-main')
+  res.render('index')
 })
 module.exports = router;
