@@ -12,7 +12,8 @@ router.get('/tutor-login', function(req, res, next) {
     res.render('tutor/tutor-home');
   }else{
     console.log("login page");
-    res.render('tutor/tutor-login');
+    res.render('tutor/tutor-login',{"loginErr":req.session.loginErr})
+    req.session.loginErr=false
   }
   });
   router.post('/tutor-login', function(req, res, next) {
@@ -22,6 +23,9 @@ router.get('/tutor-login', function(req, res, next) {
       req.session.tutorLoggedIn=true
       req.session.tutor=response.tutor
       res.render('tutor/tutor-home');
+      }else{
+        req.session.loginErr=true;
+        res.redirect('tutor-login');
       }
     })
   });

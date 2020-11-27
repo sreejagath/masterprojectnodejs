@@ -22,7 +22,9 @@
       </div>
     </form>
   </div>
- 
+ {{#if loginErr}}
+ <center><p>Invalid Username or password!!</p></center>
+ {{/if}}
   <style>
     form {
       margin-left: 30%;
@@ -77,5 +79,8 @@
 
     .container {
       padding: 16px;
+    }
+    center{
+      margin-bottom: 30px;
     }
   </style>
