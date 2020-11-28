@@ -56,4 +56,8 @@ router.get('/student/student-login',function(req,res,next){
     res.render('student/student-login');
   }
 })
+router.get('/tutor-profile', function(req, res, next) {
+  console.log("Profile Page");
+  res.render('tutor/tutor-profile');
+})
 module.exports = router;
