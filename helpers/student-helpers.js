@@ -9,5 +9,5 @@ module.exports={
             resolve(data.ops[0])
         })
         })
-    },
+    }
 }

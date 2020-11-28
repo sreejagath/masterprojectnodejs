@@ -14,4 +14,13 @@ router.get('/student/student-login', function(req, res, next) {
     res.render('student/student-login');
   }
 });
+router.post('/student-signup',(req,res)=>{
+  studentHelpers.doSignup(req.body).then((response)=>{
+    console.log(response);
+  })
+})
+router.get('/student-signup', function(req, res, next) {
+  console.log("login page");
+  res.render('student/student-signup');
+})
 module.exports = router;
