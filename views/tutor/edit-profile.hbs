@@ -43,41 +43,61 @@
   <img  style="margin-top: 3%;" src="/images/img_avatar.png" alt="Avatar">
   <button>Edit Image</button>
 </div>
-		<form action="/tutor/tutor-signup" class="templatemo-login-form" method="post">
+		<form action="/tutor/edit-profile" class="templatemo-login-form" method="post">
+		{{#each tutordetails}}
 	        	<div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Name" name="tutorname">           
+		              	<input type="text" class="form-control" value="{{this.tutorname}}" name="tutorname">           
 		          	</div>	
 	        	</div>
                 <div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Phone Number" name="tutorphone">           
+		              	<input type="text" class="form-control" value="{{this.tutorphone}}" name="tutorphone">           
 		          	</div>	
 	        	</div>
                 <div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Email" name="tutormail">           
+		              	<input type="text" class="form-control" value="{{this.tutormail}}" name="tutormail">           
 		          	</div>	
 	        	</div>
+				<div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
+		              	<input type="text" class="form-control" value="{{this.tutorcourse}}" name="tutorcourse">           
+		          	</div>	
+	        	</div>
+				<div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
+		              	<input type="text" class="form-control" value="{{this.dob}}" name="dob">           
+		          	</div>	
+	        	</div>
+				<div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
+		              	<input type="text" class="form-control" value="Resume" name="resume">           
+		          	</div>	
+	        	</div>	 	
                 <div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Username" name="username">           
+		              	<input type="text" class="form-control" value="{{this.username}}" name="username">           
 		          	</div>	
 	        	</div>
 	        	<div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="password" class="form-control" placeholder="Password" name="password">           
+		              	<input type="password" class="form-control" value="Change Password" name="password">           
 		          	</div>	
 	        	</div>	          	
 	          	
 				<div class="form-group">
 					<button type="submit" class="templatemo-blue-button width-100">UPDATE</button>
 				</div>
+				{{/each}}
 	        </form>
         </div>
       </div>
