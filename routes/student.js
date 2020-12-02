@@ -1,11 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
+const studentHelpers=require('../helpers/student-helpers');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.render('index');
-});router.get('/student-login', function(req, res, next) {
-  if(req.session.studentLoggedIn){
+});
+router.get('/student-login', function(req, res, next) {
+  if(req.session.tutorLoggedIn){
+    console.log('not logged');
+    res.render('tutor/view-students');
+  }else if(req.session.studentLoggedIn){
     res.render('student/student-home');
   }else{
     console.log("login page");
@@ -19,6 +24,7 @@ router.get('/', function(req, res, next) {
       if(response.status){
       req.session.studentLoggedIn=true
       req.session.student=response.student
+      console.log("Entering to Student Home");
       res.render('student/student-home');
       }else{
         req.session.loginErr=true;
@@ -26,9 +32,10 @@ router.get('/', function(req, res, next) {
       }
     })
   });
-  router.post('/student-signup',(req,res)=>{
+  router.post('student/student-signup',(req,res)=>{
     studentHelpers.doSignup(req.body).then((response)=>{
       console.log(response);
+      res.render('/student/student-login');
     })
   })
 router.get('/student-home', function(req, res, next) {
@@ -36,7 +43,7 @@ router.get('/student-home', function(req, res, next) {
     console.log("login");
     res.render('student/student-home',{student});
   })
-  router.get('/student/student-signup', function(req, res, next) {
+  router.get('/student-signup', function(req, res, next) {
     console.log("login page");
     res.render('student/student-signup');
   })
@@ -47,7 +54,7 @@ router.get('/logout',function(req,res,next){
 router.get('/student/student-login',function(req,res,next){
   if(req.session.studentLoggedIn){
     console.log('not logged');
-    res.render('student/view-students');
+    res.render('student/view-teachers');
   }else{
     console.log("not logged in as student");
     res.render('student/student-login');

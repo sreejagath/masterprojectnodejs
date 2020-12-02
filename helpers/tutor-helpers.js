@@ -32,7 +32,6 @@ module.exports={
                 console.log("Login Failed")
                 resolve({status:false})
             }
-    
         })
     }
 }

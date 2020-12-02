@@ -60,4 +60,8 @@ router.get('/tutor-profile', function(req, res, next) {
   console.log("Profile Page");
   res.render('tutor/tutor-profile');
 })
+router.get('/edit-profile', function(req, res, next) {
+  console.log("Edit Profile");
+  res.render('tutor/edit-profile');
+})
 module.exports = router;

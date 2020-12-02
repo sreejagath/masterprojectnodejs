@@ -1,4 +1,4 @@
-var db=require('../config/student-connection');
+var db=require('../config/connection');
 var collection=require('../config/collection');
 const bcrypt=require('bcrypt');
 module.exports={

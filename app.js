@@ -10,6 +10,7 @@ var studentRouter = require('./routes/student');
 var userRouter = require('./routes/user');
 var hbs = require('express-handlebars')
 var db=require('./config/connection')
+
 var session=require('express-session')
 var app = express();
 
