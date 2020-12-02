@@ -39,5 +39,10 @@ module.exports={
             let tutordetails=await db.get().collection(collection.TUTOR_COLLECTION).find().toArray()
             resolve(tutordetails)
         })
+    },
+    updateDetails:()=>{
+        return new Promise(async(resolve,reject)=>{
+            db.get().collection(collection.TUTOR_COLLECTION).updateOne
+        })
     }
 }

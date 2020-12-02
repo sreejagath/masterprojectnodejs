@@ -68,4 +68,9 @@ router.get('/edit-profile', function(req, res, next) {
   res.render('tutor/edit-profile',{tutordetails});
 })
 })
+router.post('/edit-profile',function(req,res,next){
+  tutorHelpers.updateDetails(req.body).then(()=>{
+    res.redirect('/tutor-profile')
+  })
+})
 module.exports = router;
