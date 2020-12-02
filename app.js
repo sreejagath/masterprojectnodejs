@@ -7,6 +7,7 @@ var logger = require('morgan');
 
 var tutorRouter = require('./routes/tutor');
 var studentRouter = require('./routes/student');
+var userRouter = require('./routes/user');
 var hbs = require('express-handlebars')
 var db=require('./config/connection')
 var session=require('express-session')
@@ -26,8 +27,9 @@ db.connect((err)=>{
   if(err) console.log("Error"+err);
   console.log("Database connected to port");
 })
-app.use('/', studentRouter);
+app.use('/student', studentRouter);
 app.use('/tutor', tutorRouter);
+app.use('/', userRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
