@@ -33,7 +33,8 @@ module.exports={
                 resolve({status:false})
             }
         })
-    },getTutorDetails:()=>{
+    },
+    getTutorDetails:()=>{
         return new Promise(async(resolve,reject)=>{
             let tutordetails=await db.get().collection(collection.TUTOR_COLLECTION).find().toArray()
             resolve(tutordetails)

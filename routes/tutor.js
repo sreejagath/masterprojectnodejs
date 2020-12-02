@@ -18,7 +18,6 @@ router.get('/tutor-login', function(req, res, next) {
   });
   router.post('/tutor-login', function(req, res, next) {
     tutorHelpers.doLogin(req.body).then((response)=>{
-      console.log(response);
       if(response.status){
       req.session.tutorLoggedIn=true
       req.session.tutor=response.tutor
@@ -35,12 +34,9 @@ router.get('/tutor-login', function(req, res, next) {
     })
   })
 router.get('/tutor-home', function(req, res, next) {
-    tutorHelpers.getTutorDetails.then((tutordetails)=>{
-      console.log(tutordetails)
       let tutor=req.session.tutor
       console.log("login");
       res.render('tutor/tutor-home',{tutor});
-    })
   })
   router.get('/tutor-signup', function(req, res, next) {
     console.log("login page");
@@ -60,8 +56,11 @@ router.get('/student/student-login',function(req,res,next){
   }
 })
 router.get('/tutor-profile', function(req, res, next) {
-  console.log("Profile Page");
-  res.render('tutor/tutor-profile');
+  tutorHelpers.getTutorDetails(req.body).then((tutordetails)=>{
+    console.log(tutordetails)
+    console.log("login");
+    res.render('tutor/tutor-profile',{tutordetails});
+  })
 })
 router.get('/edit-profile', function(req, res, next) {
   console.log("Edit Profile");
