@@ -33,5 +33,11 @@ module.exports={
             }
     
         })
+    },
+    getStudents:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let studentslist=await db.get().collection(collection.STUDENT_COLLECTION).find().toArray()
+            resolve(studentslist)
+        })
     }
 }

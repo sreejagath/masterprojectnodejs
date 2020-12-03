@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const tutorHelpers=require('../helpers/tutor-helpers');
+const studentHelpers=require('../helpers/student-helpers');
 /* GET users listing. */
 
 router.get('/', function(req, res, next) {
@@ -82,7 +83,9 @@ router.post('/edit-profile/:id',function(req,res,next){
   })
 })
 router.get('/student-control',function(req,res,next){
-  res.render('tutor/student-control')
+  studentHelpers.getStudents().then((studentslist)=>{
+    res.render('tutor/student-control',{studentslist})
+  })
 })
 router.get('/add-student',function(req,res,next){
   res.render('tutor/add-student')
@@ -90,6 +93,7 @@ router.get('/add-student',function(req,res,next){
 router.post('/add-student',(req,res)=>{
   studentHelpers.doSignup(req.body).then((response)=>{
     console.log(response);
+    res.render('tutor/student-control')
   })
 })
 module.exports = router;
