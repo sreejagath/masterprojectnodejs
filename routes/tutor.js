@@ -62,15 +62,19 @@ router.get('/tutor-profile', function(req, res, next) {
     res.render('tutor/tutor-profile',{tutordetails});
   })
 })
-router.get('/edit-profile', function(req, res, next) {
-  tutorHelpers.getTutorDetails(req.body).then((tutordetails)=>{
+router.get('/edit-profile/:id', async(req, res)=>{
+  let tutordetails= await tutorHelpers.getTutorDetails(req.params.id)
     console.log("Edit Profile");
+    console.log(tutordetails);
+    console.log(req.params.id);
+    console.log("hello");
   res.render('tutor/edit-profile',{tutordetails});
+
 })
-})
-router.post('/edit-profile',function(req,res,next){
-  tutorHelpers.updateDetails(req.body).then(()=>{
-    res.redirect('/tutor-profile')
+router.post('/edit-profile/:id',function(req,res,next){
+  console.log(req.params.id);
+  tutorHelpers.updateDetails(req.params.id,req.body).then(()=>{
+    res.render('tutor/tutor-profile')
   })
 })
 module.exports = router;

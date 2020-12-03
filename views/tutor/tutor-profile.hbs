@@ -27,13 +27,14 @@
         </nav>
       </div>
       <!-- Main content --> 
+      {{#each tutordetails}}
       <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
           <div class="row">
             <nav class="templatemo-top-nav col-lg-12 col-md-12">
               <ul class="text-uppercase">
                 <li><a href="#" class="active">View profile</a></li>
-                <li><a href="/tutor/edit-profile">Edit profile</a></li>
+                <li><a href="/tutor/edit-profile/{{this._id}}">Edit profile</a></li>
                 <li style="margin-left:230px"><a href="/tutor/logout">Log Out</a></li>
               </ul>  
             </nav> 
@@ -45,7 +46,7 @@
                 <div class="card">
   <img src="/images/img_avatar.png" alt="Avatar">
   <div class="container">
-    {{#each tutordetails}}<h4><b>{{this.tutorname}}</b>
+    <h4><b>{{this.tutorname}}</b>
     <p>{{this.tutorcourse}}<br>
       Contact : {{this.tutorphone}},<br>{{this.tutormail}}
     </p></h4>

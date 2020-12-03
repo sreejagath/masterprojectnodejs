@@ -2,6 +2,7 @@ var db=require('../config/connection');
 var collection=require('../config/collection');
 const bcrypt=require('bcrypt');
 const { response } = require('express');
+const { ObjectId } = require('mongodb');
 
 module.exports={
     doSignup:(tutorData)=>{
@@ -41,9 +42,9 @@ module.exports={
             resolve(tutordetails)
         })
     },
-    updateDetails:(tutorUpdate)=>{
+    updateDetails:(tid,tutorUpdate)=>{
         return new Promise(async(resolve,reject)=>{
-            db.get().collection(collection.TUTOR_COLLECTION).updateOne({tutorUpdate},{
+            db.get().collection(collection.TUTOR_COLLECTION).updateOne({_id:ObjectId(tid)},{
                 $set:{
                     tutorname:tutorUpdate.tutorname,
                     tutorphone:tutorUpdate.tutorphone,

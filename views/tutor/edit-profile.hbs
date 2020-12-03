@@ -43,8 +43,9 @@
   <img  style="margin-top: 3%;" src="/images/img_avatar.png" alt="Avatar">
   <button>Edit Image</button>
 </div>
-		<form action="/tutor/edit-profile" class="templatemo-login-form" method="post">
-		{{#each tutordetails}}
+{{#each tutordetails}}
+		<form action="/tutor/edit-profile/{{this._id}}" class="templatemo-login-form" method="post">
+		
 	        	<div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
