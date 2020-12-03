@@ -15,8 +15,8 @@
         <nav class="templatemo-left-nav">          
           <ul>
             <li><a href="/tutor/tutor-home"><i class="fa fa-home fa-fw"></i>Home</a></li>
-            <li><a href="/tutor/tutor-profile" class="active"><i class="fa fa-bar-chart fa-fw"></i>Profile</a></li>
-            <li><a href="/tutor/student-control"><i class="fa fa-database fa-fw"></i>Students</a></li>
+            <li><a href="/tutor/tutor-profile"><i class="fa fa-bar-chart fa-fw"></i>Profile</a></li>
+            <li><a href="/tutor/student-control" class="active"><i class="fa fa-database fa-fw"></i>Students</a></li>
             <li><a href="#"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
             <li><a href="#"><i class="fa fa-users fa-fw"></i>Assignments</a></li>
             <li><a href="#"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
@@ -27,32 +27,74 @@
         </nav>
       </div>
       <!-- Main content --> 
-      {{#each tutordetails}}
       <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
           <div class="row">
             <nav class="templatemo-top-nav col-lg-12 col-md-12">
               <ul class="text-uppercase">
-                <li><a href="#" class="active">View profile</a></li>
-                <li><a href="/tutor/edit-profile/{{this._id}}">Edit profile</a></li>
+                <li><a href="#">View profile</a></li>
+                <li><a href="#">Edit profile</a></li>
                 <li style="margin-left:230px"><a href="/tutor/logout">Log Out</a></li>
               </ul>  
             </nav> 
           </div>
         </div>
-		<br>
-		<br><br><br>
-    
-                <div class="card">
-  <img src="/images/tutor-images/{{this._id}}.jpg" alt="Tutor Image" style="border-left:5px solid #818c83;border-top:5px solid #818c83">
-  <div class="container">
-    <h4><b>{{this.tutorname}}</b>
-    <p>{{this.tutorcourse}}<br>
-      Contact : {{this.tutorphone}},<br>{{this.tutormail}}
-    </p></h4>
-
-  </div>
-</div>{{/each}}
+	
+		<form action="/tutor/add-student" class="templatemo-login-form" method="post" enctype="multipart/form-data">
+		<div class="form-group" style="margin-top: 6%;">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
+		              	<input type="text" class="form-control" placeholder="Full Name" name="studentname">           
+		          	</div>	
+	        	</div>
+	        	
+                <div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
+		              	<input type="text" class="form-control" placeholder="Phone" name="studentphone">           
+		          	</div>	
+	        	</div>
+                <div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
+		              	<input type="text" class="form-control" placeholder="Mail ID" name="studentmail">           
+		          	</div>	
+	        	</div>
+				<div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
+		              	<input type="text" class="form-control" placeholder="Course" name="studentcourse">           
+		          	</div>	
+	        	</div>
+				<div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
+		              	<input type="text" class="form-control" placeholder="DD-MM-YYYY" name="studentdob">           
+		          	</div>	
+	        	</div>	 	
+                <div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
+		              	<input type="text" class="form-control" placeholder="Username" name="username">           
+		          	</div>	
+	        	</div>
+	        	<div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
+		              	<input type="password" class="form-control" placeholder="Password" name="password">           
+		          	</div>	
+	        	</div>	          	
+	          	<div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
+                          <input type="file" name="studentimage" id="img" style="display:none;"/>
+                    <label for="img">Click to add image</label>      
+		          	</div>	
+	        	</div>
+				<div class="form-group">
+					<button type="submit" class="templatemo-blue-button">Add Student</button>
+				</div>
+	        </form>
         </div>
       </div>
     </div>
@@ -373,29 +415,40 @@ footer { padding: 15px; }
 	border: 1px solid #ccc;
 	padding: 3px;
 }
- input[type=text]{
-      width: 40%;
+ input[type=text],[type=password],label{
+      width: 70%;
       padding: 12px 20px;
       margin: 8px 0;
       display: inline-block;
       border: 1px solid #ccc;
       box-sizing: border-box;
       border-radius: 10px;
+      margin-left: 20%;
     }
+	label{
+		width: 70%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 10px;
+      margin-left: 20%;
+	  background-color: white;
+	}
 
-    input[type=submit]{
+    input[type=submit],button{
       background-color: #008bc4;
       color: white;
       padding: 14px 20px;
       margin: 8px 0;
       border: none;
       cursor: pointer;
-      width: 30%;
+      width: 40%;
       border-radius: 10px;
       font-size: 15px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
-      margin-bottom: 30px;
-	  margin-left: 30px;
+      margin-left: 36%;
     }
 
     button:hover {

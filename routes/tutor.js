@@ -81,4 +81,15 @@ router.post('/edit-profile/:id',function(req,res,next){
     res.render('tutor/tutor-home')
   })
 })
+router.get('/student-control',function(req,res,next){
+  res.render('tutor/student-control')
+})
+router.get('/add-student',function(req,res,next){
+  res.render('tutor/add-student')
+})
+router.post('/add-student',(req,res)=>{
+  studentHelpers.doSignup(req.body).then((response)=>{
+    console.log(response);
+  })
+})
 module.exports = router;

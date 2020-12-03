@@ -15,8 +15,8 @@
         <nav class="templatemo-left-nav">          
           <ul>
             <li><a href="/tutor/tutor-home"><i class="fa fa-home fa-fw"></i>Home</a></li>
-            <li><a href="/tutor/tutor-profile" class="active"><i class="fa fa-bar-chart fa-fw"></i>Profile</a></li>
-            <li><a href="/tutor/student-control"><i class="fa fa-database fa-fw"></i>Students</a></li>
+            <li><a href="/tutor/tutor-profile"><i class="fa fa-bar-chart fa-fw"></i>Profile</a></li>
+            <li><a href="/tutor/student-control" class="active"><i class="fa fa-database fa-fw"></i>Students</a></li>
             <li><a href="#"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
             <li><a href="#"><i class="fa fa-users fa-fw"></i>Assignments</a></li>
             <li><a href="#"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
@@ -27,35 +27,25 @@
         </nav>
       </div>
       <!-- Main content --> 
-      {{#each tutordetails}}
       <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
           <div class="row">
             <nav class="templatemo-top-nav col-lg-12 col-md-12">
               <ul class="text-uppercase">
-                <li><a href="#" class="active">View profile</a></li>
-                <li><a href="/tutor/edit-profile/{{this._id}}">Edit profile</a></li>
-                <li style="margin-left:230px"><a href="/tutor/logout">Log Out</a></li>
+                <li><a href="#" class="active">Control Panel</a></li>
+                <li style="margin-left:470px"><a href="/tutor/logout">Log Out</a></li>
               </ul>  
             </nav> 
           </div>
         </div>
+    
 		<br>
 		<br><br><br>
-    
-                <div class="card">
-  <img src="/images/tutor-images/{{this._id}}.jpg" alt="Tutor Image" style="border-left:5px solid #818c83;border-top:5px solid #818c83">
-  <div class="container">
-    <h4><b>{{this.tutorname}}</b>
-    <p>{{this.tutorcourse}}<br>
-      Contact : {{this.tutorphone}},<br>{{this.tutormail}}
-    </p></h4>
-
-  </div>
-</div>{{/each}}
+        <div class="button-placer">
+                    <button onclick="location.href='/tutor/add-student'" type="button">Add Students</button><br>
         </div>
       </div>
-    </div>
+      </div>
     <style>
       /*
 
@@ -383,7 +373,7 @@ footer { padding: 15px; }
       border-radius: 10px;
     }
 
-    input[type=submit]{
+    button{
       background-color: #008bc4;
       color: white;
       padding: 14px 20px;
@@ -395,22 +385,13 @@ footer { padding: 15px; }
       font-size: 15px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       margin-bottom: 30px;
-	  margin-left: 30px;
+	  
     }
 
     button:hover {
       opacity: 0.8;
     }
-    img{
-        width: 30%;
-        height: auto;
-        
-    }
-    .card{
-        margin-left: 300px;
-    }
-    h4{
-        margin-left: 30px;
-    }
-
+.button-placer{
+    padding-top: 0%;
+}
     </style>
