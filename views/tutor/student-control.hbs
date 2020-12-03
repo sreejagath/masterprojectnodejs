@@ -45,16 +45,15 @@
         <div class="button-placer" style="margin-left: 1%;">
             <button onclick="location.href='/tutor/add-student'" type="button">Add Students</button><br>
         </div>
-        <h2 style="text-align:center">STUDENTS</h2>
+        <h2 style="text-align:center;font-size: 50px;">STUDENTS</h2>
         {{#each studentslist}}
         <div class="card">
-            <img src="/w3images/jeans3.jpg" alt="Denim Jeans" style="width:100%">
+            <img src="/images/student-images/{{this._id}}.jpg" alt="Student Image" style="width:100%">
             <h1 style="text-align:center;color:black">{{this.studentname}}</h1>
             <p class="price">{{this.studentcourse}}</p>
             <p>Contact:{{this.studentphone}},{{this.studentmail}}</p>
-            <p><button>Edit Details</button></p>
+            <p><button onclick="location.href='/tutor/edit-student'" type="button">Edit Details</button></p>
             <p><button>Remove</button></p>
-            <p><button>Add to Cart</button></p>
         </div>
         {{/each}}
     </div>

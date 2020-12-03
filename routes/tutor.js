@@ -83,17 +83,31 @@ router.post('/edit-profile/:id',function(req,res,next){
   })
 })
 router.get('/student-control',function(req,res,next){
+  console.log("hello");
+  console.log(req.params.id);
   studentHelpers.getStudents().then((studentslist)=>{
     res.render('tutor/student-control',{studentslist})
   })
 })
 router.get('/add-student',function(req,res,next){
+  
   res.render('tutor/add-student')
 })
 router.post('/add-student',(req,res)=>{
-  studentHelpers.doSignup(req.body).then((response)=>{
-    console.log(response);
+  studentHelpers.doSignup(req.body,(id)).then((response)=>{
+    //let image=req.files.studentimage
+    //console.log(image);
+    //console.log(id);
+    //image.mv('./images/student-images'+id+'.jpg',(err)=>{
+      //if(!err){
+        //console.log(response);
     res.render('tutor/student-control')
+      //}else{
+        //console.log(err);
+      //}
+    //}
+    //)
+    
   })
 })
 module.exports = router;
