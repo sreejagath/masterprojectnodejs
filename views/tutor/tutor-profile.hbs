@@ -42,15 +42,12 @@
         </div>
 		<br>
 		<br><br><br>
-    
-                <div class="card">
-  <img src="/images/tutor-images/{{this._id}}.jpg" alt="Tutor Image" style="border-left:5px solid #818c83;border-top:5px solid #818c83">
-  <div class="container">
-    <h4><b>{{this.tutorname}}</b>
-    <p>{{this.tutorcourse}}<br>
-      Contact : {{this.tutorphone}},<br>{{this.tutormail}}
-    </p></h4>
-
+<div class="card">
+            <img src="/images/tutor-images/{{this._id}}.jpg" alt="Student Image" style="width:100%">
+            <h1 style="text-align:center;color:black;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;font-size:38px">{{this.tutorname}}</h1>
+            <p class="price">{{this.tutorcourse}}</p>
+            <p>Contact:{{this.tutorphone}},<br>{{this.tutormail}}</p>
+        </div>
   </div>
 </div>{{/each}}
         </div>
@@ -81,6 +78,42 @@ h3 {
 	color: #7f7f7f;
 	font-size: 1.4em;
 }
+ .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+        margin-bottom: 2%;
+
+    }
+
+    .price {
+        color: grey;
+        font-size: 22px;
+    }
+
+    .card button {
+        border: none;
+        outline: 0;
+        padding: 12px;
+        color: white;
+        background-color: #008bc4;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+        border-radius: 0%;
+        margin-bottom: 2px;
+    }
+
+    .card button:hover {
+        opacity: 0.7;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
 ul {
 	list-style-type: none;
     margin: 0;

@@ -94,7 +94,7 @@ router.get('/add-student',function(req,res,next){
   res.render('tutor/add-student')
 })
 router.post('/add-student',(req,res)=>{
-  studentHelpers.doSignup(req.body,(id)).then((response)=>{
+  studentHelpers.doSignup(req.body).then((response)=>{
     //let image=req.files.studentimage
     //console.log(image);
     //console.log(id);
