@@ -1,6 +1,7 @@
 var db=require('../config/connection');
 var collection=require('../config/collection');
 const bcrypt=require('bcrypt');
+const { response } = require('express');
 
 module.exports={
     doSignup:(tutorData)=>{
@@ -40,9 +41,20 @@ module.exports={
             resolve(tutordetails)
         })
     },
-    updateDetails:()=>{
+    updateDetails:(tutorUpdate)=>{
         return new Promise(async(resolve,reject)=>{
-            db.get().collection(collection.TUTOR_COLLECTION).updateOne
+            db.get().collection(collection.TUTOR_COLLECTION).updateOne({tutorUpdate},{
+                $set:{
+                    tutorname:tutorUpdate.tutorname,
+                    tutorphone:tutorUpdate.tutorphone,
+                    tutormail:tutorUpdate.tutormail,
+                    tutorcourse:tutorUpdate.tutorcourse,
+                    dob:tutorUpdate.dob,
+                    username:tutorUpdate.username
+                }
+            })
+        }).then((response)=>{
+            resolve()
         })
     }
 }
