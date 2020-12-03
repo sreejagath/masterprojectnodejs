@@ -39,19 +39,25 @@
             </nav> 
           </div>
         </div>
+		{{#each tutordetails}}
         <div class="card">
-  <img  style="margin-top: 3%;" src="/images/img_avatar.png" alt="Avatar">
-  <button>Edit Image</button>
-</div>
-{{#each tutordetails}}
+ 		  <img  style="margin-top: 3%;" src="{{this.image}}" alt="Avatar">
+		 
+		</div>
 		<form action="/tutor/edit-profile/{{this._id}}" class="templatemo-login-form" method="post">
-		
-	        	<div class="form-group">
+		<div class="form-group">
+	        		<div class="input-group">
+		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
+		              	<input type="file" class="form-control" name="image">           
+		          	</div>	
+	        	</div>
+		<div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
 		              	<input type="text" class="form-control" value="{{this.tutorname}}" name="tutorname">           
 		          	</div>	
 	        	</div>
+	        	
                 <div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
@@ -430,6 +436,17 @@ footer { padding: 15px; }
       border-radius: 10px;
       margin-left: 20%;
     }
+	input[type=file]{
+		width: 70%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 10px;
+      margin-left: 20%;
+	  background-color: white;
+	}
 
     input[type=submit],button{
       background-color: #008bc4;
