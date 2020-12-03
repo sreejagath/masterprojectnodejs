@@ -29,6 +29,7 @@ db.connect((err)=>{
   if(err) console.log("Error"+err);
   console.log("Database connected to port");
 })
+app.use(fileUpload())
 app.use('/student', studentRouter);
 app.use('/tutor', tutorRouter);
 app.use('/', userRouter);

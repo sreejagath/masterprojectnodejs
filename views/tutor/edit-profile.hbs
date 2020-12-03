@@ -41,10 +41,10 @@
         </div>
 		{{#each tutordetails}}
         <div class="card">
- 		  <img  style="margin-top: 3%;" src="{{this.image}}" alt="Avatar">
+ 		  <img  style="margin-top: 3%;" src="/images/tutor-images/{{this._id}}.jpg" alt="Avatar">
 		 
 		</div>
-		<form action="/tutor/edit-profile/{{this._id}}" class="templatemo-login-form" method="post">
+		<form action="/tutor/edit-profile/{{this._id}}" class="templatemo-login-form" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		

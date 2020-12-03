@@ -53,9 +53,9 @@ module.exports={
                     dob:tutorUpdate.dob,
                     username:tutorUpdate.username
                 }
-            })
-        }).then((response)=>{
-            resolve()
+            }).then((response)=>{
+                resolve()
+        })
         })
     }
 }
