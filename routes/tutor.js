@@ -77,11 +77,13 @@ router.get('/edit-profile/:id', async(req, res)=>{
 })
 router.post('/edit-profile/:id',function(req,res,next){
   let id=req.params.id
-  let image=req.files.image
-  image.mv('./public/images/tutor-images/'+id+'.jpg')
   tutorHelpers.updateDetails(req.params.id,req.body).then(()=>{
     res.render('tutor/tutor-home')
+    if(req.files.image){
+      req.files.image.mv('./public/images/tutor-images/'+id+'.jpg')
+    }
   })
+  
 })
 router.get('/student-control',function(req,res,next){
   console.log("hello");

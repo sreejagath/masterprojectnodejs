@@ -126,4 +126,13 @@ router.post('/otp-login',async(req,res)=>{
 router.get('/verify-otp',(req,res)=>{
   res.render('student/verify-otp')
 })
+router.post('/verify-otp',(req,res)=>{
+  
+  if(req.body.otp==otp){
+    res.render('student/student-home');
+}
+else{
+    res.render('student/otp-login');
+}
+})
 module.exports = router;
