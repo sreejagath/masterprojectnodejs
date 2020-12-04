@@ -19,7 +19,8 @@
     "mongodb": "^3.6.3",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.6",
-    "require-stack": "^1.0.2"
+    "require-stack": "^1.0.2",
+    "twilio": "^3.53.0"
   },
   "devDependencies": {
     "handlebars": "^4.7.6"
