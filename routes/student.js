@@ -38,6 +38,10 @@ router.get('/student-login', function(req, res, next) {
       res.render('/student/student-login');
     })
   })
+  router.get('/logout',function(req,res,next){
+    req.session.destroy()
+    res.render('index')
+  })
 router.get('/student-home', function(req, res, next) {
     let student=req.session.student
     console.log("login");
