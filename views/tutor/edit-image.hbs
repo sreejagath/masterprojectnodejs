@@ -32,63 +32,25 @@
           <div class="row">
             <nav class="templatemo-top-nav col-lg-12 col-md-12">
               <ul class="text-uppercase">
-                <li><a href="#">EDIT STUDENT</a></li>
+                <li><a href="#">Edit Student</a></li>
                 <li style="margin-left:230px"><a href="/tutor/logout">Log Out</a></li>
               </ul>  
             </nav> 
           </div>
         </div>
-	
-		<form action="/tutor/edit-student/{{studentslist._id}}" class="templatemo-login-form" method="post" enctype="multipart/form-data">
-		<div class="form-group" style="margin-top: 6%;">
-	        		<div class="input-group">
+
+		<form action="/tutor/edit-image/{{student._id}}" class="templatemo-login-form" method="post" enctype="multipart/form-data">
+		<div class="form-group">
+	        		<div class="input-group" style="margin-top: 5%;">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" value="{{studentslist.studentname}}" name="studentname">           
-		          	</div>	
-	        	</div>
-	        	
-                <div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" value="{{studentslist.studentphone}}" name="studentphone">           
-		          	</div>	
-	        	</div>
-                <div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" value="{{studentslist.studentmail}}" name="studentmail">           
+		              	<input type="file" class="form-control" name="image">           
 		          	</div>	
 	        	</div>
 				<div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" value="{{studentslist.studentcourse}}" name="studentcourse">           
-		          	</div>	
-	        	</div>
-				<div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" value="{{studentslist.studentdob}}" name="studentdob">           
-		          	</div>	
-	        	</div>	 	
-                <div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" value="{{studentslist.username}}" name="username">           
-		          	</div>	
-	        	</div>
-	        	<div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="password" class="form-control" value="Password" name="password">           
-		          	</div>	
-	        	</div>	          	
-	          	
-				<div class="form-group">
-					<button type="submit" class="templatemo-blue-button">Done</button>
+					<button type="submit" class="templatemo-blue-button width-100">UPDATE</button>
 				</div>
+			
 	        </form>
-           
         </div>
       </div>
     </div>
@@ -409,7 +371,7 @@ footer { padding: 15px; }
 	border: 1px solid #ccc;
 	padding: 3px;
 }
- input[type=text],[type=password],label{
+ input[type=text],[type=password]{
       width: 70%;
       padding: 12px 20px;
       margin: 8px 0;
@@ -419,7 +381,7 @@ footer { padding: 15px; }
       border-radius: 10px;
       margin-left: 20%;
     }
-	label{
+	input[type=file]{
 		width: 70%;
       padding: 12px 20px;
       margin: 8px 0;
@@ -442,7 +404,7 @@ footer { padding: 15px; }
       border-radius: 10px;
       font-size: 15px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
-      margin-left: 36%;
+      
     }
 
     button:hover {

@@ -118,4 +118,22 @@ router.post('/edit-student/:id',(req,res)=>{
     res.render('tutor/tutor-home')
   })
 })
+router.get('/edit-image/:id',async(req,res)=>{
+  let student= await tutorHelpers.getStudentDetails(req.params.id)
+  res.render('tutor/edit-image',{student})
+})
+router.post('/edit-image/:id',(req,res)=>{
+  let id=req.params.id
+  console.log(req.params.id);
+  let image=req.files.image
+  console.log(image);
+  image.mv('./public/images/student-images/'+id+'.jpg',(err)=>{
+    if(!err){
+    res.render('tutor/tutor-home')
+    }else{
+      console.log(err);
+    }
+  })
+  
+})
 module.exports = router;
