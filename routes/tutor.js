@@ -11,7 +11,10 @@ router.get('/', function(req, res, next) {
 router.get('/tutor-login', function(req, res, next) {
   if(req.session.tutorLoggedIn){
     res.render('tutor/tutor-home');
-  }else{
+  }else if(req.session.studentLoggedIn){
+    res.render('student/view-teachers')
+  }
+    else{
     console.log("login page");
     res.render('tutor/tutor-login',{"loginErr":req.session.loginErr})
     req.session.loginErr=false

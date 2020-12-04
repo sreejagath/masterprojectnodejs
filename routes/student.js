@@ -1,6 +1,14 @@
 var express = require('express');
 var router = express.Router();
-
+const verifyLogin=(req,res)=>{
+  if(req.session.studentLoggedIn){
+  res.render('student/student-home');
+}else{
+  console.log("login page");
+  res.render('student/student-login',{"loginErr":req.session.loginErr})
+  req.session.loginErr=false
+}
+}
 const studentHelpers=require('../helpers/student-helpers');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -42,10 +50,15 @@ router.get('/student-login', function(req, res, next) {
     req.session.destroy()
     res.render('index')
   })
-router.get('/student-home', function(req, res, next) {
+router.get('/student-home',verifyLogin, function(req, res, next) {
     let student=req.session.student
     console.log("login");
-    res.render('student/student-home',{student});
+    if(student){
+       res.render('student/student-home',{student});
+    }else{
+      res.render('student/student-login')
+    }
+   
   })
   router.get('/student-signup', function(req, res, next) {
     console.log("login page");
@@ -63,5 +76,8 @@ router.get('/student/student-login',function(req,res,next){
     console.log("not logged in as student");
     res.render('student/student-login');
   }
+})
+router.get('/tutor/view-teachers',(req,res)=>{
+  res.render('student/view-teachers')
 })
 module.exports = router;
