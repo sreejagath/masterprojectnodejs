@@ -9,6 +9,7 @@ const verifyLogin=(req,res)=>{
   req.session.loginErr=false
 }
 }
+const nodemailer = require("nodemailer");
 const studentHelpers=require('../helpers/student-helpers');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -79,5 +80,50 @@ router.get('/student/student-login',function(req,res,next){
 })
 router.get('/tutor/view-teachers',(req,res)=>{
   res.render('student/view-teachers')
+})
+router.get('/otp-login',(req,res)=>{
+  res.render('student/otp-login')
+})
+var email;
+
+var otp = Math.random();
+otp = otp * 1000000;
+otp = parseInt(otp);
+console.log(otp);
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.ethereal.email',
+  port: 587,
+  auth: {
+      user: 'casper.mcclure@ethereal.email',
+      pass: 'DTefu7T3jUkSfRYRdD'
+  }
+});
+
+router.post('/otp-login',async(req,res)=>{
+  let stpresent=await studentHelpers.findEmail(req.body.studentmail)
+  if(stpresent){
+    
+    email=req.body.studentmail;
+    var mailOptions={
+      to: req.body.studentmail,
+     subject: "Otp for registration is: ",
+     html: "<h3>OTP for account verification is </h3>"  + "<h1 style='font-weight:bold;'>" + otp +"</h1>" // html body
+   };
+   transporter.sendMail(mailOptions, (error,info) => {
+    if (error) {
+      return console.log(error);
+  }
+    console.log('Message sent: %s', info.messageId);   
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    
+    res.render('student/verify-otp')
+  }) 
+  }else{
+    res.render('student/otp-login')
+  }
+})
+router.get('/verify-otp',(req,res)=>{
+  res.render('student/verify-otp')
 })
 module.exports = router;

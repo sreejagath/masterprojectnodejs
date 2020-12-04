@@ -39,5 +39,20 @@ module.exports={
             let studentslist=await db.get().collection(collection.STUDENT_COLLECTION).find().toArray()
             resolve(studentslist)
         })
+    },
+    findEmail:(email)=>{
+        return new Promise(async(resolve,reject)=>{
+            let studentpresent=await db.get().collection(collection.STUDENT_COLLECTION).findOne({studentmail:email})
+           if(studentpresent){
+               resolve(studentpresent)
+               console.log("hello");
+            console.log(resolve);
+            console.log(studentpresent);
+          }else{
+              reject()
+          }
+          
+        })
+    
     }
 }

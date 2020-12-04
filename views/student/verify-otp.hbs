@@ -2,22 +2,16 @@
   <div class="templatemo-content-widget templatemo-login-widget white-bg">
     <header class="text-center">
       <div class="square"></div>
-      <h1>STUDENT LOGIN</h1>
+      <h1>OTP LOGIN</h1>
     </header>
-    <form action="/student/student-login" class="templatemo-login-form" method="POST">
+    <form action="/student/verify-otp" class="templatemo-login-form" method="POST">
     {{#if loginErr}}
  <center><p style="color: red;">Invalid Username or password!!</p></center>
  {{/if}}
       <div class="form-group">
         <div class="input-group">
-          <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
-          <input type="text" class="form-control" placeholder="Username" name="username">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="input-group">
           <div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>
-          <input type="password" class="form-control" placeholder="Password" name="password">
+          <input type="text" class="form-control" placeholder="Enter OTP" name="otp">
         </div>
       </div>
       <div class="form-group">
@@ -28,10 +22,7 @@
   </div>
   <div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg"
     style="margin-bottom: 20px;">
-    <center>
-      <p>Don't know your Login Info ? Contact your tutor for username and password<br>else try <strong><a href="/student/otp-login" class="blue-text">OTP Login Here</a></strong>
-      </p>
-    </center>
+    
   </div>
   <style>
     form {
@@ -47,6 +38,7 @@
     }
 
     input[type=text],
+    input[type=email],
     input[type=password] {
       width: 100%;
       padding: 12px 20px;

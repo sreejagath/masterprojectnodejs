@@ -13,6 +13,7 @@ var app = express();
 var db=require('./config/connection')
 var fileUpload = require('express-fileupload')
 var session=require('express-session')
+var nodemailer=require('nodemailer')
 
 
 // view engine setup
@@ -30,6 +31,7 @@ db.connect((err)=>{
   console.log("Database connected to port");
 })
 app.use(fileUpload())
+
 app.use('/student', studentRouter);
 app.use('/tutor', tutorRouter);
 app.use('/', userRouter);
