@@ -48,12 +48,14 @@
         <h2 style="text-align:center;font-size: 50px;">STUDENTS</h2>
         {{#each studentslist}}
         <div class="card">
-            <img src="/images/student-images/{{this._id}}.jpg" alt="Student Image" style="width:100%">
+            <img src="/images/student-images/{{this._id}}.jpg" alt="Please Update Image" style="width:100%">
             <h1 style="text-align:center;color:black">{{this.studentname}}</h1>
             <p class="price">{{this.studentcourse}}</p>
             <p>Contact:{{this.studentphone}},{{this.studentmail}}</p>
-            <p><button onclick="location.href='/tutor/edit-student'" type="button">Edit Details</button></p>
+            <p><button>Update Image</button></p>
+            <p><button onclick="location.href='/tutor/edit-student/{{this._id}}'" type="button">Edit Details</button></p>
             <p><button>Remove</button></p>
+            
         </div>
         {{/each}}
     </div>

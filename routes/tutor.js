@@ -74,10 +74,8 @@ router.get('/edit-profile/:id', async(req, res)=>{
 })
 router.post('/edit-profile/:id',function(req,res,next){
   let id=req.params.id
-  if(req.files.image){
-    let image=req.files.image
-    image.mv('./public/images/tutor-images/'+id+'.jpg')
-      }
+  let image=req.files.image
+  image.mv('./public/images/tutor-images/'+id+'.jpg')
   tutorHelpers.updateDetails(req.params.id,req.body).then(()=>{
     res.render('tutor/tutor-home')
   })
@@ -108,6 +106,16 @@ router.post('/add-student',(req,res)=>{
     //}
     //)
     
+  })
+})
+router.get('/edit-student/:id',async(req,res)=>{
+  console.log(req.params.id);
+  let studentslist= await tutorHelpers.getStudentDetails(req.params.id)
+  res.render('tutor/edit-student',{studentslist})
+})
+router.post('/edit-student/:id',(req,res)=>{
+  tutorHelpers.updateStudent(req.params.id,req.body).then(()=>{
+    res.render('tutor/tutor-home')
   })
 })
 module.exports = router;

@@ -32,55 +32,55 @@
           <div class="row">
             <nav class="templatemo-top-nav col-lg-12 col-md-12">
               <ul class="text-uppercase">
-                <li><a href="#">ADD STUDENT</a></li>
+                <li><a href="#">EDIT STUDENT</a></li>
                 <li style="margin-left:230px"><a href="/tutor/logout">Log Out</a></li>
               </ul>  
             </nav> 
           </div>
         </div>
 	
-		<form action="/tutor/add-student" class="templatemo-login-form" method="post" enctype="multipart/form-data">
+		<form action="/tutor/edit-student/{{studentslist._id}}" class="templatemo-login-form" method="post" enctype="multipart/form-data">
 		<div class="form-group" style="margin-top: 6%;">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Full Name" name="studentname">           
+		              	<input type="text" class="form-control" value="{{studentslist.studentname}}" name="studentname">           
 		          	</div>	
 	        	</div>
 	        	
                 <div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Phone" name="studentphone">           
+		              	<input type="text" class="form-control" value="{{studentslist.studentphone}}" name="studentphone">           
 		          	</div>	
 	        	</div>
                 <div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Mail ID" name="studentmail">           
+		              	<input type="text" class="form-control" value="{{studentslist.studentmail}}" name="studentmail">           
 		          	</div>	
 	        	</div>
 				<div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Course" name="studentcourse">           
+		              	<input type="text" class="form-control" value="{{studentslist.studentcourse}}" name="studentcourse">           
 		          	</div>	
 	        	</div>
 				<div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="DD-MM-YYYY" name="studentdob">           
+		              	<input type="text" class="form-control" value="{{studentslist.studentdob}}" name="studentdob">           
 		          	</div>	
 	        	</div>	 	
                 <div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Username" name="username">           
+		              	<input type="text" class="form-control" value="{{studentslist.username}}" name="username">           
 		          	</div>	
 	        	</div>
 	        	<div class="form-group">
 	        		<div class="input-group">
 		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="password" class="form-control" placeholder="Password" name="password">           
+		              	<input type="password" class="form-control" value="Password" name="password">           
 		          	</div>	
 	        	</div>	          	
 	          	
@@ -88,6 +88,7 @@
 					<button type="submit" class="templatemo-blue-button">Add Student</button>
 				</div>
 	        </form>
+           
         </div>
       </div>
     </div>

@@ -57,5 +57,28 @@ module.exports={
                 resolve()
         })
         })
+    },
+    getStudentDetails:(id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.STUDENT_COLLECTION).findOne({_id:ObjectId(id)}).then((response)=>{
+                resolve(response)
+            })
+        })
+    },
+    updateStudent:(sid,studentData)=>{
+        return new Promise(async(resolve,reject)=>{
+            db.get().collection(collection.STUDENT_COLLECTION).updateOne({_id:ObjectId(sid)},{
+                $set:{
+                    studentname:studentData.studentname,
+                    studentphone:studentData.studentphone,
+                    studentcourse:studentData.studentcourse,
+                    studentmail:studentData.studentmail,
+                    studentdob:studentData.studentdob,
+                    username:studentData.username
+                }
+            }).then((response)=>{
+                resolve()
+            })
+        })
     }
 }
