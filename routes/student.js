@@ -107,7 +107,7 @@ router.post('/otp-login',async(req,res)=>{
     email=req.body.studentmail;
     var mailOptions={
       to: req.body.studentmail,
-     subject: "Otp for registration is: ",
+     subject: "OTP - Class Room Management System ",
      html: "<h3>OTP for account verification is </h3>"  + "<h1 style='font-weight:bold;'>" + otp +"</h1>" // html body
    };
    transporter.sendMail(mailOptions, (error,info) => {
