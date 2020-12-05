@@ -44,7 +44,6 @@ module.exports={
     },
     updateDetails:(tid,tutorUpdate)=>{
         return new Promise(async(resolve,reject)=>{
-            tutorUpdate.password=await bcrypt.hash(tutorUpdate.password,10)
             db.get().collection(collection.TUTOR_COLLECTION).updateOne({_id:ObjectId(tid)},{
                 $set:{
                     tutorname:tutorUpdate.tutorname,
@@ -53,7 +52,6 @@ module.exports={
                     tutorcourse:tutorUpdate.tutorcourse,
                     dob:tutorUpdate.dob,
                     username:tutorUpdate.username,
-                    password:tutorUpdate.password
                 }
             }).then((response)=>{
                 resolve()

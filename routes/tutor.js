@@ -141,4 +141,10 @@ router.post('/edit-image/:id',(req,res)=>{
   })
   
 })
+router.get('/view-tutor-profile/:id',async(req,res)=>{
+  let tutordetails= await tutorHelpers.getTutorDetails(req.params.id)
+    console.log(tutordetails)
+    res.render('tutor/view-tutor-profile',{tutordetails});
+  
+})
 module.exports = router;
