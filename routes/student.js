@@ -85,7 +85,9 @@ router.get("/otp-login", (req, res) => {
   if (req.session.studentLoggedIn) {
     res.redirect("/student/student-home");
   } else {
-    res.render("student/otp-login");
+    res.render("student/otp-login",{"emailError":req.session.loginErr,"otpError":req.session.otpError});
+    req.session.loginErr=false;
+    req.session.otpError=false;
   }
   
 });
@@ -129,6 +131,7 @@ router.post("/otp-login", async (req, res) => {
     });
     
   } else {
+    req.session.loginErr=true;
     res.redirect("/student/otp-login");
   }
 });
@@ -145,7 +148,8 @@ router.post("/verify-otp", (req, res) => {
     req.session.studentLoggedIn = true;
     res.render("student/student-home");
   } else {
-    res.render("student/otp-login");
+    req.session.otpError=true;
+    res.redirect("/student/otp-login");
   }
 });
 module.exports = router;

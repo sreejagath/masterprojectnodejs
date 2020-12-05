@@ -4,10 +4,14 @@
       <div class="square"></div>
       <h1>OTP LOGIN</h1>
     </header>
-    <form action="/student/otp-login" class="templatemo-login-form" method="POST">
-    {{#if loginErr}}
- <center><p style="color: red;">Invalid Username or password!!</p></center>
+    {{#if emailError}}
+ <center><p style="color: red;">Email not registered!</p></center>
  {{/if}}
+ 
+    <form action="/student/otp-login" class="templatemo-login-form" method="POST">
+    {{#if otpError}}
+    <center><p style="color: red;">Invalid OTP</p></center>
+    {{/if}}
       <div class="form-group">
         <div class="input-group">
           <div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>
