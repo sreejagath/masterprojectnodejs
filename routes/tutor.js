@@ -134,7 +134,7 @@ router.post('/edit-image/:id',(req,res)=>{
   console.log(image);
   image.mv('./public/images/student-images/'+id+'.jpg',(err)=>{
     if(!err){
-    res.render('tutor/tutor-home')
+    res.redirect('/tutor/student-control')
     }else{
       console.log(err);
     }
