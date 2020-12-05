@@ -82,5 +82,12 @@ module.exports={
                 resolve()
             })
         })
+    },
+    deleteStudent:(studentid)=>{
+        return new Promise(async(resolve,reject)=>{
+            db.get().collection(collection.STUDENT_COLLECTION).removeOne({_id:ObjectId(studentid)}).then((response)=>{
+                resolve(response)
+            })
+        })
     }
 }

@@ -42,14 +42,20 @@ module.exports={
     },
     findEmail:(email)=>{
         return new Promise(async(resolve,reject)=>{
+            let emailstatus=false;
+            let response={};
             let studentpresent=await db.get().collection(collection.STUDENT_COLLECTION).findOne({studentmail:email})
            if(studentpresent){
-               resolve(studentpresent)
+               
                console.log("hello");
+               response.email=studentpresent;
+               response.status=true;
+               resolve(response)
             console.log(resolve);
             console.log(studentpresent);
           }else{
-              reject()
+              console.log("email not found");
+              resolve({status:false})
           }
           
         })

@@ -78,7 +78,7 @@ router.get('/edit-profile/:id', async(req, res)=>{
 router.post('/edit-profile/:id',function(req,res,next){
   let id=req.params.id
   tutorHelpers.updateDetails(req.params.id,req.body).then(()=>{
-    res.render('tutor/tutor-home')
+    res.redirect('/tutor/tutor-profile')
     if(req.files.image){
       req.files.image.mv('./public/images/tutor-images/'+id+'.jpg')
     }
@@ -104,7 +104,7 @@ router.post('/add-student',(req,res)=>{
     //image.mv('./images/student-images'+id+'.jpg',(err)=>{
       //if(!err){
         //console.log(response);
-    res.render('tutor/student-control')
+    res.redirect('/tutor/student-control')
       //}else{
         //console.log(err);
       //}
@@ -120,7 +120,7 @@ router.get('/edit-student/:id',async(req,res)=>{
 })
 router.post('/edit-student/:id',(req,res)=>{
   tutorHelpers.updateStudent(req.params.id,req.body).then(()=>{
-    res.render('tutor/tutor-home')
+    res.redirect('/tutor/student-control')
   })
 })
 router.get('/edit-image/:id',async(req,res)=>{
@@ -145,6 +145,12 @@ router.get('/view-tutor-profile/:id',async(req,res)=>{
   let tutordetails= await tutorHelpers.getTutorDetails(req.params.id)
     console.log(tutordetails)
     res.render('tutor/view-tutor-profile',{tutordetails});
-  
+})
+router.get('/remove-student/:id',async(req,res)=>{
+  let studentid=req.params.id;
+  console.log(studentid);
+  tutorHelpers.deleteStudent(studentid).then((response)=>{
+    res.redirect('/tutor/student-control')
+  })
 })
 module.exports = router;
