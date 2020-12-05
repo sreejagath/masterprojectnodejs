@@ -153,4 +153,7 @@ router.get('/remove-student/:id',async(req,res)=>{
     res.redirect('/tutor/student-control')
   })
 })
+router.get('/add-assignments',(req,res)=>{
+  res.render('tutor/add-assignments')
+})
 module.exports = router;
