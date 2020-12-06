@@ -46,17 +46,19 @@
             <button onclick="location.href='/tutor/add-student'" type="button">Add Students</button><br>
         </div>
         <h2 style="text-align:center;font-size: 50px;">STUDENTS</h2>
+        <div class="div-main">
         {{#each studentslist}}
         <div class="card">
             <img src="/images/student-images/{{this._id}}.jpg" alt="Please Update Image" style="width:100%">
             <h1 style="text-align:center;color:black">{{this.studentname}}</h1>
             <p class="price">{{this.studentcourse}}</p>
-            <p>Contact : {{this.studentphone}} , {{this.studentmail}}</p>
+            <p>Contact : {{this.studentphone}} ,<br> {{this.studentmail}}</p>
             <p><button onclick="location.href='/tutor/edit-image/{{this._id}}'" type="button">Update Image</button></p>
             <p><button onclick="location.href='/tutor/edit-student/{{this._id}}'" type="button">Edit Details</button></p>
             <p><button onclick="location.href='/tutor/remove-student/{{this._id}}'" type="button">Remove</button></p>
         </div>
         {{/each}}
+        </div>
     </div>
 </div>
 </div>
@@ -118,12 +120,22 @@ TABLE OF CONTENT
 
     .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        max-width: 300px;
-        margin: auto;
+        max-width: 28%;
+        max-height: 30%;
+        margin-left: 3%;
         text-align: center;
         font-family: arial;
         margin-bottom: 2%;
-
+        display: inline-block;
+    }
+    .card:hover{
+        box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 1);
+    }
+    .card h1{
+        font-size: 30px;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: burlywood;
+        margin-bottom: 0%;
     }
 
     .price {
