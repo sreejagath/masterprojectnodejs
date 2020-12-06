@@ -67,7 +67,7 @@ module.exports={
     },
     updateStudent:(sid,studentData)=>{
         return new Promise(async(resolve,reject)=>{
-            studentData.password=await bcrypt.hash(studentData.password,10)
+            
             db.get().collection(collection.STUDENT_COLLECTION).updateOne({_id:ObjectId(sid)},{
                 $set:{
                     studentname:studentData.studentname,
@@ -75,8 +75,7 @@ module.exports={
                     studentcourse:studentData.studentcourse,
                     studentmail:studentData.studentmail,
                     studentdob:studentData.studentdob,
-                    username:studentData.username,
-                    password:studentData.password
+                   
                 }
             }).then((response)=>{
                 resolve()
