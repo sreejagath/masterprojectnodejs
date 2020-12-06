@@ -49,13 +49,13 @@
         <div class="div-main">
         {{#each studentslist}}
         <div class="card">
-            <img src="/images/student-images/{{this._id}}.jpg" alt="Please Update Image" style="width:100%">
+            <img src="/images/student-images/{{this._id}}.jpg" alt="Please update image!" style="width:100%">
             <h1 style="text-align:center;color:black">{{this.studentname}}</h1>
             <p class="price">{{this.studentcourse}}</p>
             <p>Contact : {{this.studentphone}} ,<br> {{this.studentmail}}</p>
             <p><button onclick="location.href='/tutor/edit-image/{{this._id}}'" type="button">Update Image</button></p>
             <p><button onclick="location.href='/tutor/edit-student/{{this._id}}'" type="button">Edit Details</button></p>
-            <p><button onclick="location.href='/tutor/remove-student/{{this._id}}'; return confirm('Are you sure to delete?')" type="button">Remove</button></p>
+            <p><button onclick="remove('/tutor/remove-student/{{this._id}}','{{this.studentname}}')" type="button">Remove</button></p>
         </div>
         {{/each}}
         </div>
@@ -63,6 +63,14 @@
 </div>
 </div>
 </div>
+<script>
+    function remove(url,name) {
+  if (confirm('Are you sure you want to remove '+name+'?')) {
+    window.location.href=url;
+  }
+  return false;
+}
+</script>
 
 <style>
     /*

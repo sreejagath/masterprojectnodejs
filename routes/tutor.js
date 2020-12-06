@@ -97,20 +97,11 @@ router.get('/add-student',function(req,res,next){
   res.render('tutor/add-student')
 })
 router.post('/add-student',(req,res)=>{
-  studentHelpers.doSignup(req.body).then((response)=>{
-    //let image=req.files.studentimage
-    //console.log(image);
-    //console.log(id);
-    //image.mv('./images/student-images'+id+'.jpg',(err)=>{
-      //if(!err){
-        //console.log(response);
+  studentHelpers.doSignup(req.body).then((id)=>{
     res.redirect('/tutor/student-control')
-      //}else{
-        //console.log(err);
-      //}
-    //}
-    //)
-    
+    if(req.files.studentimage){
+      req.files.studentimage.mv('./public/images/student-images/'+id+'.jpg')
+    }
   })
 })
 router.get('/edit-student/:id',async(req,res)=>{
@@ -121,6 +112,10 @@ router.get('/edit-student/:id',async(req,res)=>{
 router.post('/edit-student/:id',(req,res)=>{
   tutorHelpers.updateStudent(req.params.id,req.body).then(()=>{
     res.redirect('/tutor/student-control')
+    var id=req.params.id;
+    if(req.files.studentimage){
+      req.files.studentimage.mv('./public/images/student-images/'+id+'.jpg')
+    }
   })
 })
 router.get('/edit-image/:id',async(req,res)=>{
