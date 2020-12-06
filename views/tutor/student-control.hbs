@@ -55,7 +55,7 @@
             <p>Contact : {{this.studentphone}} ,<br> {{this.studentmail}}</p>
             <p><button onclick="location.href='/tutor/edit-image/{{this._id}}'" type="button">Update Image</button></p>
             <p><button onclick="location.href='/tutor/edit-student/{{this._id}}'" type="button">Edit Details</button></p>
-            <p><button onclick="location.href='/tutor/remove-student/{{this._id}}'" type="button">Remove</button></p>
+            <p><button onclick="location.href='/tutor/remove-student/{{this._id}}'; return confirm('Are you sure to delete?')" type="button">Remove</button></p>
         </div>
         {{/each}}
         </div>
@@ -63,9 +63,6 @@
 </div>
 </div>
 </div>
-<script>
-    
-</script>
 
 <style>
     /*
