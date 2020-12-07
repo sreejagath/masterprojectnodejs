@@ -47,17 +47,21 @@
         </div>
         <h2 style="text-align:center;font-size: 50px;">STUDENTS</h2>
         <div class="div-main">
-        {{#each studentslist}}
-        <div class="card">
-            <img src="/images/student-images/{{this._id}}.jpg" alt="Please update image!" style="width:100%">
-            <h1 style="text-align:center;color:black">{{this.studentname}}</h1>
-            <p class="price">{{this.studentcourse}}</p>
-            <p>Contact : {{this.studentphone}} ,<br> {{this.studentmail}}</p>
-            <p><button onclick="location.href='/tutor/edit-image/{{this._id}}'" type="button">Update Image</button></p>
-            <p><button onclick="location.href='/tutor/edit-student/{{this._id}}'" type="button">Edit Details</button></p>
-            <p><button onclick="remove('/tutor/remove-student/{{this._id}}','{{this.studentname}}')" type="button">Remove</button></p>
-        </div>
-        {{/each}}
+        
+        <table>
+  		<tr>
+    		<th>Roll No.</th>
+    		<th>Name</th>
+    		<th>Actions</th>
+  		</tr>
+		  {{#each studentslist}}
+  		<tr>
+    		<td>1</td>
+    		<td>{{this.studentname}}</td>
+    		<td><button onclick="remove('/tutor/remove-student/{{this._id}}','{{this.studentname}}')" type="button">Remove</button></td>
+  		</tr>
+		  {{/each}}
+	</table>
         </div>
     </div>
 </div>
@@ -122,6 +126,25 @@ TABLE OF CONTENT
         margin: 0;
         padding: 0;
     }
+    table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 5%;
+  color: black;
+}
+
+td, th {
+  border: 2px solid #ccc;
+  text-align: left;
+  padding: 8px;
+	text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #83ccd1
+}
 
     .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
