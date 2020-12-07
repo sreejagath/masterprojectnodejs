@@ -55,7 +55,7 @@
 		  {{#each all_assignments}}
   		<tr>
     		<td>{{this.topic}}</td>
-    		<td><a href="/data/assignments/{{this.topic}}.pdf" download="/data/assignments/{{this.topic}}.pdf" style="color: red;"> {{this.topic}}.pdf</a></td>
+    		<td><a href="/data/assignments/{{this.topic}}.pdf" download="/data/assignments/{{this.topic}}.pdf"> {{this.topic}}.pdf</a></td>
     		<td><a href="/tutor/delete-assignment/{{this._id}}">Delete</a></td>
   		</tr>
 		  {{/each}}
@@ -100,8 +100,9 @@ table {
   width: 90%;
   margin-left: 5%;
   border-radius: 5%;
-  color: black;
+  color: #008bc4;
 }
+
 
 td, th {
   border: 2px solid #ccc;
@@ -111,7 +112,11 @@ td, th {
 }
 
 tr:nth-child(even) {
-  background-color: #83ccd1
+  background-color: #008bc4;
+  color:white;
+}
+tr:nth-child(even) a{
+	color: white;
 }
 input[type=submit]:hover{
         opacity: 0.7;

@@ -20,6 +20,7 @@ module.exports={
                     if(status){
                         console.log("Login Success")
                         response.student=student
+                        console.log("Detail is here");
                         response.status=true
                         resolve(response)
                     }else{
@@ -32,6 +33,13 @@ module.exports={
                 resolve({status:false})
             }
     
+        })
+    },
+    getStudentDetails:(id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.STUDENT_COLLECTION).findOne({_id:ObjectId(id)}).then((response)=>{
+                resolve(response)
+            })
         })
     },
     getStudents:()=>{
@@ -60,5 +68,10 @@ module.exports={
           
         })
     
+    },
+    submitAssignment:(content)=>{
+        return new Promise(async(resolve,reject)=>{
+            db.get().collection(collection.ASSIGNMENT_DATA)
+        })
     }
 }

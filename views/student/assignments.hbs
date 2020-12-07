@@ -4,7 +4,8 @@
           <div class="square"></div>
           
          
-          <h1>Hi ,student !</h1>
+          <h1>Hi , Tutor !</h1>
+          
           </header>
         <!-- Search box -->
         
@@ -13,10 +14,10 @@
         </div>
         <nav class="templatemo-left-nav">          
           <ul>
-            <li><a href="#" class="active"><i class="fa fa-home fa-fw"></i>Home</a></li>
+            <li><a href="#"><i class="fa fa-home fa-fw"></i>Home</a></li>
             <li><a href="#"><i class="fa fa-bar-chart fa-fw"></i>Today's Task</a></li>
             <li><a href="#"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
-            <li><a href="/student/assignments"><i class="fa fa-users fa-fw"></i>Assignments</a></li>
+            <li><a href="/student/assignments" class="active"><i class="fa fa-users fa-fw"></i>Assignments</a></li>
             <li><a href="#"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
             <li><a href="#"><i class="fa fa-eject fa-fw"></i>Profile</a></li>
           </ul>  
@@ -29,21 +30,35 @@
             <nav class="templatemo-top-nav col-lg-12 col-md-12">
               <ul class="text-uppercase">
                 <li><a href="#" class="active">Control Panel</a></li>
-                <li style="margin-left:470px"><a href="/student/logout">Log Out</a></li>
+                <li style="margin-left:470px"><a href="/tutor/logout">Log Out</a></li>
               </ul>  
             </nav> 
           </div>
         </div>
 		<br>
 		<br><br><br>
-		
-		
-                <form action="#" style="margin-left: 30%;">
-					<input type="text" name="" id="" placeholder="Topic"><br>
-					<input type="text" name="" id="" placeholder="Image"><br>
-					<input type="submit" name="" id="" value="Submit">
+                <form action="/student/assignments" method="POST" enctype="multipart/form-data" style="margin-left: 20%;">
+					<input type="text" name="topic" placeholder="Topic"><br>
+					<input type="file" name="assignment" placeholder="Details" required><br>
+					<input type="submit" value="Submit">
 				</form>
-        </div>
+
+	<table>
+  		<tr>
+    		<th>Topic</th>
+    		<th>File</th>
+    		<th>Action</th>
+  		</tr>
+		  {{#each all_assignments}}
+  		<tr>
+    		<td>{{this.topic}}</td>
+    		<td><a href="/data/assignments/{{this.topic}}.pdf" download="/data/assignments/{{this.topic}}.pdf"> {{this.topic}}.pdf</a></td>
+    		<td><a href="/tutor/delete-assignment/{{this._id}}">Delete</a></td>
+  		</tr>
+		  {{/each}}
+	</table>
+
+</div>
       </div>
     </div>
     <style>
@@ -75,6 +90,33 @@ ul {
 	list-style-type: none;
     margin: 0;
     padding: 0;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 5%;
+  color: #008bc4;
+}
+
+
+td, th {
+  border: 2px solid #ccc;
+  text-align: left;
+  padding: 8px;
+	text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #008bc4;
+  color:white;
+}
+tr:nth-child(even) a{
+	color: white;
+}
+input[type=submit]:hover{
+        opacity: 0.7;
 }
 a:hover { text-decoration: none; }
 nav li {
@@ -363,14 +405,15 @@ footer { padding: 15px; }
 	border: 1px solid #ccc;
 	padding: 3px;
 }
- input[type=text]{
-      width: 40%;
+ input[type=text],[type=file]{
+      width: 60%;
       padding: 12px 20px;
       margin: 8px 0;
       display: inline-block;
       border: 1px solid #ccc;
       box-sizing: border-box;
       border-radius: 10px;
+	  background-color: white;
     }
 
     input[type=submit]{
@@ -385,7 +428,7 @@ footer { padding: 15px; }
       font-size: 15px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       margin-bottom: 30px;
-	  margin-left: 30px;
+	  margin-left: 16%;
     }
 
     button:hover {

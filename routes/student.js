@@ -11,6 +11,7 @@ const verifyLogin = (req, res) => {
   }
 };
 const nodemailer = require("nodemailer");
+const tutorHelpers=require('../helpers/tutor-helpers');
 const studentHelpers = require("../helpers/student-helpers");
 /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -33,10 +34,10 @@ router.post("/student-login", function (req, res, next) {
     console.log(response);
     if (response.status) {
       req.session.studentLoggedIn = true;
-      req.session.student = response.student;
+      req.session.student=response.student;
       console.log("Entering to Student Home");
       res.render("student/student-home");
-    } else {
+    }else{
       req.session.loginErr = true;
       res.redirect("student-login");
     }
@@ -52,12 +53,12 @@ router.get("/logout", function (req, res, next) {
   req.session.destroy();
   res.render("index");
 });
-router.get("/student-home", verifyLogin, function (req, res, next) {
+router.get("/student-home",async(req, res)=> {
   let student = req.session.student;
-  console.log("login");
-  if (student) {
-    res.render("student/student-home", { student });
-  } else {
+  if(req.session.studentLoggedIn){
+    res.render("student/student-home",{student});
+    console.log("hai to home");
+  }else{
     res.render("student/student-login");
   }
 });
@@ -152,4 +153,12 @@ router.post("/verify-otp", (req, res) => {
     res.redirect("/student/otp-login");
   }
 });
+router.get("/assignments",(req,res)=>{
+  tutorHelpers.getAssignments().then((all_assignments)=>{
+  res.render("student/assignments",{all_assignments})
+})
+})
+router.post("/assignments",(req,res)=>{
+  
+})
 module.exports = router;
