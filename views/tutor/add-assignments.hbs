@@ -40,9 +40,9 @@
         </div>
 		<br>
 		<br><br><br>
-                <form action="/tutor/add-assignments" style="margin-left: 20%;">
-					<input type="text" name="Topic" placeholder="Topic"><br>
-					<input type="file" name="assignment" placeholder="Image"><br>
+                <form action="/tutor/add-assignments" method="POST" enctype="multipart/form-data" style="margin-left: 20%;">
+					<input type="text" name="topic" placeholder="Topic"><br>
+					<input type="file" name="assignment" placeholder="Details" required><br>
 					<input type="submit" value="Submit">
 				</form>
         </div>

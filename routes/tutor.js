@@ -149,6 +149,24 @@ router.get('/remove-student/:id',async(req,res)=>{
   })
 })
 router.get('/add-assignments',(req,res)=>{
-  res.render('tutor/add-assignments')
+    res.render('tutor/add-assignments')
+})
+router.post('/add-assignments',(req,res)=>{
+  tutorHelpers.addAssignments(req.body).then((response)=>{
+    console.log(req.body.assignment);
+    res.redirect('/tutor/add-student')
+    if(req.body.assignment){
+      console.log(req.body.assignment);
+      let assignment=req.body.assignment
+      let topic=response.topic
+      assignment.mv('./public/data/assignments/'+topic+'.pdf',(err)=>{
+        if(!err){
+          res.redirect('/tutor/tutor-home')
+        }else{
+          console.log(err);
+        }
+      })
+    }
+  })
 })
 module.exports = router;

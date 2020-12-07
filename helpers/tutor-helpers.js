@@ -88,5 +88,12 @@ module.exports={
                 resolve(response)
             })
         })
+    },
+    addAssignments:(assignmentdetails)=>{
+        return new Promise(async(resolve,reject)=>{
+        db.get().collection(collection.ASSIGNMENT_DATA).insertOne(assignmentdetails).then((data)=>{
+            resolve(data.ops[0].topic)
+        })
+        })
     }
 }
