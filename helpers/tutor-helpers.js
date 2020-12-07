@@ -95,5 +95,11 @@ module.exports={
             resolve(data.ops[0].topic)
         })
         })
+    },
+    getAssignments:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let all_assignments=await db.get().collection(collection.ASSIGNMENT_DATA).find().toArray()
+            resolve(all_assignments)
+        })
     }
 }

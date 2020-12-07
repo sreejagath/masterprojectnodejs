@@ -45,7 +45,23 @@
 					<input type="file" name="assignment" placeholder="Details" required><br>
 					<input type="submit" value="Submit">
 				</form>
-        </div>
+
+	<table>
+  		<tr>
+    		<th>Topic</th>
+    		<th>File</th>
+    		<th>Action</th>
+  		</tr>
+		  {{#each all_assignments}}
+  		<tr>
+    		<td>{{this.topic}}</td>
+    		<td><a href="/data/assignments/{{this.topic}}.pdf" download="/data/assignments/{{this.topic}}.pdf" style="color: red;"> {{this.topic}}.pdf</a></td>
+    		<td><a href="/tutor/delete-assignment/{{this._id}}">Delete</a></td>
+  		</tr>
+		  {{/each}}
+	</table>
+
+</div>
       </div>
     </div>
     <style>
@@ -77,6 +93,25 @@ ul {
 	list-style-type: none;
     margin: 0;
     padding: 0;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 5%;
+  color: black;
+}
+
+td, th {
+  border: 2px solid #ccc;
+  text-align: left;
+  padding: 8px;
+	text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #83ccd1
 }
 input[type=submit]:hover{
         opacity: 0.7;
