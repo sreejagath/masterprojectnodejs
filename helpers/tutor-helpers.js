@@ -44,6 +44,7 @@ module.exports={
     },
     updateDetails:(tid,tutorUpdate)=>{
         return new Promise(async(resolve,reject)=>{
+           
             db.get().collection(collection.TUTOR_COLLECTION).updateOne({_id:ObjectId(tid)},{
                 $set:{
                     tutorname:tutorUpdate.tutorname,
@@ -52,6 +53,7 @@ module.exports={
                     tutorcourse:tutorUpdate.tutorcourse,
                     dob:tutorUpdate.dob,
                     username:tutorUpdate.username,
+                    
                 }
             }).then((response)=>{
                 resolve()
@@ -67,7 +69,7 @@ module.exports={
     },
     updateStudent:(sid,studentData)=>{
         return new Promise(async(resolve,reject)=>{
-            
+            studentData.password=await bcrypt.hash(studentData.password,10)
             db.get().collection(collection.STUDENT_COLLECTION).updateOne({_id:ObjectId(sid)},{
                 $set:{
                     studentname:studentData.studentname,
@@ -75,7 +77,8 @@ module.exports={
                     studentcourse:studentData.studentcourse,
                     studentmail:studentData.studentmail,
                     studentdob:studentData.studentdob,
-                   
+                    rollnumber:studentData.rollnumber,
+                    password:studentData.password
                 }
             }).then((response)=>{
                 resolve()
