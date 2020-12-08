@@ -153,12 +153,26 @@ router.post("/verify-otp", (req, res) => {
     res.redirect("/student/otp-login");
   }
 });
-router.get("/assignments",(req,res)=>{
+router.get("/assignments/:id",(req,res)=>{
+  let student=tutorHelpers.getStudentDetails(req.params.id)
   tutorHelpers.getAssignments().then((all_assignments)=>{
   res.render("student/assignments",{all_assignments})
 })
 })
 router.post("/assignments",(req,res)=>{
-  
+  studentHelpers.submitAssignment(req.body).then(()=>{
+    res.redirect("/student/student-home")
+    if(req.files.assignment){
+      let assignment=req.files.assignment;
+      
+      assignment.mv('./public/data/student-assignment/'+topic+'.pdf',(err)=>{
+        if(!err){
+          res.redirect('/tutor/tutor-home')
+        }else{
+          console.log(err);
+        }
+      })
+    }
+  })
 })
 module.exports = router;

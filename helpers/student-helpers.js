@@ -1,5 +1,6 @@
 var db=require('../config/connection');
 var collection=require('../config/collection');
+const { ObjectId } = require('mongodb');
 const bcrypt=require('bcrypt');
 module.exports={
     doSignup:(studentData)=>{
@@ -71,7 +72,9 @@ module.exports={
     },
     submitAssignment:(content)=>{
         return new Promise(async(resolve,reject)=>{
-            db.get().collection(collection.ASSIGNMENT_DATA)
+            db.get().collection(collection.ASSIGNMENT_UPLOAD).insertOne(content).then((data)=>{
+                resolve(data.ops[0].topic)
+            })
         })
     }
 }

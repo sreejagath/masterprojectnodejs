@@ -57,7 +57,7 @@
 		  {{#each studentslist}}
   		<tr>
     		<td>{{this.rollnumber}}</td>
-    		<td>{{this.studentname}}</td>
+    		<td><a href="/tutor/view-student-details/{{this._id}}" style="color: red;">{{this.studentname}}</a></td>
     		<td><button onclick="location.href='/tutor/edit-student/{{this._id}}'" type="button">Edit</button>  <button onclick="remove('/tutor/remove-student/{{this._id}}','{{this.studentname}}')" type="button">Remove</button></td>
   		</tr>
 		  {{/each}}

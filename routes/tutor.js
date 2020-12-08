@@ -170,4 +170,8 @@ router.post('/add-assignments',(req,res)=>{
     }
   })
 })
+router.get('/view-student-details/:id',async(req,res)=>{
+  let studentdetails= await tutorHelpers.getStudentDetails(req.params.id)
+  res.render('tutor/view-student-details',{studentdetails})
+})
 module.exports = router;
