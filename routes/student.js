@@ -157,7 +157,7 @@ router.get("/assignments/",(req,res)=>{
   let student=tutorHelpers.getStudentDetails(req.params.id)
   tutorHelpers.getAssignments().then((all_assignments)=>{
   
-    res.render("student/assignments",{all_assignments,topic})
+    res.render("student/assignments",{all_assignments})
   
   
 })
