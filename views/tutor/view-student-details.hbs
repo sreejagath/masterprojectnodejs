@@ -50,27 +50,45 @@
             <main class="container" style="margin-top: -15%;">
  
   <!-- Left Column / Headphones Image -->
-  <div class="left-column">
+  <div class="right-column">
     <img src="/images/student-images/{{studentdetails._id}}.jpg" alt="" class="active">
   </div>
  
  
   <!-- Right Column -->
-  <div class="right-column">
+  <div class="left-column">
  
     <!-- Product Description -->
     <div class="product-description">
       <span>STUDENT</span>
       <h1>{{studentdetails.studentname}}</h1>
-
-      <p>Course       : {{studentdetails.studentcourse}}</p><br>
-      <p>Phone Number : {{studentdetails.studentphone}}</p><br>
-      <p>Email        : {{studentdetails.studentmail}}</p><br>
-      <p>Date Of Birth : {{studentdetails.studentdob}}</p><br>
+      <p>Roll Number  : {{studentdetails.rollnumber}}</p>
+      <p>Course       : {{studentdetails.studentcourse}}</p>
+      <p>Phone Number : {{studentdetails.studentphone}}</p>
+      <p>Email        : {{studentdetails.studentmail}}</p>
+      <p>Date Of Birth : {{studentdetails.studentdob}}</p>
     </div>
- 
+
     
 </main>
+ <hr width="100%">
+ <div class="table-student">
+ <table>
+  <caption style="text-align:center">Assignments</caption>
+  <tr>
+    <th>Topic</th>
+    <th>File</th>
+    <th>Mark</th>
+    <th>Action</th>
+  </tr>
+  <tr>
+    <td>Topic Name</td>
+    <td>File Name.pdf</td>
+    <td><input type="text" style="margin-left: 0%;"></td>
+    <td>Save</td>
+  </tr>
+</table>
+</div>
         </div>
   </div>
 </div>
@@ -102,19 +120,34 @@ h3 {
 	color: #7f7f7f;
 	font-size: 1.4em;
 }
-.left-column {
+ table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 40%;
+  margin-left: 5%;
+  border-radius: 5%;
+  color: black;
+}
+
+td, th {
+  border: 0.5px solid #ccc;
+  text-align: left;
+  padding: 8px;
+	text-align: center;
+}
+.right-column {
   width: 65%;
   position: relative;
   
-  margin-left: 35%;
+  margin-left: 55%;
 }
  
-.right-column {
+.left-column {
   width: 35%;
   margin-top: 60px;
   margin-left: 7%;
 }
-.left-column img {
+.right-column img {
   width: absolute;
   position: absolute;
   left: 0;
@@ -123,7 +156,7 @@ h3 {
   transition: all 0.3s ease;
 }
  
-.left-column img.active {
+.right-column img.active {
   opacity: 1;
 }
 .product-description {
