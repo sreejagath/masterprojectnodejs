@@ -156,7 +156,10 @@ router.post("/verify-otp", (req, res) => {
 router.get("/assignments/",(req,res)=>{
   let student=tutorHelpers.getStudentDetails(req.params.id)
   tutorHelpers.getAssignments().then((all_assignments)=>{
-  res.render("student/assignments",{all_assignments})
+  
+    res.render("student/assignments",{all_assignments,topic})
+  
+  
 })
 })
 router.post("/assignments",(req,res)=>{

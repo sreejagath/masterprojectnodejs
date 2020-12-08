@@ -4,6 +4,15 @@ var router = express.Router();
 const tutorHelpers=require('../helpers/tutor-helpers');
 const studentHelpers=require('../helpers/student-helpers');
 /* GET users listing. */
+const verifyLogin = (req, res) => {
+  if (req.session.tutorLoggedIn) {
+    res.render("tutor/tutor-home");
+  } else {
+    console.log("login page");
+    res.render("tutor/tutor-login", { loginErr: req.session.loginErr });
+    req.session.loginErr = false;
+  }
+};
 
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -59,14 +68,14 @@ router.get('/student/student-login',function(req,res,next){
     res.render('student/student-login');
   }
 })
-router.get('/tutor-profile', function(req, res, next) {
+router.get('/tutor-profile',verifyLogin, function(req, res, next) {
   tutorHelpers.getTutorDetails(req.body).then((tutordetails)=>{
     console.log(tutordetails)
     console.log("login");
     res.render('tutor/tutor-profile',{tutordetails});
   })
 })
-router.get('/edit-profile/:id', async(req, res)=>{
+router.get('/edit-profile/:id',verifyLogin, async(req, res)=>{
   let tutordetails= await tutorHelpers.getTutorDetails(req.params.id)
     console.log("Edit Profile");
     console.log(tutordetails);
@@ -85,14 +94,14 @@ router.post('/edit-profile/:id',function(req,res,next){
   })
   
 })
-router.get('/student-control',function(req,res,next){
+router.get('/student-control',verifyLogin,function(req,res,next){
   console.log("hello");
   console.log(req.params.id);
   studentHelpers.getStudents().then((studentslist)=>{
     res.render('tutor/student-control',{studentslist})
   })
 })
-router.get('/add-student',function(req,res,next){
+router.get('/add-student',verifyLogin,function(req,res,next){
   
   res.render('tutor/add-student')
 })
@@ -104,7 +113,7 @@ router.post('/add-student',(req,res)=>{
     }
   })
 })
-router.get('/edit-student/:id',async(req,res)=>{
+router.get('/edit-student/:id',verifyLogin,async(req,res)=>{
   console.log(req.params.id);
   let studentslist= await tutorHelpers.getStudentDetails(req.params.id)
   res.render('tutor/edit-student',{studentslist})
@@ -118,7 +127,7 @@ router.post('/edit-student/:id',(req,res)=>{
     }
   })
 })
-router.get('/edit-image/:id',async(req,res)=>{
+router.get('/edit-image/:id',verifyLogin,async(req,res)=>{
   let student= await tutorHelpers.getStudentDetails(req.params.id)
   res.render('tutor/edit-image',{student})
 })
@@ -136,19 +145,19 @@ router.post('/edit-image/:id',(req,res)=>{
   })
   
 })
-router.get('/view-tutor-profile/:id',async(req,res)=>{
+router.get('/view-tutor-profile/:id',verifyLogin,async(req,res)=>{
   let tutordetails= await tutorHelpers.getTutorDetails(req.params.id)
     console.log(tutordetails)
     res.render('tutor/view-tutor-profile',{tutordetails});
 })
-router.get('/remove-student/:id',async(req,res)=>{
+router.get('/remove-student/:id',verifyLogin,async(req,res)=>{
   let studentid=req.params.id;
   console.log(studentid);
   tutorHelpers.deleteStudent(studentid).then((response)=>{
     res.redirect('/tutor/student-control')
   })
 })
-router.get('/add-assignments',(req,res)=>{
+router.get('/add-assignments',verifyLogin,(req,res)=>{
   tutorHelpers.getAssignments().then((all_assignments)=>{
     res.render('tutor/add-assignments',{all_assignments})
   })
@@ -170,7 +179,7 @@ router.post('/add-assignments',(req,res)=>{
     }
   })
 })
-router.get('/view-student-details/:id',async(req,res)=>{
+router.get('/view-student-details/:id',verifyLogin,async(req,res)=>{
   let studentdetails= await tutorHelpers.getStudentDetails(req.params.id)
   res.render('tutor/view-student-details',{studentdetails})
 })

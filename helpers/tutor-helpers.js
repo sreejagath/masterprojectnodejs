@@ -103,6 +103,16 @@ module.exports={
         return new Promise(async(resolve,reject)=>{
             let all_assignments=await db.get().collection(collection.ASSIGNMENT_DATA).find().toArray()
             resolve(all_assignments)
+            console.log(all_assignments);
+        })
+    },
+    getTopic:()=>{
+        return new Promise(async(resolve,reject)=>{
+            db.get().collection(collection.ASSIGNMENT_DATA).find().sort({_id:-1}).limit(1).then((topic)=>{
+                resolve(topic)
+            console.log(topic); 
+            });
+           
         })
     }
 }
