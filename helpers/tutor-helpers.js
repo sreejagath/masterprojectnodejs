@@ -106,13 +106,13 @@ module.exports={
             console.log(all_assignments);
         })
     },
-    getTopic:()=>{
+    getStudentAssignment:(id)=>{
         return new Promise(async(resolve,reject)=>{
-            db.get().collection(collection.ASSIGNMENT_DATA).find().sort({_id:-1}).limit(1).then((topic)=>{
-                resolve(topic)
-            console.log(topic); 
-            });
-           
+            let student_assignments=await db.get().collection(collection.ASSIGNMENT_UPLOAD).find().toArray()
+            db.get().collection(collection.STUDENT_COLLECTION).findOne({_id:ObjectId(id)}).then((response)=>{
+                resolve(response,student_assignments)
+                
+            })
         })
     }
 }

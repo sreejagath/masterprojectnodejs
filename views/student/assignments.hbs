@@ -4,7 +4,7 @@
 			<div class="square"></div>
 
 
-			<h1>Hi , Tutor !</h1>
+			<h1>Hi , student !</h1>
 
 		</header>
 		<!-- Search box -->
@@ -38,16 +38,14 @@
 		<br>
 		<br><br><br>
 
-		<form action="/student/assignments" method="POST" enctype="multipart/form-data" style="margin-left: 20%;">
+		<form action="/student/assignments/{{studentdeatail._id}}" method="POST" enctype="multipart/form-data" style="margin-left: 20%;">
 			<select name="topic">
 				<option>Topic</option>
 				{{#each all_assignments}}
 				<option value="{{this.topic}}">{{this.topic}}</option>
 				{{/each}}
 			</select><br>
-
 			<input type="file" name="assignment" placeholder="Details" required><br>
-
 			<input type="submit" value="Submit">
 		</form>
 

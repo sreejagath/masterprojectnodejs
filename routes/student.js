@@ -22,7 +22,8 @@ router.get("/student-login", function (req, res, next) {
     console.log("not logged");
     res.render("tutor/view-students");
   } else if (req.session.studentLoggedIn) {
-    res.render("student/student-home");
+    let studentDeatail=req.session.student
+    res.render("student/student-home",{studentDeatail});
   } else {
     console.log("login page");
     res.render("student/student-login", { loginErr: req.session.loginErr });
@@ -36,7 +37,9 @@ router.post("/student-login", function (req, res, next) {
       req.session.studentLoggedIn = true;
       req.session.student=response.student;
       console.log("Entering to Student Home");
-      res.render("student/student-home");
+      console.log(req.session.student);
+      let studentDeatail=req.session.student
+      res.render("student/student-home",{studentDeatail});
     }else{
       req.session.loginErr = true;
       res.redirect("student-login");
@@ -54,10 +57,11 @@ router.get("/logout", function (req, res, next) {
   res.render("index");
 });
 router.get("/student-home",async(req, res)=> {
-  let student = req.session.student;
   if(req.session.studentLoggedIn){
+    let student = req.session.student;
+    console.log(student);
     res.render("student/student-home",{student});
-    console.log("hai to home");
+    
   }else{
     res.render("student/student-login");
   }
@@ -153,24 +157,24 @@ router.post("/verify-otp", (req, res) => {
     res.redirect("/student/otp-login");
   }
 });
-router.get("/assignments/",(req,res)=>{
+router.get("/assignments/:id",(req,res)=>{
   let student=tutorHelpers.getStudentDetails(req.params.id)
   tutorHelpers.getAssignments().then((all_assignments)=>{
-  
-    res.render("student/assignments",{all_assignments})
+    let studentdeatail = req.session.student;
+    res.render("student/assignments",{all_assignments,studentdeatail})
   
   
 })
 })
-router.post("/assignments",(req,res)=>{
+router.post("/assignments/:id",(req,res)=>{
   studentHelpers.submitAssignment(req.body).then(()=>{
-    res.redirect("/student/student-home")
     if(req.files.assignment){
       let assignment=req.files.assignment;
-      
-      assignment.mv('./public/data/student-assignment/'+topic+'.pdf',(err)=>{
+      let id=req.params.id;
+      let topic=req.body.topic;
+      assignment.mv('./public/data/student-assignment/'+id+topic+'.pdf',(err)=>{
         if(!err){
-          res.redirect('/tutor/tutor-home')
+          res.redirect('/student/student-home')
         }else{
           console.log(err);
         }

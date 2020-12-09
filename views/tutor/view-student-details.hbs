@@ -68,7 +68,6 @@
       <p>Email        : {{studentdetails.studentmail}}</p>
       <p>Date Of Birth : {{studentdetails.studentdob}}</p>
     </div>
-
     
 </main>
  <hr width="100%">
@@ -81,11 +80,14 @@
     <th>Mark</th>
     <th>Action</th>
   </tr>
+  {{#each all_assignments}}
   <tr>
-    <td>Topic Name</td>
-    <td>File Name.pdf</td>
+    <td>{{this.topic}}</td>
+    {{/each}}
+   <td><a href="/data/student-assignment/{{studentdetails._id}}{{this.topic}}">{{this.topic}}.pdf</a> </td>
     <td><input type="text" style="margin-left: 0%;"></td>
     <td>Save</td>
+    
   </tr>
 </table>
 </div>
