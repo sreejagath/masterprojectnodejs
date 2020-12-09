@@ -114,5 +114,18 @@ module.exports={
                 
             })
         })
+    },
+    addNotes:(notesdetails)=>{
+        return new Promise(async(resolve,reject)=>{
+        db.get().collection(collection.NOTES).insertOne(notesdetails).then((data)=>{
+            resolve(data.ops[0])
+        })
+        })
+    },
+    getNotes:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let all_notes=await db.get().collection(collection.NOTES).find().toArray()
+            resolve(all_notes)
+        })
     }
 }

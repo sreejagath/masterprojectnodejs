@@ -186,6 +186,24 @@ router.get('/view-student-details/:id',async(req,res)=>{
   })
 })
 router.get('/upload-notes',(req,res)=>{
-  res.render('tutor/upload-notes')
+  tutorHelpers.getNotes().then((all_notes)=>{
+  res.render('tutor/upload-notes',{all_notes})
+  })
+})
+router.post('/upload-notes',(req,res)=>{
+  tutorHelpers.addNotes(req.body).then((response)=>{
+    if(req.files.notes){
+      console.log(req.body.notes);
+      let notes=req.files.notes
+      let topic=req.body.topic
+      notes.mv('./public/data/notes/'+topic,(err)=>{
+        if(!err){
+          res.redirect('/tutor/tutor-home')
+        }else{
+          console.log(err);
+        }
+      })
+    }
+  })
 })
 module.exports = router;

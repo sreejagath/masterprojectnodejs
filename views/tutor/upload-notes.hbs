@@ -42,7 +42,7 @@
 		<br><br><br>
                 <form action="/tutor/upload-notes" method="POST" enctype="multipart/form-data" style="margin-left: 20%;">
 					<input type="text" name="topic" placeholder="Topic"><br>
-					<input type="file" name="assignment" placeholder="Details" required><br>
+					<input type="file" name="notes" placeholder="Details" required><br>
 					<input type="submit" value="Submit">
 				</form>
 
@@ -52,10 +52,10 @@
     		<th>File</th>
     		<th>Action</th>
   		</tr>
-		  {{#each all_assignments}}
+		  {{#each all_notes}}
   		<tr>
     		<td>{{this.topic}}</td>
-    		<td><a href="/data/assignments/{{this.topic}}.pdf" download="/data/assignments/{{this.topic}}.pdf"> {{this.topic}}.pdf</a></td>
+    		<td><a href="/data/notes/{{this.topic}}" download="/data/notes/{{this.topic}}"> {{this.topic}}</a></td>
     		<td><a href="/tutor/delete-assignment/{{this._id}}">Delete</a></td>
   		</tr>
 		  {{/each}}
