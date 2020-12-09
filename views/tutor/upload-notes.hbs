@@ -56,7 +56,7 @@
   		<tr>
     		<td>{{this.topic}}</td>
     		<td><a href="/data/notes/{{this.topic}}" download="/data/notes/{{this.topic}}"> {{this.topic}}</a></td>
-    		<td><button onclick="remove('/tutor/delete-assignment/{{this._id}}','{{this.topic}}')" type="button">Remove</button></td>
+    		<td><button onclick="remove('/tutor/delete-notes/{{this._id}}','{{this.topic}}')" type="button">Remove</button></td>
   		</tr>
 		  {{/each}}
 	</table>
@@ -427,7 +427,7 @@ footer { padding: 15px; }
 	  background-color: white;
     }
 
-    input[type=submit]{
+    input[type=submit],button{
       background-color: #008bc4;
       color: white;
       padding: 14px 20px;

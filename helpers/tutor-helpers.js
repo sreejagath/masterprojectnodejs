@@ -137,5 +137,12 @@ module.exports={
             let all_notes=await db.get().collection(collection.NOTES).find().toArray()
             resolve(all_notes)
         })
+    },
+    deleteNotes:(notesid)=>{
+        return new Promise(async(resolve,reject)=>{
+            db.get().collection(collection.NOTES).removeOne({_id:ObjectId(notesid)}).then((response)=>{
+                resolve(response)
+            })
+        })
     }
 }

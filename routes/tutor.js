@@ -215,4 +215,10 @@ router.get('/delete-assignment/:id',(req,res)=>{
     res.redirect('/tutor/add-assignments')
   })
 })
+router.get('/delete-notes/:id',(req,res)=>{
+  let notesid=req.params.id;
+  tutorHelpers.deleteNotes(notesid).then((response)=>{
+    res.redirect('/tutor/upload-notes')
+  })
+})
 module.exports = router;
