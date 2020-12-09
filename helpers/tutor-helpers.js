@@ -109,6 +109,13 @@ module.exports={
             console.log(all_assignments);
         })
     },
+    deleteAssignment:(assignmentid)=>{
+        return new Promise(async(resolve,reject)=>{
+            db.get().collection(collection.ASSIGNMENT_DATA).removeOne({_id:ObjectId(assignmentid)}).then((response)=>{
+                resolve(response)
+            })
+        })
+    },
     getStudentAssignment:(id)=>{
         return new Promise(async(resolve,reject)=>{
             let student_assignments=await db.get().collection(collection.ASSIGNMENT_UPLOAD).find().toArray()

@@ -56,7 +56,8 @@
   		<tr>
     		<td>{{this.topic}}</td>
     		<td><a href="/data/assignments/{{this.topic}}.pdf" download="/data/assignments/{{this.topic}}.pdf"> {{this.topic}}.pdf</a></td>
-    		<td><a href="/tutor/delete-assignment/{{this._id}}">Delete</a></td>
+    		
+			<td><button onclick="remove('/tutor/delete-assignment/{{this._id}}','{{this.topic}}')" type="button">Remove</button></td>
   		</tr>
 		  {{/each}}
 	</table>
@@ -64,6 +65,14 @@
 </div>
       </div>
     </div>
+	<script>
+    function remove(url,name) {
+  if (confirm('Are you sure you want to remove '+name+'?')) {
+    window.location.href=url;
+  }
+  return false;
+}
+	</script>
     <style>
       /*
 
@@ -419,7 +428,7 @@ footer { padding: 15px; }
 	  background-color: white;
     }
 
-    input[type=submit]{
+    button,input[type=submit]{
       background-color: #008bc4;
       color: white;
       padding: 14px 20px;

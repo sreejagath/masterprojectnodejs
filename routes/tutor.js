@@ -209,4 +209,10 @@ router.post('/upload-notes',(req,res)=>{
 router.get('/attendance',(req,res)=>{
   res.render('tutor/attendance')
 })
+router.get('/delete-assignment/:id',(req,res)=>{
+  let assignmentid=req.params.id;
+  tutorHelpers.deleteAssignment(assignmentid).then((response)=>{
+    res.redirect('/tutor/add-assignments')
+  })
+})
 module.exports = router;
