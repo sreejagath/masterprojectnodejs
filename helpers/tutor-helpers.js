@@ -94,8 +94,11 @@ module.exports={
     },
     addAssignments:(assignmentdetails)=>{
         return new Promise(async(resolve,reject)=>{
+            var datetime = new Date();
+            
         db.get().collection(collection.ASSIGNMENT_DATA).insertOne(assignmentdetails).then((data)=>{
             resolve(data.ops[0].topic)
+            console.log(datetime);
         })
         })
     },

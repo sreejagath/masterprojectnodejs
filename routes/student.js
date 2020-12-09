@@ -183,6 +183,8 @@ router.post("/assignments/:id",(req,res)=>{
   })
 })
 router.get('/task-today',(req,res)=>{
-  res.render('student/task-today')
+  tutorHelpers.getAssignments().then((all_assignments,date)=>{
+    res.render("student/task-today",{all_assignments,date})
+})
 })
 module.exports = router;
