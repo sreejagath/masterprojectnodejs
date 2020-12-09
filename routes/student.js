@@ -182,4 +182,7 @@ router.post("/assignments/:id",(req,res)=>{
     }
   })
 })
+router.get('/task-today',(req,res)=>{
+  res.render('student/task-today')
+})
 module.exports = router;
