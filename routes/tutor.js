@@ -185,4 +185,7 @@ router.get('/view-student-details/:id',async(req,res)=>{
   res.render('tutor/view-student-details',{studentdetails,studentdata,all_assignments})
   })
 })
+router.get('/upload-notes',(req,res)=>{
+  res.render('tutor/upload-notes')
+})
 module.exports = router;

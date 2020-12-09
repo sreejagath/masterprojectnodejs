@@ -16,10 +16,10 @@
           <ul>
             <li><a href="/tutor/tutor-home"><i class="fa fa-home fa-fw"></i>Home</a></li>
             <li><a href="/tutor/tutor-profile"><i class="fa fa-bar-chart fa-fw"></i>Profile</a></li>
-            <li><a href="/tutor/student-control" class="active"><i class="fa fa-database fa-fw"></i>Students</a></li>
+            <li><a href="/tutor/student-control"><i class="fa fa-database fa-fw"></i>Students</a></li>
             <li><a href="#"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
             <li><a href="/tutor/add-assignments"><i class="fa fa-users fa-fw"></i>Assignments</a></li>
-            <li><a href="/tutor/upload-notes"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
+            <li><a href="/tutor/upload-notes" class="active"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
             <li><a href="#"><i class="fa fa-eject fa-fw"></i>Announcement</a></li>
 			<li><a href="#"><i class="fa fa-eject fa-fw"></i>Events</a></li>
 			<li><a href="#"><i class="fa fa-eject fa-fw"></i>Photos</a></li>
@@ -32,74 +32,36 @@
           <div class="row">
             <nav class="templatemo-top-nav col-lg-12 col-md-12">
               <ul class="text-uppercase">
-                <li><a href="#">ADD STUDENT</a></li>
-                <li style="margin-left:230px"><a href="/tutor/logout">Log Out</a></li>
+                <li><a href="#" class="active">Control Panel</a></li>
+                <li style="margin-left:470px"><a href="/tutor/logout">Log Out</a></li>
               </ul>  
             </nav> 
           </div>
         </div>
-	
-		<form action="/tutor/add-student" class="templatemo-login-form" method="post" enctype="multipart/form-data">
-		<div class="form-group" style="margin-top: 6%;">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Roll Number" name="rollnumber">           
-		          	</div>	
-	        	</div>
-                <div class="form-group">
-					<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Full Name" name="studentname">           
-		          	</div>	
-	        	</div>
-	        	
-                <div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Phone" name="studentphone">           
-		          	</div>	
-	        	</div>
-                <div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Mail ID" name="studentmail">           
-		          	</div>	
-	        	</div>
-				<div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Course" name="studentcourse">           
-		          	</div>	
-	        	</div>
-				<div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="DD-MM-YYYY" name="studentdob">           
-		          	</div>	
-	        	</div>	 	
-                <div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" class="form-control" placeholder="Username" name="username">           
-		          	</div>	
-	        	</div>
-	        	<div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="password" class="form-control" placeholder="Password" name="password">           
-		          	</div>	
-	        	</div>	          	
-				<div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="file" class="form-control" placeholder="Profile Picture" name="studentimage">           
-		          	</div>	
-	        	</div>
-				<div class="form-group">
-					<button type="submit" class="templatemo-blue-button">Add Student</button>
-				</div>
-	        </form>
-        </div>
+		<br>
+		<br><br><br>
+                <form action="/tutor/upload-notes" method="POST" enctype="multipart/form-data" style="margin-left: 20%;">
+					<input type="text" name="topic" placeholder="Topic"><br>
+					<input type="file" name="assignment" placeholder="Details" required><br>
+					<input type="submit" value="Submit">
+				</form>
+
+	<table>
+  		<tr>
+    		<th>Topic</th>
+    		<th>File</th>
+    		<th>Action</th>
+  		</tr>
+		  {{#each all_assignments}}
+  		<tr>
+    		<td>{{this.topic}}</td>
+    		<td><a href="/data/assignments/{{this.topic}}.pdf" download="/data/assignments/{{this.topic}}.pdf"> {{this.topic}}.pdf</a></td>
+    		<td><a href="/tutor/delete-assignment/{{this._id}}">Delete</a></td>
+  		</tr>
+		  {{/each}}
+	</table>
+
+</div>
       </div>
     </div>
     <style>
@@ -131,6 +93,33 @@ ul {
 	list-style-type: none;
     margin: 0;
     padding: 0;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 5%;
+  color: #008bc4;
+}
+
+
+td, th {
+  border: 2px solid #ccc;
+  text-align: left;
+  padding: 8px;
+	text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #008bc4;
+  color:white;
+}
+tr:nth-child(even) a{
+	color: white;
+}
+input[type=submit]:hover{
+        opacity: 0.7;
 }
 a:hover { text-decoration: none; }
 nav li {
@@ -419,56 +408,34 @@ footer { padding: 15px; }
 	border: 1px solid #ccc;
 	padding: 3px;
 }
- input[type=text],[type=password],[type=file],label{
-      width: 70%;
+ input[type=text],[type=file]{
+      width: 60%;
       padding: 12px 20px;
       margin: 8px 0;
       display: inline-block;
       border: 1px solid #ccc;
       box-sizing: border-box;
       border-radius: 10px;
-      margin-left: 20%;
 	  background-color: white;
     }
-	label{
-		width: 70%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      border-radius: 10px;
-      margin-left: 20%;
-	  background-color: white;
-	}
 
-    input[type=submit],button{
+    input[type=submit]{
       background-color: #008bc4;
       color: white;
       padding: 14px 20px;
       margin: 8px 0;
       border: none;
       cursor: pointer;
-      width: 40%;
+      width: 30%;
       border-radius: 10px;
       font-size: 15px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
-      margin-left: 36%;
+      margin-bottom: 30px;
+	  margin-left: 16%;
     }
 
     button:hover {
       opacity: 0.8;
-    }
-    img{
-        width: 30%;
-        height: auto;
-        
-    }
-    .card{
-        margin-left: 300px;
-    }
-    h4{
-        margin-left: 30px;
     }
 
     </style>
