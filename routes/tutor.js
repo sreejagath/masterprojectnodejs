@@ -206,4 +206,7 @@ router.post('/upload-notes',(req,res)=>{
     }
   })
 })
+router.get('/attendance',(req,res)=>{
+  res.render('tutor/attendance')
+})
 module.exports = router;
