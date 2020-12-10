@@ -164,6 +164,7 @@ router.get('/add-assignments',(req,res)=>{
     
 })
 router.post('/add-assignments',(req,res)=>{
+  console.log("Ajax worked successfully");
   tutorHelpers.addAssignments(req.body).then((response)=>{
     if(req.files.assignment){
       console.log(req.body.assignment);
