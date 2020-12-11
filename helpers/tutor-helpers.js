@@ -119,11 +119,31 @@ module.exports={
     getStudentAssignment:(id)=>{
         return new Promise(async(resolve,reject)=>{
             let student_assignments=await db.get().collection(collection.ASSIGNMENT_UPLOAD).find().toArray()
-            db.get().collection(collection.STUDENT_COLLECTION).findOne({_id:ObjectId(id)}).then((response)=>{
-                resolve(response,student_assignments)
-                
-            })
+                resolve(student_assignments)
         })
+    },
+    studentAssignment:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let assignList=await db.get().collection(collection.STUDENT_COLLECTION).aggregate([
+                {
+                    $match:{_id:ObjectId(userId)}
+                },
+                {
+                    $lookup:{
+                        from:collection.ASSIGNMENT_UPLOAD,
+                        localField:'topic',
+                        foreignField:'id', 
+                        as:'assignments'
+                    }
+                }
+            ]).toArray()
+            console.log("id is");
+            console.log(assignList[0])
+            console.log("assignments are");
+            console.log(assignList[0].assignments);
+            resolve(assignList)
+        })
+
     },
     addNotes:(notesdetails)=>{
         return new Promise(async(resolve,reject)=>{

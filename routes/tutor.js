@@ -181,10 +181,11 @@ router.post('/add-assignments',(req,res)=>{
   })
 })
 router.get('/view-student-details/:id',async(req,res)=>{
-  let studentdetails= await tutorHelpers.getStudentDetails(req.params.id)
-  tutorHelpers.getStudentAssignment(req.params.id).then((all_assignments,studentdata)=>{
-  res.render('tutor/view-student-details',{studentdetails,studentdata,all_assignments})
+  tutorHelpers.studentAssignment(req.params.id).then((assignments)=>{
+      res.render('tutor/view-student-details',{assignments})
   })
+  
+  
 })
 router.get('/upload-notes',(req,res)=>{
   tutorHelpers.getNotes().then((all_notes)=>{

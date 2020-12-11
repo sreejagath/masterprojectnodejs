@@ -48,10 +48,10 @@
             <p class="price">{{this.tutorcourse}}</p>
             <p>Contact:{{this.tutorphone}},<br>{{this.tutormail}}</p>-->
             <main class="container" style="margin-top: -15%;">
- 
+ {{#each assignments}}
   <!-- Left Column / Headphones Image -->
   <div class="right-column">
-    <img src="/images/student-images/{{studentdetails._id}}.jpg" alt="" class="active">
+    <img src="/images/student-images/{{this._id}}.jpg" alt="" class="active">
   </div>
  
  
@@ -61,14 +61,14 @@
     <!-- Product Description -->
     <div class="product-description">
       <span>STUDENT</span>
-      <h1>{{studentdetails.studentname}}</h1>
-      <p>Roll Number  : {{studentdetails.rollnumber}}</p>
-      <p>Course       : {{studentdetails.studentcourse}}</p>
-      <p>Phone Number : {{studentdetails.studentphone}}</p>
-      <p>Email        : {{studentdetails.studentmail}}</p>
-      <p>Date Of Birth : {{studentdetails.studentdob}}</p>
+      <h1>{{this.studentname}}</h1>
+      <p>Roll Number  : {{this.rollnumber}}</p>
+      <p>Course       : {{this.studentcourse}}</p>
+      <p>Phone Number : {{this.studentphone}}</p>
+      <p>Email        : {{this.studentmail}}</p>
+      <p>Date Of Birth : {{this.studentdob}}</p>
     </div>
-    
+    {{/each}}
 </main>
  <hr width="100%">
  <div class="table-student">
@@ -80,13 +80,16 @@
     <th>Mark</th>
     <th>Action</th>
   </tr>
-  {{#each all_assignments}}
+   {{#each assignments}}
+    {{#each this.assignments}}
   <tr>
+   
     <td>{{this.topic}}</td>
-    {{/each}}
-   <td><a href="/data/student-assignment/{{studentdetails._id}}{{this.topic}}">{{this.topic}}.pdf</a> </td>
+   <td><a href="/data/student-assignment/{{assignments._id}}{{this.topic}}">{{this.topic}}.pdf</a> </td>
     <td><input type="text" style="margin-left: 0%;"></td>
-    <td>Save</td>
+    <td>Save</td> 
+    {{/each}}
+    {{/each}}
     
   </tr>
 </table>
