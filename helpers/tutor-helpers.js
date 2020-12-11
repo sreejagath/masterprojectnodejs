@@ -135,10 +135,19 @@ module.exports={
                         foreignField:'id', 
                         as:'assignments'
                     }
+                },
+                {
+                    $project:{
+                        assignments:1,
+                    }
+                },
+                {
+                    $unwind:'$assignments'
                 }
+               
             ]).toArray()
             console.log("id is");
-            console.log(assignList[0])
+            console.log(assignList)
             console.log("assignments are");
             console.log(assignList[0].assignments);
             resolve(assignList)
