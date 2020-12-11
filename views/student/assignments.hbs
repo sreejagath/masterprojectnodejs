@@ -40,7 +40,7 @@
 
 		<form action="/student/assignments/{{studentdeatail._id}}" method="POST" enctype="multipart/form-data" style="margin-left: 20%;">
 			<select name="topic">
-				<option>Topic</option>
+				<option selected="true" disabled>Topic</option>
 				{{#each all_assignments}}
 				<option value="{{this.topic}}">{{this.topic}}</option>
 				{{/each}}
