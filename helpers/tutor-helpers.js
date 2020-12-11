@@ -143,13 +143,18 @@ module.exports={
                 },
                 {
                     $unwind:'$assignments'
+                },
+                {
+                    $project:{
+                        topic:'$assignments.topic'
+                    }
                 }
-               
             ]).toArray()
             console.log("id is");
             console.log(assignList)
             console.log("assignments are");
-            console.log(assignList[0].assignments);
+            console.log(assignList[0]);
+            console.log(assignList);
             resolve(assignList)
         })
 

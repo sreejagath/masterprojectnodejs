@@ -41,8 +41,9 @@
 		<br>
 		<br><br><br>
                 <form action="/tutor/upload-notes" method="POST" enctype="multipart/form-data" style="margin-left: 20%;">
-					<input type="text" name="topic" placeholder="Topic"><br>
-					<input type="file" name="notes" placeholder="Details" required><br>
+					<input type="text" name="topic" placeholder="Topic" required><br>
+					<input type="file" name="notes" placeholder="Details"><br>
+					<input type="text" name="link" placeholder="Youtube Link"><br>
 					<input type="submit" value="Submit">
 				</form>
 
@@ -55,8 +56,8 @@
 		  {{#each all_notes}}
   		<tr>
     		<td>{{this.topic}}</td>
-    		<td><a href="/data/notes/{{this.topic}}" download="/data/notes/{{this.topic}}"> {{this.topic}}</a></td>
-    		<td><button onclick="remove('/tutor/delete-notes/{{this._id}}','{{this.topic}}')" type="button">Remove</button></td>
+    		<td><a href="/data/notes/{{this.topic}}.pdf" download="/data/notes/{{this.topic}}.pdf"> {{this.topic}}</a></td>
+    		<td><button onclick="remove('/tutor/delete-notes/{{this._id}}.pdf','{{this.topic}}')" type="button">Remove</button></td>
   		</tr>
 		  {{/each}}
 	</table>

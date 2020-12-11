@@ -51,7 +51,7 @@
 
   <!-- Left Column / Headphones Image -->
   <div class="right-column">
-    <img src="/images/student-images/{{this._id}}.jpg" alt="" class="active">
+    <img src="/images/student-images/{{student._id}}.jpg" alt="" class="active">
   </div>
  
  
@@ -61,14 +61,14 @@
     <!-- Product Description -->
     <div class="product-description">
       <span>STUDENT</span>
-      <h1></h1>
-      <p>Roll Number  : </p>
-      <p>Course       : </p>
-      <p>Phone Number : </p>
-      <p>Email        :</p>
-      <p>Date Of Birth : </p>
+      <h1>{{student.studentname}}</h1>
+      <p>Roll Number  : {{student.rollnumber}}</p>
+      <p>Course       :{{student.studentcourse}} </p>
+      <p>Phone Number : {{student.studentphone}}</p>
+      <p>Email        :{{student.studentmail}}</p>
+      <p>Date Of Birth : {{student.studentdob}}</p>
     </div>
-    
+   
 </main>
  <hr width="100%">
  <div class="table-student">
@@ -80,16 +80,17 @@
     <th>Mark</th>
     <th>Action</th>
   </tr>
-   {{#each assignments}}
-    {{#each this.assignments}}
+    {{#each assignments}}
+    
   <tr>
-   
     <td>{{this.topic}}</td>
-   <td><a href="/data/student-assignment/{{this._id}}{{this.topic}}">{{this.topic}}.pdf</a> </td>{{/each}}
+    
+   <td><a href="/data/student-assignment/{{this._id}}{{this.topic}}.pdf">{{this.topic}}.pdf</a> </td>
     <td><input type="text" style="margin-left: 0%;"></td>
     <td>Save</td> 
     
     {{/each}}
+    
     
   </tr>
 </table>
