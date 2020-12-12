@@ -80,18 +80,60 @@
     <th>Mark</th>
     <th>Action</th>
   </tr>
+   
     {{#each assignments}}
-    
   <tr>
     <td>{{this.topic}}</td>
     
-   <td><a href="/data/student-assignment/{{this._id}}{{this.topic}}.pdf">{{this.topic}}.pdf</a> </td>
+   <td><a href="/data/student-assignment/{{this.id}}{{this.topic}}.pdf">{{this.topic}}.pdf</a> </td>
     <td><input type="text" style="margin-left: 0%;"></td>
-    <td>Save</td> 
-    
+    <td>Save</td>
     {{/each}}
     
     
+    
+    
+  </tr>
+</table>
+</div>
+
+<div class="table-exam">
+ <table>
+  <caption style="text-align:center">Exams</caption>
+  <tr>
+    <th>Exam</th>
+    <th>Mark</th>
+    <th>Action</th>
+  </tr> 
+  <tr>
+    <td>S1</td>
+    <td><input type="text" style="margin-left: 0%;"></td>
+    <td>Save</td>
+  </tr>
+  <tr>
+    <td>S2</td>
+    <td><input type="text" style="margin-left: 0%;"></td>
+    <td>Save</td>
+  </tr>
+  <tr>
+    <td>S3</td>
+    <td><input type="text" style="margin-left: 0%;"></td>
+    <td>Save</td>
+  </tr>
+  <tr>
+    <td>S4</td>
+    <td><input type="text" style="margin-left: 0%;"></td>
+    <td>Save</td>
+  </tr>
+  <tr>
+    <td>S5</td>
+    <td><input type="text" style="margin-left: 0%;"></td>
+    <td>Save</td>
+  </tr>
+  <tr>
+    <td>S6</td>
+    <td><input type="text" style="margin-left: 0%;"></td>
+    <td>Save</td>
   </tr>
 </table>
 </div>
@@ -133,6 +175,16 @@ h3 {
   margin-left: 5%;
   border-radius: 5%;
   color: black;
+}
+.table-exam{
+  margin-left: 30%;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 5%;
+  color: black;
+  position: absolute;
+  margin-top: -18%;
 }
 
 td, th {

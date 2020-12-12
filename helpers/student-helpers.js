@@ -1,6 +1,6 @@
 var db=require('../config/connection');
 var collection=require('../config/collection');
-const { ObjectId } = require('mongodb');
+var ObjectId = require('mongodb').ObjectID;
 const bcrypt=require('bcrypt');
 module.exports={
     doSignup:(studentData)=>{
@@ -70,11 +70,28 @@ module.exports={
         })
     
     },
-    submitAssignment:(content)=>{
+    submitAssignment:(content,studentId)=>{
         return new Promise(async(resolve,reject)=>{
-            db.get().collection(collection.ASSIGNMENT_UPLOAD).insertOne(content).then((data)=>{
-                resolve(data.ops[0].topic)
-            })
+            let assignmentList=await db.get().collection(collection.ASSIGNMENT_UPLOAD).findOne({student:ObjectId(studentId)})
+            if(assignmentList){
+                db.get().collection(collection.ASSIGNMENT_UPLOAD).updateOne({student:ObjectId(studentId)},
+                {
+                    $push:{topic:content}
+                }).then((response)=>{
+                    resolve()
+                })
+            }else{
+                let assignObj={
+                    student:ObjectId(studentId),
+                    topic:[content]
+                }
+                db.get().collection(collection.ASSIGNMENT_UPLOAD).insertOne(assignObj).then((response)=>{
+                        resolve(response)
+                })
+            }
+            // db.get().collection(collection.ASSIGNMENT_UPLOAD).insertOne(content).then((data)=>{
+            //     resolve(data.ops[0].topic)
+            // })
         })
     }
 }

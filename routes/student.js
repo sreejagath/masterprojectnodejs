@@ -1,9 +1,9 @@
 const { response } = require("express");
 var express = require("express");
 var router = express.Router();
-const verifyLogin = (req, res) => {
+const verifyLogin = (req,res,next) => {
   if (req.session.studentLoggedIn) {
-    res.render("student/student-home");
+    next()
   } else {
     console.log("login page");
     res.render("student/student-login", { loginErr: req.session.loginErr });
@@ -166,8 +166,8 @@ router.get("/assignments/:id",(req,res)=>{
   
 })
 })
-router.post("/assignments/:id",(req,res)=>{
-  studentHelpers.submitAssignment(req.body).then(()=>{
+router.post("/assignments/:id",verifyLogin,(req,res)=>{
+  studentHelpers.submitAssignment(req.body.topic,req.params.id).then(()=>{
     if(req.files.assignment){
       let assignment=req.files.assignment;
       let id=req.params.id;
@@ -182,9 +182,15 @@ router.post("/assignments/:id",(req,res)=>{
     }
   })
 })
-router.get('/task-today',(req,res)=>{
+router.get('/task-today',async(req,res)=>{
+  let notes=await tutorHelpers.getNotes()
+  console.log(notes);
   tutorHelpers.getAssignments().then((all_assignments,date)=>{
-    res.render("student/task-today",{all_assignments,date})
+    res.render("student/task-today",{all_assignments,date,notes})
 })
+})
+router.get('/view-notes',async(req,res)=>{
+  let notes=await tutorHelpers.getNotes()
+ res.render("student/view-notes",{notes}) 
 })
 module.exports = router;

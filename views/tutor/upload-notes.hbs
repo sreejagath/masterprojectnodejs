@@ -42,8 +42,8 @@
 		<br><br><br>
                 <form action="/tutor/upload-notes" method="POST" enctype="multipart/form-data" style="margin-left: 20%;">
 					<input type="text" name="topic" placeholder="Topic" required><br>
-					<input type="file" name="notes" placeholder="Details"><br>
-					<input type="text" name="link" placeholder="Youtube Link"><br>
+					
+					<input type="url" name="link" placeholder="Youtube Link"><br>
 					<input type="submit" value="Submit">
 				</form>
 
@@ -417,7 +417,7 @@ footer { padding: 15px; }
 	border: 1px solid #ccc;
 	padding: 3px;
 }
- input[type=text],[type=file]{
+ input[type=text],[type=file],[type=url]{
       width: 60%;
       padding: 12px 20px;
       margin: 8px 0;

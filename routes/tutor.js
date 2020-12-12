@@ -4,9 +4,9 @@ var router = express.Router();
 const tutorHelpers=require('../helpers/tutor-helpers');
 const studentHelpers=require('../helpers/student-helpers');
 /* GET users listing. */
-const verifyLogin = (req, res) => {
+const verifyLogin = (req, res,next) => {
   if (req.session.tutorLoggedIn) {
-    res.render("tutor/tutor-home");
+    next();
   } else {
     console.log("login page");
     res.render("tutor/tutor-login", { loginErr: req.session.loginErr });
@@ -46,7 +46,7 @@ router.get('/tutor-login', function(req, res, next) {
       console.log(response);
     })
   })
-router.get('/tutor-home', function(req, res, next) {
+router.get('/tutor-home',verifyLogin, function(req, res, next) {
       let tutor=req.session.tutor
       console.log(tutor);
       res.render('tutor/tutor-home',{tutor});
@@ -94,7 +94,7 @@ router.post('/edit-profile/:id',function(req,res,next){
   })
   
 })
-router.get('/student-control',function(req,res,next){
+router.get('/student-control',verifyLogin,function(req,res,next){
   console.log("hello");
   console.log(req.params.id);
   studentHelpers.getStudents().then((studentslist)=>{
@@ -195,13 +195,14 @@ router.get('/upload-notes',(req,res)=>{
 })
 router.post('/upload-notes',(req,res)=>{
   tutorHelpers.addNotes(req.body).then((response)=>{
+    res.redirect('/tutor/tutor-home')
     if(req.files.notes){
       console.log(req.body.notes);
       let notes=req.files.notes
       let topic=req.body.topic
       notes.mv('./public/data/notes/'+topic,(err)=>{
         if(!err){
-          res.redirect('/tutor/tutor-home')
+          
         }else{
           console.log(err);
         }

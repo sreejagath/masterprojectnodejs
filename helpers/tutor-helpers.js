@@ -95,7 +95,7 @@ module.exports={
     addAssignments:(assignmentdetails)=>{
         return new Promise(async(resolve,reject)=>{
             var datetime = new Date();
-            
+             
         db.get().collection(collection.ASSIGNMENT_DATA).insertOne(assignmentdetails).then((data)=>{
             resolve(data.ops[0].topic)
             console.log(datetime);
@@ -135,25 +135,41 @@ module.exports={
                         foreignField:'id', 
                         as:'assignments'
                     }
-                },
-                {
+                },{
                     $project:{
-                        assignments:1,
-                    }
-                },
-                {
-                    $unwind:'$assignments'
-                },
-                {
-                    $project:{
+                        id:'$assignments.student',
                         topic:'$assignments.topic'
                     }
-                }
+                },
+                {
+                    $project:{
+                        id:1,topic:1
+                    }
+                },{
+                    $unwind:'$id'
+                },{
+                    $unwind:'$topic'
+                },{
+                    $unwind:'$topic'
+                },
+                 {
+                     $project:{
+                        id:1,topic:1
+                    }
+                 },
+                 
+                  
+                //   {
+                //     $project:{
+                //          assignments:1
+                //       }
+                //   },
+                 
+                
             ]).toArray()
             console.log("id is");
-            console.log(assignList)
+            console.log(assignList[0])
             console.log("assignments are");
-            console.log(assignList[0]);
             console.log(assignList);
             resolve(assignList)
         })

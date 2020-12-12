@@ -54,8 +54,8 @@
     <h4><b style="color: black;">{{this.topic}}</b></h4>
     </div>
     <a href="/data/assignments/{{this.topic}}.pdf" download="/data/assignments/{{this.topic}}.pdf"><button> Download</button></a>
-    <h4>Updated on:{{this.date}}</h4>
-    {{/each}}
+    {{/each}}{{#each date}}<h4>Updated on:{{this.date}}</h4>{{/each}}
+    
   </div>
  
  
@@ -64,8 +64,12 @@
  
     <!-- Product Description -->
     <div class="product-description" style="text-align: center;">
-      <span>NOTES</span>
-      
+      <span>NOTES</span><br>
+     {{#each notes}} <iframe width="400" height="200" src="{{this.link}}">
+</iframe><br>
+
+{{/each}}
+
     </div>
  
     
@@ -120,7 +124,9 @@ h3 {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   margin-top: -3%;
 }
- 
+ iframe{
+   margin-top:-23%;
+ }
 .right-column {
   width: 35%;
   margin-top: -3%;
