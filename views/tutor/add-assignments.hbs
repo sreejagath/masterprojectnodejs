@@ -18,7 +18,7 @@
             <li><a href="/tutor/tutor-profile"><i class="fa fa-bar-chart fa-fw"></i>Profile</a></li>
             <li><a href="/tutor/student-control"><i class="fa fa-database fa-fw"></i>Students</a></li>
             <li><a href="/tutor/attendance"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
-            <li><a href="/tutor/add-assignments" class="active"><i class="fa fa-users fa-fw"></i>Assignments</a></li>
+            <li><a href="/tutor/add-assignments" class="active"><i class="fa fa-users fa-fw"></i>Assignments <span id="alert"></span> </a></li>
             <li><a href="/tutor/upload-notes"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
             <li><a href="#"><i class="fa fa-eject fa-fw"></i>Announcement</a></li>
 			<li><a href="#"><i class="fa fa-eject fa-fw"></i>Events</a></li>
@@ -40,9 +40,9 @@
         </div>
 		<br>
 		<br><br><br>
-                <form action="/tutor/add-assignments" method="POST" enctype="multipart/form-data" style="margin-left: 20%;">
-					<input type="text" name="topic" placeholder="Topic"><br>
-					<input type="file" name="assignment" placeholder="Details" required><br>
+                <form action="/tutor/add-assignments" method="POST" enctype="multipart/form-data" style="margin-left: 20%;" id="assignmentForm">
+					<input type="text" name="topic" placeholder="Topic" required><br>
+					<input type="file" name="assignment" placeholder="Details" accept="application/pdf" required><br>
 					<input type="submit" value="Submit" id="submit">
 				</form>
 
@@ -55,7 +55,7 @@
 		  {{#each all_assignments}}
   		<tr>
     		<td>{{this.topic}}</td>
-    		<td><a href="/data/assignments/{{this.topic}}.pdf" download="/data/assignments/{{this.topic}}.pdf"> {{this.topic}}.pdf</a></td>
+    		<td><a href="/data/assignments/{{this.topic}}.pdf"> {{this.topic}}.pdf</a></td>
     		
 			<td><button onclick="remove('/tutor/delete-assignment/{{this._id}}','{{this.topic}}')" type="button">Remove</button></td>
   		</tr>
@@ -71,8 +71,33 @@
     		window.location.href=url;
  		 }
   		return false;
-		}
-		
+	}
+// this is the id of the form
+$("#assignmentForm").submit(function(e) {
+    e.preventDefault();
+	 // avoid to execute the actual submit of the form.
+    $.ajax({
+           type: "POST",
+           url: '/tutor/add-assignments',
+           data: $("#assignmentForm").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               //alert(data); // show response from the php script.
+			   $("#alert").html("NEW!")
+           }
+         });
+});
+//function makeAlert(){
+		//$.ajax({
+        	//url:'/tutor/tutor-home',
+        	//method:'post',
+        	//success:(response)=>{
+			//if(response){
+			//	$("#alert").html("NEW !")
+			//}	
+			//}
+    	//})
+	//}--}}
 	</script>
     <style>
       /*
@@ -111,6 +136,7 @@ table {
   margin-left: 5%;
   border-radius: 5%;
   color: #008bc4;
+  margin-bottom: 20%;
 }
 
 

@@ -166,17 +166,12 @@ router.get('/add-assignments',(req,res)=>{
 router.post('/add-assignments',(req,res)=>{
   console.log("Ajax worked successfully");
   tutorHelpers.addAssignments(req.body).then((response)=>{
+    console.log(req.files);
+    res.redirect('/tutor/tutor-home')
     if(req.files.assignment){
-      console.log(req.body.assignment);
       let assignment=req.files.assignment
       let topic=req.body.topic
-      assignment.mv('./public/data/assignments/'+topic+'.pdf',(err)=>{
-        if(!err){
-          res.redirect('/tutor/tutor-home')
-        }else{
-          console.log(err);
-        }
-      })
+      assignment.mv('./public/data/assignments/'+topic+'.pdf')
     }
   })
 })
