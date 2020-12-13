@@ -43,7 +43,7 @@
                 <form action="/tutor/add-assignments" method="POST" enctype="multipart/form-data" style="margin-left: 20%;" id="assignmentForm">
 					<input type="text" name="topic" placeholder="Topic" required><br>
 					<input type="file" name="assignment" placeholder="Details" accept="application/pdf" required><br>
-					<input type="submit" value="Submit" id="submit">
+					<input type="submit" value="Submit" id="submit" onclick="createAlert()">
 				</form>
 
 	<table>
@@ -73,20 +73,26 @@
   		return false;
 	}
 // this is the id of the form
-$("#assignmentForm").submit(function(e) {
-    e.preventDefault();
+//$("#assignmentForm").submit(function(e) {
+   
 	 // avoid to execute the actual submit of the form.
-    $.ajax({
-           type: "POST",
-           url: '/tutor/add-assignments',
-           data: $("#assignmentForm").serialize(), // serializes the form's elements.
-           success: function(data)
-           {
-               //alert(data); // show response from the php script.
-			   $("#alert").html("NEW!")
+	 function createAlert(){
+			$.ajax({
+         		  url: '/student/student-home',
+				   method: "POST",
+          		  
+          // data: $("#assignmentForm").serialize(), // serializes the form's elements.
+     		      success: function(data)
+                 {
+               alert(data); // show response from the php script.
+				   $("#alert").html("NEW!")
            }
          });
 });
+
+
+	 }
+    
 //function makeAlert(){
 		//$.ajax({
         	//url:'/tutor/tutor-home',
