@@ -13,6 +13,7 @@ var app = express();
 var db=require('./config/connection')
 var fileUpload = require('express-fileupload')
 var session=require('express-session')
+const MongoStore = require('connect-mongo')(session);
 var nodemailer=require('nodemailer')
 
 

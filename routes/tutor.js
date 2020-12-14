@@ -166,7 +166,6 @@ router.get('/add-assignments',(req,res)=>{
 router.post('/add-assignments',(req,res)=>{
   console.log("Ajax worked successfully");
   tutorHelpers.addAssignments(req.body).then((response)=>{
-    console.log(req.files);
     res.redirect('/tutor/tutor-home')
     if(req.files.assignment){
       let assignment=req.files.assignment
@@ -189,21 +188,21 @@ router.get('/upload-notes',(req,res)=>{
   })
 })
 router.post('/upload-notes',(req,res)=>{
-  tutorHelpers.addNotes(req.body).then((response)=>{
-    res.redirect('/tutor/tutor-home')
     if(req.files.notes){
+      tutorHelpers.addNotes(req.body,req.files.notes.mimetype).then((response)=>{
       console.log(req.body.notes);
       let notes=req.files.notes
       let topic=req.body.topic
-      notes.mv('./public/data/notes/'+topic,(err)=>{
-        if(!err){
-          
-        }else{
-          console.log(err);
-        }
-      })
-    }
-  })
+      notes.mv('./public/data/notes/'+'pdf_note_'+topic+'.pdf')
+    })
+  }
+    if(req.files.video){
+      console.log(req.body.notes);
+      let video=req.files.video
+      let topic=req.body.topic
+      video.mv('./public/data/notes/'+'video'+topic+'.mp4')
+    }res.redirect('/tutor/tutor-home')
+  
 })
 router.get('/attendance',(req,res)=>{
   res.render('tutor/attendance')
@@ -219,5 +218,11 @@ router.get('/delete-notes/:id',(req,res)=>{
   tutorHelpers.deleteNotes(notesid).then((response)=>{
     res.redirect('/tutor/upload-notes')
   })
+})
+router.get('/announcements',(req,res)=>{
+  res.render('tutor/announcements')
+})
+router.post('/announcements',(req,res)=>{
+  res.redirect('/tutor/tutor-home')
 })
 module.exports = router;

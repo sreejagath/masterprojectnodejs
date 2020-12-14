@@ -40,68 +40,17 @@
         </div>
 		<br>
 		<br><br><br>
-                <form action="/tutor/add-assignments" method="POST" enctype="multipart/form-data" style="margin-left: 20%;" id="assignmentForm">
-					<input type="text" name="topic" placeholder="Topic" required><br>
-					<input type="file" name="assignment" placeholder="Details" accept="application/pdf" required><br>
-					<input type="submit" value="Submit" id="submit" onclick="createAlert()">
+                <form action="/tutor/announcements" method="POST" enctype="multipart/form-data" style="margin-left: 20%;" id="assignmentForm">
+					<input type="text" name="Announcement" placeholder="Announcement" required><br>
+					<input type="file" name="announcementdetail" placeholder="Details" accept="application/pdf,video/*,image/*" required multiple><br>
+					<input type="submit" value="Submit" id="submit">
 				</form>
 
-	<table>
-  		<tr>
-    		<th>Topic</th>
-    		<th>File</th>
-    		<th>Action</th>
-  		</tr>
-		  {{#each all_assignments}}
-  		<tr>
-    		<td>{{this.topic}}</td>
-    		<td><a href="/data/assignments/{{this.topic}}.pdf"> {{this.topic}}.pdf</a></td>
-			<td><button onclick="remove('/tutor/delete-assignment/{{this._id}}','{{this.topic}}')" type="button">Remove</button></td>
-  		</tr>
-		  {{/each}}
-	</table>
+	
 
 </div>
       </div>
     </div>
-	<script>
-    function remove(url,name) {
-  		if (confirm('Are you sure you want to remove '+name+'?')) {
-    		window.location.href=url;
- 		 }
-  		return false;
-	}
-// this is the id of the form
-//$("#assignmentForm").submit(function(e) {
-   
-	 // avoid to execute the actual submit of the form.
-	 function createAlert(){
-			$.ajax({
-         		  url: '/student/student-home',
-				   method: "POST",
-          // data: $("#assignmentForm").serialize(), // serializes the form's elements.
-     		      success:()=>{
-               alert("Form Submitted"); // show response from the php script.
-				   //$("#alert").html("NEW!")
-           }
-         });
-});
-
-
-	 }
-    
-//function makeAlert(){
-		//$.ajax({
-        	//url:'/tutor/tutor-home',
-        	//method:'post',
-        	//success:(response)=>{
-			//if(response){
-			//	$("#alert").html("NEW !")
-			//}	
-			//}
-    	//})
-	//}--}}
-	</script>
     <style>
       /*
 

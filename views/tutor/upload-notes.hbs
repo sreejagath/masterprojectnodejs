@@ -42,7 +42,15 @@
 		<br><br><br>
 		<form action="/tutor/upload-notes" method="POST" enctype="multipart/form-data" style="margin-left: 20%;">
 			<input type="text" name="topic" placeholder="Topic" required><br>
-			<input type="file" name="notes" placeholder="Details" accept="application/pdf,video/*"><br>
+
+			<label for="file-upload" class="custom-file-upload">
+				Upload PDF Notes
+			</label>
+			<input id="file-upload" type="file" accept="application/pdf" name="notes" style="display: none;">
+			<label for="video-upload" class="custom-file-upload">
+				Upload Video Notes
+			</label>
+			<input id="video-upload" type="file" accept="video/*" name="video" style="display: none;">
 			<input type="url" name="link" placeholder="Youtube Link"><br>
 			<input type="submit" value="Submit">
 		</form>
@@ -55,9 +63,9 @@
 			{{#each all_notes}}
 			<tr>
 				<td>{{this.topic}}</td>
-				<td><a href="/data/notes/{{this.topic}}.pdf" download="/data/notes/{{this.topic}}.pdf">
+				<td><a href="/data/notes/pdf_note_{{this.topic}}.pdf">
 						{{this.topic}}</a></td>
-				<td><button onclick="remove('/tutor/delete-notes/{{this._id}}.pdf','{{this.topic}}')"
+				<td><button onclick="remove('/tutor/delete-notes/{{this._id}}','{{this.topic}}')"
 						type="button">Remove</button></td>
 			</tr>
 			{{/each}}
@@ -132,6 +140,7 @@ TABLE OF CONTENT
 		margin-left: 5%;
 		border-radius: 5%;
 		color: #008bc4;
+		margin-bottom: 15%;
 	}
 
 
@@ -627,7 +636,8 @@ TABLE OF CONTENT
 
 	input[type=text],
 	[type=file],
-	[type=url] {
+	[type=url],
+	label {
 		width: 60%;
 		padding: 12px 20px;
 		margin: 8px 0;

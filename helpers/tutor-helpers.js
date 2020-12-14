@@ -177,7 +177,7 @@ module.exports={
     },
     addNotes:(notesdetails)=>{
         return new Promise(async(resolve,reject)=>{
-        db.get().collection(collection.NOTES).insertOne(notesdetails).then((data)=>{
+        db.get().collection(collection.NOTES).insert(notesdetails).then((data)=>{
             resolve(data.ops[0])
         })
         })
