@@ -202,6 +202,13 @@ module.exports={
                 console.log(datetime);
             })
         })
+    },
+    getAnnouncements:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let announcements=await db.get().collection(collection.ANNOUNCEMENTS).find().toArray()
+            resolve(announcements)
+            console.log(announcements);
+        })
     }
    
 }

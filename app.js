@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret:"Key",cookie:{maxAge:600000000}}));
+//app.use(session({secret:"Key",cookie:{maxAge:600000000}}));
 db.connect((err)=>{
   if(err) console.log("Error"+err);
   console.log("Database connected to port");
@@ -38,7 +38,6 @@ var store = new MongoDBStore({
 store.on('error', function(error) {
   console.log(error);
 });
- 
 app.use(require('express-session')({
   secret: 'This is a secret',
   cookie: {
@@ -51,8 +50,7 @@ app.use(require('express-session')({
   resave: true,
   saveUninitialized: true
 }));
-app.use(fileUpload())
-
+app.use(fileUpload());
 app.use('/student', studentRouter);
 app.use('/tutor', tutorRouter);
 app.use('/', userRouter);
@@ -60,7 +58,6 @@ app.use('/', userRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
