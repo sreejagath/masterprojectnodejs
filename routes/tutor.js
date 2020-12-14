@@ -223,6 +223,9 @@ router.get('/announcements',(req,res)=>{
   res.render('tutor/announcements')
 })
 router.post('/announcements',(req,res)=>{
-  res.redirect('/tutor/tutor-home')
+  tutorHelpers.addAnnouncements(req.body).then(()=>{
+    res.redirect('/tutor/tutor-home')
+  })
+  
 })
 module.exports = router;

@@ -194,5 +194,14 @@ module.exports={
                 resolve(response)
             })
         })
+    },
+    addAnnouncements:(announcement)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.ANNOUNCEMENTS).insertOne(announcement).then((data)=>{
+                resolve(data)
+                console.log(datetime);
+            })
+        })
     }
+   
 }
