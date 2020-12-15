@@ -47,6 +47,7 @@ router.get('/tutor-login', function(req, res, next) {
     })
   })
 router.get('/tutor-home',verifyLogin,async function(req, res, next) {
+  console.log("Ajax is here");
       let tutor=req.session.tutor
       let announcement=await tutorHelpers.getAnnouncements()
       res.render('tutor/tutor-home',{tutor,announcement});
@@ -233,5 +234,8 @@ router.get('/file-upload',(req,res)=>{
 })
 router.post('/file-upload',(req,res)=>{
   res.redirect('/tutor/file-upload')
+})
+router.get('/ajax',(req,res)=>{
+  res.render('tutor/ajax-try')
 })
 module.exports = router;
