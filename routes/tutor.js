@@ -46,10 +46,10 @@ router.get('/tutor-login', function(req, res, next) {
       console.log(response);
     })
   })
-router.get('/tutor-home',verifyLogin, function(req, res, next) {
+router.get('/tutor-home',verifyLogin,async function(req, res, next) {
       let tutor=req.session.tutor
-      console.log(tutor);
-      res.render('tutor/tutor-home',{tutor});
+      let announcement=await tutorHelpers.getAnnouncements()
+      res.render('tutor/tutor-home',{tutor,announcement});
   })
   router.get('/tutor-signup', function(req, res, next) {
     console.log("login page");
@@ -208,6 +208,7 @@ router.get('/attendance',(req,res)=>{
   res.render('tutor/attendance')
 })
 router.get('/delete-assignment/:id',(req,res)=>{
+  console.log("deleting");
   let assignmentid=req.params.id;
   tutorHelpers.deleteAssignment(assignmentid).then((response)=>{
     res.redirect('/tutor/add-assignments')
@@ -226,6 +227,11 @@ router.post('/announcements',(req,res)=>{
   tutorHelpers.addAnnouncements(req.body).then(()=>{
     res.redirect('/tutor/tutor-home')
   })
-  
+})
+router.get('/file-upload',(req,res)=>{
+  res.render('tutor/file-upload')
+})
+router.post('/file-upload',(req,res)=>{
+  res.redirect('/tutor/file-upload')
 })
 module.exports = router;
