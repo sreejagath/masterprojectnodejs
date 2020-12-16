@@ -1,52 +1,56 @@
 <div style="margin-bottom:10%">
-<center style="margin-top: 10%;">
-    <form action="/tutor/file-upload" method="post" enctype="multipart/form-data" id="Form">
-    <input type="text" name="myfile"><br>
-    <input type="submit" value="Upload File to Server">
-</form></center>
+    <center style="margin-top: 10%;">
+        <form action="/tutor/file-upload" method="post" enctype="multipart/form-data" id="Form">
+            <input type="text" name="myfile"><br>
+            <input type="submit" value="Upload File to Server">
+        </form>
+    </center>
 </div>
 <div class="progress" style="margin-botton:5%">
-    <div class="bar"></div >
-    <div class="percent"></div >
+    <div class="bar"></div>
+    <div class="percent"></div>
 </div>
 
 <div id="status"></div>
 <script>
     $("#Form").submit((e) => {
-		e.preventDefault()
-		$.ajax({
-			url: '/tutor/file-upload',
-			method: 'post',
+        e.preventDefault()
+        $.ajax({
+            url: '/tutor/file-upload',
+            method: 'post',
+            contentType: 'application/json',
+            processData: false,
+            data: JSON.stringify({ data: 'test' })
 			data: $("#Form").serialize(),
-			success: () => {
-				alert("Assignment added successfully")
-				//location.reload()
-				$('a[href="/student/student-home"]').$("#alert").append("<span>NEW!</span>")
-			//	.$("#alert").append('<span>Updated</span>');
-			}
-		})
-	})
-    $(function() {
+            success: () => {
+                alert("Assignment added successfully")
+                //location.reload()
 
-    var bar = $('.bar');
-    var percent = $('.percent');
-    var status = $('#status');
+                //	.$("#alert").append('<span>Updated</span>');
+            }
+        })
+    })
+    $(function () {
 
-    $('form').ajaxForm({
-        beforeSend: function() {
-            status.empty();
-            var percentVal = '0%';
-            bar.width(percentVal);
-            percent.html(percentVal);
-        },
-        uploadProgress: function(event, position, total, percentComplete) {
-            var percentVal = percentComplete + '%';
-            bar.width(percentVal);
-            percent.html(percentVal);
-        },
-        complete: function(xhr) {
-            status.html(xhr.responseText);
-        }
-    });
-}); 
+        var bar = $('.bar');
+        var percent = $('.percent');
+        var status = $('#status');
+
+        $('form').ajaxForm({
+            beforeSend: function () {
+                status.empty();
+                var percentVal = '0%';
+                bar.width(percentVal);
+                percent.html(percentVal);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal);
+                percent.html(percentVal);
+            },
+            complete: function (xhr) {
+                status.html(xhr.responseText);
+            }
+        });
+    }); 
 </script>

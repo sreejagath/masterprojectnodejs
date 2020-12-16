@@ -37,7 +37,16 @@
 		</div>
 		<br>
 		<br><br><br>
-
+<input type="text" value="{{notification.student}}" style="display: none;" id="notification">
+<script>
+	var student=document.querySelector('#notification').value
+	console.log(student)
+	if(student){
+		alert('New Assignment')
+	}else{
+		console.log('hi')
+	}
+</script>
 
 		<form action="#" style="margin-left: 30%;">
 			<input type="text" name="" id="" placeholder="Topic"><br>

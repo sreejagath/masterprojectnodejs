@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var notification=require('../config/notification')
 const tutorHelpers=require('../helpers/tutor-helpers');
 const studentHelpers=require('../helpers/student-helpers');
 /* GET users listing. */
@@ -167,6 +167,8 @@ router.get('/add-assignments',(req,res)=>{
 router.post('/add-assignments',(req,res)=>{
   console.log("Ajax worked successfully");
   tutorHelpers.addAssignments(req.body).then((response)=>{
+    notification.student=true
+    
     res.redirect('/tutor/tutor-home')
     if(req.files.assignment){
       let assignment=req.files.assignment

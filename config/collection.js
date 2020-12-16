@@ -4,5 +4,8 @@ module.exports={
     ASSIGNMENT_DATA:'assignment',
     ASSIGNMENT_UPLOAD:'assignment_submit',
     NOTES:'notes_collection',
-    ANNOUNCEMENTS:'announcements'
+    ANNOUNCEMENTS:'announcements',
+    SERVICEID:'VA31888d2e4b2594f1e5c3bc86b8ee25a3',
+    ACCOUNTSID:'AC0975f77ffb9d4625836a5cfc08df95c8',
+    AUTHTOKEN:'b4d08b193677e8f1fadacb6d6e58da62'
 }

@@ -1,6 +1,8 @@
 const { response } = require("express");
 var express = require("express");
 var router = express.Router();
+var notification=require('../config/notification')
+
 const verifyLogin = (req,res,next) => {
   if (req.session.studentLoggedIn) {
     next()
@@ -60,7 +62,8 @@ router.get("/student-home",async(req, res)=> {
   if(req.session.studentLoggedIn){
     let student = req.session.student;
     console.log(student);
-    res.render("student/student-home",{student});
+    console.log(notification)
+    res.render("student/student-home",{student,notification});
     
   }else{
     res.render("student/student-login");
@@ -171,6 +174,7 @@ router.post("/assignments/:id",verifyLogin,(req,res)=>{
     if(req.files.assignment){
       let assignment=req.files.assignment;
       let id=req.params.id;
+      notification.student=false
       let topic=req.body.topic;
       assignment.mv('./public/data/student-assignment/'+id+topic+'.pdf',(err)=>{
         if(!err){
