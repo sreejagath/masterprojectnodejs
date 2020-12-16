@@ -2,10 +2,7 @@
 	<div class="templatemo-sidebar">
 		<header class="templatemo-site-header">
 			<div class="square"></div>
-
-
 			<h1>Hi , Tutor !</h1>
-
 		</header>
 		<!-- Search box -->
 
@@ -18,7 +15,8 @@
 				<li><a href="/tutor/tutor-profile"><i class="fa fa-bar-chart fa-fw"></i>Profile</a></li>
 				<li><a href="/tutor/student-control"><i class="fa fa-database fa-fw"></i>Students</a></li>
 				<li><a href="/tutor/attendance"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
-				<li><a href="/tutor/add-assignments" class="active"><i class="fa fa-users fa-fw"></i>Assignments <label id="alert"></label></a></li>
+				<li><a href="/tutor/add-assignments" class="active"><i class="fa fa-users fa-fw"></i>Assignments <label
+							id="alert"></label></a></li>
 				<li><a href="/tutor/upload-notes"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
 				<li><a href="#"><i class="fa fa-eject fa-fw"></i>Announcement</a></li>
 				<li><a href="#"><i class="fa fa-eject fa-fw"></i>Events</a></li>
@@ -72,17 +70,19 @@
 </div>
 <script>
 	$("#assignmentForm").submit((e) => {
-        e.preventDefault()
-        $.ajax({
-            url: '/student/student-home',
-            method: 'get',
-            data: $("#assignmentForm").serialize(),
-            success:()=> {
-				location.reload()
-				console.log("Ajax on student")
-            }
-        })
-    })
+		e.preventDefault()
+		$.ajax({
+			url: '/tutor/add-assignments',
+			method: 'post',
+			data: $("#assignmentForm").serialize(),
+			success: () => {
+				alert("Assignment added successfully")
+				//location.reload()
+				$("#alert").append("<span>NEW!</span>")
+				//$('a[href="/student/student-home"]').$("#alert").append('<span>Updated</span>');
+			}
+		})
+	})
 	function remove(url, name) {
 		if (confirm('Are you sure you want to remove ' + name + '?')) {
 			window.location.href = url;
@@ -108,8 +108,8 @@
 			}
 		}
 	}
-	
-		
+
+
 // this is the id of the form
 //$("#assignmentForm").submit(function(e) {
 

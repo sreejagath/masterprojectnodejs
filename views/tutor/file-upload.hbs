@@ -1,15 +1,31 @@
-<form action="/tutor/file-upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="myfile"><br>
+<div style="margin-bottom:10%">
+<center style="margin-top: 10%;">
+    <form action="/tutor/file-upload" method="post" enctype="multipart/form-data" id="Form">
+    <input type="text" name="myfile"><br>
     <input type="submit" value="Upload File to Server">
-</form>
-
-<div class="progress">
+</form></center>
+</div>
+<div class="progress" style="margin-botton:5%">
     <div class="bar"></div >
     <div class="percent"></div >
 </div>
 
 <div id="status"></div>
 <script>
+    $("#Form").submit((e) => {
+		e.preventDefault()
+		$.ajax({
+			url: '/tutor/file-upload',
+			method: 'post',
+			data: $("#Form").serialize(),
+			success: () => {
+				alert("Assignment added successfully")
+				//location.reload()
+				$('a[href="/student/student-home"]').$("#alert").append("<span>NEW!</span>")
+			//	.$("#alert").append('<span>Updated</span>');
+			}
+		})
+	})
     $(function() {
 
     var bar = $('.bar');
