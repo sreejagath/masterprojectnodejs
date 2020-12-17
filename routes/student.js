@@ -1,11 +1,11 @@
 const { response } = require("express");
 var express = require("express");
 var router = express.Router();
-var notification=require('../config/notification')
+var notification = require("../config/notification");
 
-const verifyLogin = (req,res,next) => {
+const verifyLogin = (req, res, next) => {
   if (req.session.studentLoggedIn) {
-    next()
+    next();
   } else {
     console.log("login page");
     res.render("student/student-login", { loginErr: req.session.loginErr });
@@ -13,7 +13,7 @@ const verifyLogin = (req,res,next) => {
   }
 };
 const nodemailer = require("nodemailer");
-const tutorHelpers=require('../helpers/tutor-helpers');
+const tutorHelpers = require("../helpers/tutor-helpers");
 const studentHelpers = require("../helpers/student-helpers");
 /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -24,8 +24,8 @@ router.get("/student-login", function (req, res, next) {
     console.log("not logged");
     res.render("tutor/view-students");
   } else if (req.session.studentLoggedIn) {
-    let studentDeatail=req.session.student
-    res.render("student/student-home",{studentDeatail});
+    let studentDeatail = req.session.student;
+    res.render("student/student-home", { studentDeatail });
   } else {
     console.log("login page");
     res.render("student/student-login", { loginErr: req.session.loginErr });
@@ -37,12 +37,12 @@ router.post("/student-login", function (req, res, next) {
     console.log(response);
     if (response.status) {
       req.session.studentLoggedIn = true;
-      req.session.student=response.student;
+      req.session.student = response.student;
       console.log("Entering to Student Home");
       console.log(req.session.student);
-      let studentDeatail=req.session.student
-      res.render("student/student-home",{studentDeatail});
-    }else{
+      let studentDeatail = req.session.student;
+      res.render("student/student-home", { studentDeatail });
+    } else {
       req.session.loginErr = true;
       res.redirect("student-login");
     }
@@ -58,14 +58,13 @@ router.get("/logout", function (req, res, next) {
   req.session.destroy();
   res.render("index");
 });
-router.get("/student-home",async(req, res)=> {
-  if(req.session.studentLoggedIn){
+router.get("/student-home", async (req, res) => {
+  if (req.session.studentLoggedIn) {
     let student = req.session.student;
     console.log(student);
-    console.log(notification)
-    res.render("student/student-home",{student,notification});
-    
-  }else{
+    console.log(notification);
+    res.render("student/student-home", { student, notification });
+  } else {
     res.render("student/student-login");
   }
 });
@@ -93,11 +92,13 @@ router.get("/otp-login", (req, res) => {
   if (req.session.studentLoggedIn) {
     res.redirect("/student/student-home");
   } else {
-    res.render("student/otp-login",{"emailError":req.session.loginErr,"otpError":req.session.otpError});
-    req.session.loginErr=false;
-    req.session.otpError=false;
+    res.render("student/otp-login", {
+      emailError: req.session.loginErr,
+      otpError: req.session.otpError,
+    });
+    req.session.loginErr = false;
+    req.session.otpError = false;
   }
-  
 });
 var email;
 
@@ -116,33 +117,32 @@ const transporter = nodemailer.createTransport({
 });
 
 router.post("/otp-login", async (req, res) => {
-  studentHelpers.findEmail(req.body.studentmail).then((response)=>{
-  if (response.status) {
-    email = req.body.studentmail;
-    var mailOptions = {
-      to: req.body.studentmail,
-      subject: "OTP - Class Room Management System ",
-      html:
-        "<h3>OTP for account verification is </h3>" +
-        "<h1 style='font-weight:bold;'>" +
-        otp +
-        "</h1>", // html body
-    };
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return console.log(error);
-      }
-      console.log("Message sent: %s", info.messageId);
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  studentHelpers.findEmail(req.body.studentmail).then((response) => {
+    if (response.status) {
+      email = req.body.studentmail;
+      var mailOptions = {
+        to: req.body.studentmail,
+        subject: "OTP - Class Room Management System ",
+        html:
+          "<h3>OTP for account verification is </h3>" +
+          "<h1 style='font-weight:bold;'>" +
+          otp +
+          "</h1>", // html body
+      };
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log(error);
+        }
+        console.log("Message sent: %s", info.messageId);
+        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
-      res.render("student/verify-otp");
-    });
-    
-  } else {
-    req.session.loginErr=true;
-    res.redirect("/student/otp-login");
-  }
-});
+        res.render("student/verify-otp");
+      });
+    } else {
+      req.session.loginErr = true;
+      res.redirect("/student/otp-login");
+    }
+  });
 });
 router.get("/verify-otp", (req, res) => {
   if (req.session.studentLoggedIn) {
@@ -156,38 +156,39 @@ router.post("/verify-otp", (req, res) => {
     req.session.studentLoggedIn = true;
     res.render("student/student-home");
   } else {
-    req.session.otpError=true;
+    req.session.otpError = true;
     res.redirect("/student/otp-login");
   }
 });
-router.get("/assignments/:id",(req,res)=>{
-  let student=tutorHelpers.getStudentDetails(req.params.id)
-  tutorHelpers.getAssignments().then((all_assignments)=>{
+router.get("/assignments/:id", (req, res) => {
+  let student = tutorHelpers.getStudentDetails(req.params.id);
+  tutorHelpers.getAssignments().then((all_assignments) => {
     let studentdeatail = req.session.student;
-    res.render("student/assignments",{all_assignments,studentdeatail})
-  
-  
-})
-})
-router.post("/assignments/:id",verifyLogin,(req,res)=>{
-  studentHelpers.submitAssignment(req.body.topic,req.params.id).then(()=>{
-    if(req.files.assignment){
-      let assignment=req.files.assignment;
-      let id=req.params.id;
-      notification.student=false
-      let topic=req.body.topic;
-      assignment.mv('./public/data/student-assignment/'+id+topic+'.pdf',(err)=>{
-        if(!err){
-          res.redirect('/student/student-home')
-        }else{
-          console.log(err);
+    res.render("student/assignments", { all_assignments, studentdeatail });
+  });
+});
+router.post("/assignments/:id", verifyLogin, (req, res) => {
+  studentHelpers.submitAssignment(req.body.topic, req.params.id).then(() => {
+    if (req.files.assignment) {
+      let assignment = req.files.assignment;
+      let id = req.params.id;
+      notification.student = false;
+      let topic = req.body.topic;
+      assignment.mv(
+        "./public/data/student-assignment/" + id + topic + ".pdf",
+        (err) => {
+          if (!err) {
+            res.redirect("/student/student-home");
+          } else {
+            console.log(err);
+          }
         }
-      })
+      );
     }
-  })
-})
-router.get('/task-today',async(req,res)=>{
-  let notes=await tutorHelpers.getNotes()
+  });
+});
+router.get("/task-today", async (req, res) => {
+  let notes = await tutorHelpers.getNotes();
   console.log(notes);
   let date_ob = new Date();
   let date = ("0" + date_ob.getDate()).slice(-2);
@@ -195,19 +196,17 @@ router.get('/task-today',async(req,res)=>{
   let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
   // current year
   let year = date_ob.getFullYear();
-  let present=(date + "/" + month + "/" + year);
-  let ts = date_ob;
-
-// timestamp in milliseconds
-console.log(ts);
-  let date_present=present
-  notification.attendance=true
-  tutorHelpers.getAssignments().then((all_assignments,date)=>{
-    res.render("student/task-today",{all_assignments,date,notes})
-})
-})
-router.get('/view-notes',async(req,res)=>{
-  let notes=await tutorHelpers.getNotes()
- res.render("student/view-notes",{notes}) 
-})
+  let present = date + "/" + month + "/" + year;
+  let date_present = present;
+  notification.attendance = true;
+  console.log("student is");
+  console.log(notification.attendance);
+  tutorHelpers.getAssignments().then((all_assignments, date) => {
+    res.render("student/task-today", { all_assignments, date, notes });
+  });
+});
+router.get("/view-notes", async (req, res) => {
+  let notes = await tutorHelpers.getNotes();
+  res.render("student/view-notes", { notes });
+});
 module.exports = router;

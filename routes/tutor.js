@@ -217,7 +217,15 @@ router.get('/attendance',(req,res)=>{
   let year = date_ob.getFullYear();
   let present=(date + "/" + month + "/" + year);
     console.log(present);
-      res.render('tutor/attendance',{studentslist})
+    if(notification.attendance===true){
+       presentstudent="P";
+    }else{
+       presentstudent="A";
+    }
+    console.log(notification.attendance);
+    console.log("attendance");
+    console.log(presentstudent);
+      res.render('tutor/attendance',{studentslist,presentstudent})
   })
 })
 router.get('/delete-assignment/:id',(req,res)=>{

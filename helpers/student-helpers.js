@@ -72,23 +72,27 @@ module.exports={
     },
     submitAssignment:(content,studentId)=>{
         return new Promise(async(resolve,reject)=>{
-            let assignmentList=await db.get().collection(collection.ASSIGNMENT_UPLOAD).findOne({student:ObjectId(studentId)})
+            let assignmentList=await db.get().collection(collection.STUDENT_COLLECTION).findOne({_id:ObjectId(studentId)})
             if(assignmentList){
-                db.get().collection(collection.ASSIGNMENT_UPLOAD).updateOne({student:ObjectId(studentId)},
+                db.get().collection(collection.STUDENT_COLLECTION).updateOne({_id:ObjectId(studentId)},
                 {
-                    $push:{topic:content}
+                    $push:{
+                        topic:content
+                    }
                 }).then((response)=>{
                     resolve()
                 })
-            }else{
-                let assignObj={
-                    student:ObjectId(studentId),
-                    topic:[content]
-                }
-                db.get().collection(collection.ASSIGNMENT_UPLOAD).insertOne(assignObj).then((response)=>{
-                        resolve(response)
-                })
             }
+            // else{
+            //     db.get().collection(collection.STUDENT_COLLECTION).updateOne({student:ObjectId(studentId)},
+            //     {
+            //         $set:{
+            //             topic:[content]
+            //         }
+            //     }).then((response)=>{
+            //             resolve()
+            //     })
+            // }
             // db.get().collection(collection.ASSIGNMENT_UPLOAD).insertOne(content).then((data)=>{
             //     resolve(data.ops[0].topic)
             // })
