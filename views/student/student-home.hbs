@@ -1,3 +1,4 @@
+
 <div class="templatemo-flex-row">
 	<div class="templatemo-sidebar">
 		<header class="templatemo-site-header">
@@ -38,11 +39,13 @@
 		<br>
 		<br><br><br>
 <input type="text" value="{{notification.student}}" style="display: none;" id="notification">
+<input type="text" value="{{student.studentname}}" style="display: none;" id="studentName">
 <script>
 	var student=document.querySelector('#notification').value
 	console.log(student)
-	if(student){
-		alert('New Assignment')
+	if(student==="true"){
+var name=document.getElementById("studentName").value
+alert('Hi '+name+', You have an Assignment' )
 	}else{
 		console.log('hi')
 	}
