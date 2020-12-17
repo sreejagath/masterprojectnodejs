@@ -81,11 +81,11 @@
     <th>Action</th>
   </tr>
    
-    {{#each assignments}}
+    {{#each student.topic}}
   <tr>
     <td>{{this.topic}}</td>
     
-   <td><a href="/data/student-assignment/{{this.id}}{{this.topic}}.pdf">{{this.topic}}.pdf</a> </td>
+   <td><a href="/data/student-assignment/{{this._id}}{{this.topic}}.pdf">{{this.topic}}.pdf</a> </td>
     <td><input type="text" style="margin-left: 0%;"></td>
     <td>Save</td>
     {{/each}}
@@ -176,6 +176,7 @@ h3 {
   border-radius: 5%;
   color: black;
   position: absolute;
+  
 }
 .table-exam{
   margin-left: 30%;

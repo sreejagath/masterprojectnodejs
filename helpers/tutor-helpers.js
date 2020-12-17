@@ -127,37 +127,31 @@ module.exports={
             let assignList=await db.get().collection(collection.STUDENT_COLLECTION).aggregate([
                 {
                     $match:{_id:ObjectId(userId)}
-                },
-                {
-                    $lookup:{
-                        from:collection.ASSIGNMENT_UPLOAD,
-                        localField:'topic',
-                        foreignField:'id', 
-                        as:'assignments'
-                    }
-                },{
-                    $project:{
-                        id:'$assignments.student',
-                        topic:'$assignments.topic'
-                    }
-                },
-                {
-                    $project:{
-                        id:1,topic:1
-                    }
-                },{
-                    $unwind:'$id'
-                },{
-                    $unwind:'$topic'
                 },{
                     $unwind:'$topic'
                 },
                  {
-                     $project:{
-                        id:1,topic:1
-                    }
+                     $lookup:{
+                         from:collection.STUDENT_COLLECTION,
+                         localField:'topic',
+                         foreignField:'id', 
+                         as:'assignments'
+                     }
                  },
-                 
+                 {
+                     $project:{
+                       
+                         topic:'$assignments'
+                     }
+                 },
+                 {
+                     $project:{
+                         topic:1
+                     }
+                    }
+                //  ,{
+                //      $unwind:'$topic'
+                //  }
                   
                 //   {
                 //     $project:{
@@ -168,9 +162,10 @@ module.exports={
                 
             ]).toArray()
             console.log("id is");
-            console.log(assignList[0])
+            //console.log(assignList[0])
             console.log("assignments are");
-            console.log(assignList);
+            console.log(assignList[0]);
+            console.log("hello");
             resolve(assignList)
         })
 
