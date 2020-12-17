@@ -208,7 +208,17 @@ router.post('/upload-notes',(req,res)=>{
   
 })
 router.get('/attendance',(req,res)=>{
-  res.render('tutor/attendance')
+  studentHelpers.getStudents().then((studentslist)=>{
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+  // current month
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  // current year
+  let year = date_ob.getFullYear();
+  let present=(date + "/" + month + "/" + year);
+    console.log(present);
+      res.render('tutor/attendance',{studentslist})
+  })
 })
 router.get('/delete-assignment/:id',(req,res)=>{
   console.log("deleting");

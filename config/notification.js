@@ -1,3 +1,5 @@
 module.exports={
-student:false
+    student:false,
+    attendance:false
+
 }

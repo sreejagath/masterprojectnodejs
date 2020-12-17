@@ -189,6 +189,19 @@ router.post("/assignments/:id",verifyLogin,(req,res)=>{
 router.get('/task-today',async(req,res)=>{
   let notes=await tutorHelpers.getNotes()
   console.log(notes);
+  let date_ob = new Date();
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  // current month
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  // current year
+  let year = date_ob.getFullYear();
+  let present=(date + "/" + month + "/" + year);
+  let ts = date_ob;
+
+// timestamp in milliseconds
+console.log(ts);
+  let date_present=present
+  notification.attendance=true
   tutorHelpers.getAssignments().then((all_assignments,date)=>{
     res.render("student/task-today",{all_assignments,date,notes})
 })

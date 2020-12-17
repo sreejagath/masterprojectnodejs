@@ -46,11 +46,13 @@
     		<th>Name</th>
     		<th>Attendance</th>
   		</tr>
+		  {{#each studentslist}}
   		<tr>
-    		<td>1</td>
-    		<td>Name</td>
+    		<td>{{this.rollnumber}}</td>
+    		<td>{{this.studentname}}</td>
     		<td>Present/Absent</td>
   		</tr>
+		  {{/each}}
 	</table>
 
 </div>
