@@ -1,31 +1,29 @@
- <div class="templatemo-flex-row">
-      <div class="templatemo-sidebar">
-        <header class="templatemo-site-header">
-          <div class="square"></div>
-          
-         
-          <h1>Hi , Tutor !</h1>
-          
-          </header>
-        <!-- Search box -->
-        
-        <div class="mobile-menu-icon">
-            <i class="fa fa-bars"></i>
-        </div>
-        <nav class="templatemo-left-nav">          
-          <ul>
-            <li><a href="/tutor/tutor-home"><i class="fa fa-home fa-fw"></i>Home</a></li>
-            <li><a href="/tutor/tutor-profile"><i class="fa fa-bar-chart fa-fw"></i>Profile</a></li>
-            <li><a href="/tutor/student-control"><i class="fa fa-database fa-fw"></i>Students</a></li>
-            <li><a href="/tutor/attendance"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
-            <li><a href="/tutor/add-assignments" class="active"><i class="fa fa-users fa-fw"></i>Assignments <span id="alert"></span> </a></li>
-            <li><a href="/tutor/upload-notes"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
-            <li><a href="#"><i class="fa fa-eject fa-fw"></i>Announcement</a></li>
-			<li><a href="#"><i class="fa fa-eject fa-fw"></i>Events</a></li>
-			<li><a href="#"><i class="fa fa-eject fa-fw"></i>Photos</a></li>
-          </ul>  
-        </nav>
-      </div>
+<div class="templatemo-flex-row">
+	<div class="templatemo-sidebar">
+		<header class="templatemo-site-header">
+			<div class="square"></div>
+
+
+			<h1>Hi , student !</h1>
+
+		</header>
+		<!-- Search box -->
+
+		<div class="mobile-menu-icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<nav class="templatemo-left-nav">
+			<ul>
+				<li><a href="/student/student-home"><i class="fa fa-home fa-fw"></i>Home</a></li>
+				<li><a href="/student/task-today"><i class="fa fa-bar-chart fa-fw"></i>Today's Task</a></li>
+				<li><a href="#"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
+				<li><a href="/student/assignments" class="active"><i class="fa fa-users fa-fw"></i>Assignments</a></li>
+				<li><a href="/student/view-notes"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
+                <li><a href="/student/announcements"><i class="fa fa-sliders fa-fw"></i>Announcements</a></li>
+				<li><a href="#"><i class="fa fa-eject fa-fw"></i>Profile</a></li>
+			</ul>
+		</nav>
+	</div>
       <!-- Main content --> 
       <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
@@ -40,12 +38,6 @@
         </div>
 		<br>
 		<br><br><br>
-                <form action="/tutor/announcements" method="POST" enctype="multipart/form-data" style="margin-left: 20%;" id="assignmentForm">
-					<input type="text" name="Announcement" placeholder="Announcement" required><br>
-					<input type="file" name="announcementdetail" placeholder="Details" accept="application/pdf,video/*,image/*" required multiple><br>
-					<input type="submit" value="Submit" id="submit">
-				</form>
-
 	<table id="studenttable">
   		<tr>
     		<th>Announcements</th>

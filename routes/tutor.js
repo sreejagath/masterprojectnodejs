@@ -245,6 +245,11 @@ router.get('/announcements',async(req,res)=>{
 })
 router.post('/announcements',(req,res)=>{
   tutorHelpers.addAnnouncements(req.body).then(()=>{
+   if(req.files.announcementdetail){
+      let doc=req.files.announcementdetail
+      let announcement=req.body.Announcement
+      doc.mv('./public/data/announcement/'+announcement+'_img.jpg')
+    }
     res.redirect('/tutor/tutor-home')
   })
 })

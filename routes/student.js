@@ -5,7 +5,7 @@ var notification = require("../config/notification");
 var multer  = require('multer')
 var upload = multer()
 var collection = require("../config/collection");
-var client = require('twilio')(collection.ACCOUNTSID,collection.AUTHTOKEN)
+var twilio = require('twilio')(collection.ACCOUNTSID,collection.AUTHTOKEN)
 const verifyLogin = (req, res, next) => {
   if (req.session.studentLoggedIn) {
     next();
@@ -147,11 +147,10 @@ router.post("/otp-login", async (req, res) => {
     
         res.render("student/verify-otp");
       // });
-    // } else {
-    //   req.session.loginErr = true;
-    //   res.redirect("/student/otp-login");
-    // }
-  };
+     } else {
+       req.session.loginErr = true;
+       res.redirect("/student/otp-login");
+     }
   })
 });
 router.get("/verify-otp", (req, res) => {
@@ -199,15 +198,6 @@ router.post("/assignments/:id", verifyLogin, (req, res) => {
 });
 router.get("/task-today", async (req, res) => {
   let notes = await tutorHelpers.getNotes();
-  console.log(notes);
-  let date_ob = new Date();
-  let date = ("0" + date_ob.getDate()).slice(-2);
-  // current month
-  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-  // current year
-  let year = date_ob.getFullYear();
-  let present = date + "/" + month + "/" + year;
-  let date_present = present;
   notification.attendance = true;
   console.log("student is");
   console.log(notification.attendance);
@@ -219,4 +209,8 @@ router.get("/view-notes", async (req, res) => {
   let notes = await tutorHelpers.getNotes();
   res.render("student/view-notes", { notes });
 });
+router.get("/announcements",async(req,res)=>{
+  let announcements=await tutorHelpers.getAnnouncements()
+  res.render("student/announcements",{announcements})
+})
 module.exports = router;
