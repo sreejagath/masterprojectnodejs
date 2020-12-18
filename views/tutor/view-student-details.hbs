@@ -81,11 +81,11 @@
     <th>Action</th>
   </tr>
    
-    {{#each student.topic}}
+    {{#each student.assignments}}
   <tr>
     <td>{{this.topic}}</td>
     
-   <td><a href="/data/student-assignment/{{this._id}}{{this.topic}}.pdf">{{this.topic}}.pdf</a> </td>
+   <td><a href="/data/student-assignment/{{this.id}}{{this.topic}}.pdf">{{this.topic}}.pdf</a> </td>
     <td><input type="text" style="margin-left: 0%;"></td>
     <td>Save</td>
     {{/each}}
