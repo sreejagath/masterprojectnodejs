@@ -2,7 +2,10 @@ const { response } = require("express");
 var express = require("express");
 var router = express.Router();
 var notification = require("../config/notification");
-
+var multer  = require('multer')
+var upload = multer()
+var collection = require("../config/collection");
+var client = require('twilio')(collection.ACCOUNTSID,collection.AUTHTOKEN)
 const verifyLogin = (req, res, next) => {
   if (req.session.studentLoggedIn) {
     next();
@@ -15,6 +18,11 @@ const verifyLogin = (req, res, next) => {
 const nodemailer = require("nodemailer");
 const tutorHelpers = require("../helpers/tutor-helpers");
 const studentHelpers = require("../helpers/student-helpers");
+
+
+
+
+
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   res.render("index");
@@ -61,9 +69,10 @@ router.get("/logout", function (req, res, next) {
 router.get("/student-home", async (req, res) => {
   if (req.session.studentLoggedIn) {
     let student = req.session.student;
+    let announcement=await tutorHelpers.getAnnouncements()
     console.log(student);
     console.log(notification);
-    res.render("student/student-home", { student, notification });
+    res.render("student/student-home", { student, notification,announcement });
   } else {
     res.render("student/student-login");
   }
@@ -119,30 +128,31 @@ const transporter = nodemailer.createTransport({
 router.post("/otp-login", async (req, res) => {
   studentHelpers.findEmail(req.body.studentmail).then((response) => {
     if (response.status) {
-      email = req.body.studentmail;
-      var mailOptions = {
-        to: req.body.studentmail,
-        subject: "OTP - Class Room Management System ",
-        html:
-          "<h3>OTP for account verification is </h3>" +
-          "<h1 style='font-weight:bold;'>" +
-          otp +
-          "</h1>", // html body
-      };
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          return console.log(error);
-        }
-        console.log("Message sent: %s", info.messageId);
-        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-
+      // email = req.body.studentmail;
+      // var mailOptions = {
+      //   to: req.body.studentmail,
+      //   subject: "OTP - Class Room Management System ",
+      //   html:
+      //     "<h3>OTP for account verification is </h3>" +
+      //     "<h1 style='font-weight:bold;'>" +
+      //     otp +
+      //     "</h1>", // html body
+      // };
+      // transporter.sendMail(mailOptions, (error, info) => {}
+      //   if (error) {
+      //     return console.log(error);
+      //   }
+      //   console.log("Message sent: %s", info.messageId);
+      //   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    
         res.render("student/verify-otp");
-      });
-    } else {
-      req.session.loginErr = true;
-      res.redirect("/student/otp-login");
-    }
-  });
+      // });
+    // } else {
+    //   req.session.loginErr = true;
+    //   res.redirect("/student/otp-login");
+    // }
+  };
+  })
 });
 router.get("/verify-otp", (req, res) => {
   if (req.session.studentLoggedIn) {

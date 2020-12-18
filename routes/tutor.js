@@ -239,8 +239,9 @@ router.get('/delete-notes/:id',(req,res)=>{
     res.redirect('/tutor/upload-notes')
   })
 })
-router.get('/announcements',(req,res)=>{
-  res.render('tutor/announcements')
+router.get('/announcements',async(req,res)=>{
+  let announcements=await tutorHelpers.getAnnouncements()
+  res.render('tutor/announcements',{announcements})
 })
 router.post('/announcements',(req,res)=>{
   tutorHelpers.addAnnouncements(req.body).then(()=>{

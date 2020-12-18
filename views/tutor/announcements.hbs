@@ -46,7 +46,18 @@
 					<input type="submit" value="Submit" id="submit">
 				</form>
 
-	
+	<table id="studenttable">
+  		<tr>
+    		<th>Announcements</th>
+    		<th>Docs</th>
+  		</tr>
+		  {{#each announcements}}
+  		<tr>
+    		<td>{{this.Announcement}}</a></td>
+    		<td></td>
+  		</tr>
+		  {{/each}}
+	</table>
 
 </div>
       </div>
