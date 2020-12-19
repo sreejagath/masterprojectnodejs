@@ -63,23 +63,23 @@ module.exports = {
       resolve(studentslist);
     });
   },
-  findEmail: (email) => {
+  findPhone: (phone) => {
     return new Promise(async (resolve, reject) => {
-      let emailstatus = false;
+      let phonestatus = false;
       let response = {};
       let studentpresent = await db
         .get()
         .collection(collection.STUDENT_COLLECTION)
-        .findOne({ studentmail: email });
+        .findOne({ studentphone: phone });
       if (studentpresent) {
         console.log("hello");
-        response.email = studentpresent;
+        response.phone = studentpresent;
         response.status = true;
         resolve(response);
         console.log(resolve);
         console.log(studentpresent);
       } else {
-        console.log("email not found");
+        console.log("Phone not found");
         resolve({ status: false });
       }
     });

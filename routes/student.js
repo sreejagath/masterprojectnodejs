@@ -126,8 +126,13 @@ const transporter = nodemailer.createTransport({
 });
 
 router.post("/otp-login", async (req, res) => {
-  studentHelpers.findEmail(req.body.studentmail).then((response) => {
+  studentHelpers.findPhone(req.body.studentphone).then((response) => {
     if (response.status) {
+      twilio.verify.services(collection.SERVICEID).verifications.create({
+        to:"+91"+req.body.studentphone,
+        channel:'sms'
+      })
+      let phone=req.body.studentphone
       // email = req.body.studentmail;
       // var mailOptions = {
       //   to: req.body.studentmail,
@@ -145,7 +150,7 @@ router.post("/otp-login", async (req, res) => {
       //   console.log("Message sent: %s", info.messageId);
       //   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     
-        res.render("student/verify-otp");
+        res.render("student/verify-otp",{phone});
       // });
      } else {
        req.session.loginErr = true;
@@ -161,14 +166,32 @@ router.get("/verify-otp", (req, res) => {
   }
 });
 router.post("/verify-otp", (req, res) => {
-  if (req.body.otp == otp) {
-    req.session.studentLoggedIn = true;
-    res.render("student/student-home");
-  } else {
-    req.session.otpError = true;
-    res.redirect("/student/otp-login");
-  }
-});
+    twilio.verify.services(collection.SERVICEID).verificationChecks.create({
+      to:"+91"+req.body.phone,
+      code:otp
+    }).then((valid)=>{
+      if(valid){
+        req.session.studentLoggedIn = true;
+        res.render("student/student-home");
+    } else {
+           req.session.otpError = true;
+          res.redirect("/student/otp-login");
+         }
+        })
+    })
+    
+  
+
+
+
+//   if (req.body.otp == otp) {
+//     req.session.studentLoggedIn = true;
+//     
+//   } else {
+//     req.session.otpError = true;
+//     res.redirect("/student/otp-login");
+//   }
+// });
 router.get("/assignments/:id", (req, res) => {
   let student = tutorHelpers.getStudentDetails(req.params.id);
   tutorHelpers.getAssignments().then((all_assignments) => {
@@ -212,5 +235,13 @@ router.get("/view-notes", async (req, res) => {
 router.get("/announcements",async(req,res)=>{
   let announcements=await tutorHelpers.getAnnouncements()
   res.render("student/announcements",{announcements})
+})
+router.get("/attendance",(req,res)=>{
+  if(notification.attendance===true){
+    presentstudent="Present";
+ }else{
+    presentstudent="Absent";
+ }
+  res.render("student/attendance",{presentstudent})
 })
 module.exports = router;

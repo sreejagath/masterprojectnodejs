@@ -1,11 +1,10 @@
-
 <div class="templatemo-flex-row">
 	<div class="templatemo-sidebar">
 		<header class="templatemo-site-header">
 			<div class="square"></div>
 
 
-			<h1>Hi ,{{student.studentname}}!</h1>
+			<h1>Hi ,student!</h1>
 		</header>
 		<!-- Search box -->
 
@@ -14,10 +13,10 @@
 		</div>
 		<nav class="templatemo-left-nav">
 			<ul>
-				<li><a href="/student/student-home" class="active"><i class="fa fa-home fa-fw"></i>Home</a></li>
+				<li><a href="/student/student-home"><i class="fa fa-home fa-fw"></i>Home</a></li>
 				<li><a href="/student/task-today"><i class="fa fa-bar-chart fa-fw"></i>Today's Task <label
 							id="alert"></label></a></li>
-				<li><a href="/student/attendance"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
+				<li><a href="/student/attendance" class="active"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
 				<li><a href="/student/assignments/{{student._id}}"><i class="fa fa-users fa-fw"></i>Assignments</a></li>
 				<li><a href="/student/view-notes"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
 				<li><a href="/student/announcements"><i class="fa fa-sliders fa-fw"></i>Announcements</a></li>
@@ -39,25 +38,16 @@
 		</div>
 		<br>
 		<br><br><br>
-<input type="text" value="{{notification.student}}" style="display: none;" id="notification">
-<input type="text" value="{{student.studentname}}" style="display: none;" id="studentName">
-<script>
-	var student=document.querySelector('#notification').value
-	console.log(student)
-	if(student==="true"){
-var name=document.getElementById("studentName").value
-alert('Hi '+name+', You have an Assignment' )
-	}else{
-		console.log('hi')
-	}
-</script>
+        <div class="attendance">
+           <p style="margin-left: 20px;">You have been marked {{this.presentstudent}} today</p>
+           Total Days:30 <br>
+           Present: <br>
+           Absent: <br>
+           Percentage: <br>
+           Class-Average :
+        </div>
 
-		<div class="left-column" style="color:black">
-			<center><span>ANNOUNCEMENTS</span></center>
-			{{#each announcement}}
-			<a href="/student/announcements"><h5> => {{this.Announcement}} <span style="background-color: red;color:white;"> NEW !</span></h5></a>
-			{{/each}}
-		</div>
+
 	</div>
 </div>
 </div>
@@ -105,7 +95,7 @@ TABLE OF CONTENT
 		color: #7f7f7f;
 		font-size: 1.4em;
 	}
-	.left-column {
+	.attendance {
     width: 25%;
     margin-bottom: 3%;
     position: absolute;
