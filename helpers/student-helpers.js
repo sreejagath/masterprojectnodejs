@@ -146,4 +146,38 @@ module.exports = {
       // })
     });
   },
+  addAttendance:(id,attendance)=>{
+    return new Promise(async (resolve, reject) => {
+      console.log("student:");
+      console.log(id);
+      if(attendance===true){
+        presentstudent="Present";
+     }else{
+        presentstudent="Absent";
+     }console.log(attendance,presentstudent);
+      let student = await db.get().collection(collection.STUDENT_COLLECTION).findOne({ _id: ObjectId(id) });
+       if (student) {
+         let date_ob = new Date();
+         let date = ("0" + date_ob.getDate()).slice(-2);
+         let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+         let year = date_ob.getFullYear();
+         console.log(date + "/" + month + "/" + year);
+         let timestamp = date + "/" + month + "/" + year;
+         let attendance = {
+           id: ObjectId(id),
+           status:presentstudent,
+           date: timestamp,
+         };
+         db.get().collection(collection.STUDENT_COLLECTION).updateOne({ _id: ObjectId(id) },
+             {
+               $push: {
+                 attendance,
+               },
+             }
+           ).then((response) => {
+             resolve();
+           });
+       }
+    })
+  }
 };

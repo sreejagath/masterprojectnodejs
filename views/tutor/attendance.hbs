@@ -49,9 +49,13 @@
 		  {{#each studentslist}}
   		<tr>
     		<td>{{this.rollnumber}}</td>
-    		<td>{{this.studentname}}</td>{{/each}}
-    		<td>{{this.presentstudent}}</td>
+    		<td>{{this.studentname}}</td>
+			{{#each this.attendance}}
+    		<td>{{this.status}}</td>
+			
   		</tr>
+		  {{/each}}
+		  {{/each}}
 		  
 	</table>
 

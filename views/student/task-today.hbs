@@ -71,7 +71,7 @@
           <iframe width="400" height="200" src="{{this.link}}">
           </iframe><br>
           <h5>{{this.topic}}</h5> <br>
-          <embed type="video/webm" width="320" height="240" controls src="/data/notes/video{{this.topic}}.mp4">
+          <embed type="video/webm" width="320" height="240" controls src="/data/notes/video{{this.topic}}.mp4" id="notevideo">
           <h5>{{this.topic}}</h5> <br>
           <div class="container-card">
             <h4><b style="color: black;">{{this.topic}}.pdf</b></h4>
@@ -90,8 +90,6 @@
           {{!-- {% else %}
           <video src={{status.image.url}}></video>
           {% endif %} --}}
-
-
 
         </div>
 

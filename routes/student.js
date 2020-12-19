@@ -222,6 +222,9 @@ router.post("/assignments/:id", verifyLogin, (req, res) => {
 router.get("/task-today", async (req, res) => {
   let notes = await tutorHelpers.getNotes();
   notification.attendance = true;
+  if(notification.attendance){
+    studentHelpers.addAttendance(req.session.student._id,notification.attendance)
+  }
   console.log("student is");
   console.log(notification.attendance);
   tutorHelpers.getAssignments().then((all_assignments, date) => {
