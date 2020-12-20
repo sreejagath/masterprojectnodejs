@@ -223,7 +223,7 @@ router.get('/attendance',(req,res)=>{
     console.log(notification.attendance);
     console.log("attendance");
     console.log(presentstudent);
-      res.render('tutor/attendance',{studentslist,presentstudent})
+      res.render('tutor/attendance',{studentslist,presentstudent,present})
   })
 })
 router.get('/delete-assignment/:id',(req,res)=>{
