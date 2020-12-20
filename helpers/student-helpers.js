@@ -152,9 +152,10 @@ module.exports = {
       console.log(id);
       if(attendance===true){
         presentstudent="Present";
-     }else{
+         }else{
         presentstudent="Absent";
-     }console.log(attendance,presentstudent);
+      }
+     console.log(attendance,presentstudent);
       let student = await db.get().collection(collection.STUDENT_COLLECTION).findOne({ _id: ObjectId(id) });
        if (student) {
          let date_ob = new Date();
@@ -168,16 +169,38 @@ module.exports = {
            status:presentstudent,
            date: timestamp,
          };
-         db.get().collection(collection.STUDENT_COLLECTION).updateOne({ _id: ObjectId(id) },
-             {
-               $push: {
-                 attendance,
-               },
-             }
-           ).then((response) => {
-             resolve();
-           });
-       }
-    })
-  }
+         console.log("printing date");
+         console.log(attendance.date);
+         let dateExist=student.attendance.findIndex(attendance=> attendance.date==attendance.date)
+         console.log("date is present");
+            console.log(dateExist);
+           if (dateExist!=-1){
+             reject
+          //    console.log("present here");
+          //                       db.get().collection(collection.STUDENT_COLLECTION).updateOne({ _id: ObjectId(id) },
+          //                        {
+          //                            reject
+          //                          }).then((response) => {
+          //                              resolve();
+          //                             });
+           }else{
+            console.log("not present");
+            // let attendance = {
+            //   id: ObjectId(id),
+            //   status:presentstudent,
+            //   date: timestamp,
+            // };
+                    db.get().collection(collection.STUDENT_COLLECTION).updateOne({ _id: ObjectId(id) },
+                     {
+                     $push: {
+                     attendance,
+                    }
+                    }).then((response) => {
+                   resolve();
+                     });
+                   }
+                 }
+      })
+  }  
+
 };

@@ -48,6 +48,18 @@ router.get('/tutor-login', function(req, res, next) {
   })
 router.get('/tutor-home',verifyLogin,async function(req, res, next) {
   console.log("Ajax is here");
+ const date=new Date().toLocaleDateString(undefined,{
+   month:'2-digit',
+   day:'2-digit',
+     year:'numeric',
+    hour:'2-digit',
+    minute:'2-digit'
+ })
+ console.log(date);
+  var dateobj = new Date();
+ function pad(n) {return n < 10 ? "0"+n : n;}
+ var result = pad(dateobj.getDate())+"/"+pad(dateobj.getMonth()+1)+"/"+dateobj.getFullYear();
+ console.log(result);
       let tutor=req.session.tutor
       let announcement=await tutorHelpers.getAnnouncements()
       res.render('tutor/tutor-home',{tutor,announcement});
