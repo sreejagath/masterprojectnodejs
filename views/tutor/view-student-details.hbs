@@ -101,40 +101,17 @@
  <table>
   <caption style="text-align:center">Exams</caption>
   <tr>
-    <th>Exam</th>
-    <th>Mark</th>
-    <th>Action</th>
+    <th>Date</th>
+    <th>Attendance</th>
+    
   </tr> 
+  {{#each student.attendance}}
   <tr>
-    <td>S1</td>
-    <td><input type="text" style="margin-left: 0%;"></td>
-    <td>Save</td>
-  </tr>
-  <tr>
-    <td>S2</td>
-    <td><input type="text" style="margin-left: 0%;"></td>
-    <td>Save</td>
-  </tr>
-  <tr>
-    <td>S3</td>
-    <td><input type="text" style="margin-left: 0%;"></td>
-    <td>Save</td>
-  </tr>
-  <tr>
-    <td>S4</td>
-    <td><input type="text" style="margin-left: 0%;"></td>
-    <td>Save</td>
-  </tr>
-  <tr>
-    <td>S5</td>
-    <td><input type="text" style="margin-left: 0%;"></td>
-    <td>Save</td>
-  </tr>
-  <tr>
-    <td>S6</td>
-    <td><input type="text" style="margin-left: 0%;"></td>
-    <td>Save</td>
-  </tr>
+    <td>{{this.date}}</td>
+    
+   <td>{{this.status}}</td>
+    
+    {{/each}}
 </table>
 </div>
         </div>
