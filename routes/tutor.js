@@ -172,7 +172,19 @@ router.get('/remove-student/:id',async(req,res)=>{
 })
 router.get('/add-assignments',(req,res)=>{
   tutorHelpers.getAssignments().then((all_assignments)=>{
-    res.render('tutor/add-assignments',{all_assignments})
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    var hours = date_ob.getHours();
+    var minutes = date_ob.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    let present=(date + "/" + month + "/" + year+","+strTime);
+    res.render('tutor/add-assignments',{all_assignments,present})
   })
     
 })
@@ -218,14 +230,12 @@ router.post('/upload-notes',(req,res)=>{
   
 })
 router.get('/attendance',(req,res)=>{
-  studentHelpers.getStudents().then((studentslist)=>{
+  studentHelpers.getStudents().then(async(studentslist)=>{
     let date_ob = new Date();
     let date = ("0" + date_ob.getDate()).slice(-2);
-  // current month
-  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-  // current year
-  let year = date_ob.getFullYear();
-  let present=(date + "/" + month + "/" + year);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let present=(date + "/" + month + "/" + year);
     console.log(present);
     if(notification.attendance===true){
        presentstudent="P";
@@ -235,6 +245,8 @@ router.get('/attendance',(req,res)=>{
     console.log(notification.attendance);
     console.log("attendance");
     console.log(presentstudent);
+    let attendance=await tutorHelpers.thisDay()
+    console.log(attendance);
       res.render('tutor/attendance',{studentslist,presentstudent,present})
   })
 })

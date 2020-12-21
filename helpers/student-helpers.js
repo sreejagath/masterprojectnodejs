@@ -171,7 +171,7 @@ module.exports = {
          };
          console.log("printing date");
          console.log(attendance.date);
-         let dateExist=student.attendance.findIndex(attendance=> attendance.date==attendance.date)
+         let dateExist=student.attendance.findIndex(attendance=> attendance.date==timestamp)
          console.log("date is present");
             console.log(dateExist);
            if (dateExist!=-1){

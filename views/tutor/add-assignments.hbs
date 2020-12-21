@@ -40,6 +40,7 @@
 		<br><br><br>
 		<form action="/tutor/add-assignments" method="POST" enctype="multipart/form-data" style="margin-left: 20%;"
 			id="assignmentForm">
+			<input type="text" name="date" style="display: none;" value="{{this.present}}">
 			<input type="text" name="topic" placeholder="Topic" required><br>
 			<input type="file" name="assignment" placeholder="Details" accept="application/pdf" required><br>
 			<input type="submit" value="Submit" id="submit" onclick="move();createAlert();">

@@ -3,6 +3,7 @@ var collection=require('../config/collection');
 const bcrypt=require('bcrypt');
 const { response } = require('express');
 const { ObjectId } = require('mongodb');
+const { attendance } = require('../config/notification');
 
 module.exports={
     doSignup:(tutorData)=>{
@@ -94,11 +95,8 @@ module.exports={
     },
     addAssignments:(assignmentdetails)=>{
         return new Promise(async(resolve,reject)=>{
-            var datetime = new Date();
-             
         db.get().collection(collection.ASSIGNMENT_DATA).insertOne(assignmentdetails).then((data)=>{
             resolve(data.ops[0].topic)
-            console.log(datetime);
         })
         })
     },
@@ -203,6 +201,19 @@ module.exports={
             let announcements=await db.get().collection(collection.ANNOUNCEMENTS).find().toArray()
             resolve(announcements)
             console.log(announcements);
+        })
+    },
+    thisDay:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let date_ob = new Date();
+            let date = ("0" + date_ob.getDate()).slice(-2);
+            let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+            let year = date_ob.getFullYear();
+            let timestamp = date + "/" + month + "/" + year;
+            db.get().collection(collection.STUDENT_COLLECTION).findOne({attendance}).then((response)=>{
+                console.log(response);
+                resolve(response)
+            })
         })
     }
    
