@@ -216,6 +216,13 @@ module.exports={
                 resolve(response)
             })
         })
+    },
+    addEvents:(event)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.EVENTS).insertOne(event).then((data)=>{
+                resolve(data)
+            })
+        })
     }
    
 }

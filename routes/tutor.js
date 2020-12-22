@@ -287,6 +287,16 @@ router.get('/ajax',(req,res)=>{
   res.render('tutor/ajax-try')
 })
 router.get('/events',(req,res)=>{
-  res.render('tutor/events')
+  let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let present=(date + "/" + month + "/" + year);
+  res.render('tutor/events',{present})
+})
+router.post('/events',(req,res)=>{
+  tutorHelpers.addEvents(req.body).then(()=>{
+    res.redirect('/tutor/tutor-home')
+  })
 })
 module.exports = router;
