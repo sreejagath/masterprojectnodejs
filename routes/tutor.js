@@ -245,7 +245,7 @@ router.get('/attendance',(req,res)=>{
     console.log(notification.attendance);
     console.log("attendance");
     console.log(presentstudent);
-    let attendance=await tutorHelpers.thisDay()
+    let attendance=await tutorHelpers.thisDay(studentslist)
     console.log(attendance);
       res.render('tutor/attendance',{studentslist,presentstudent,present})
   })
@@ -285,5 +285,8 @@ router.post('/file-upload',(req,res)=>{
 })
 router.get('/ajax',(req,res)=>{
   res.render('tutor/ajax-try')
+})
+router.get('/events',(req,res)=>{
+  res.render('tutor/events')
 })
 module.exports = router;

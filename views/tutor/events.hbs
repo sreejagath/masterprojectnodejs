@@ -2,10 +2,7 @@
 	<div class="templatemo-sidebar">
 		<header class="templatemo-site-header">
 			<div class="square"></div>
-
-
 			<h1>Hi , Tutor !</h1>
-
 		</header>
 		<!-- Search box -->
 
@@ -14,15 +11,15 @@
 		</div>
 		<nav class="templatemo-left-nav">
 			<ul>
-				<li><a href="/tutor/tutor-home" class="active"><i class="fa fa-home fa-fw"></i>Home</a></li>
+				<li><a href="/tutor/tutor-home"><i class="fa fa-home fa-fw"></i>Home</a></li>
 				<li><a href="/tutor/tutor-profile"><i class="fa fa-bar-chart fa-fw"></i>Profile</a></li>
 				<li><a href="/tutor/student-control"><i class="fa fa-database fa-fw"></i>Students</a></li>
 				<li><a href="/tutor/attendance"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
-				<li><a href="/tutor/add-assignments"><i class="fa fa-users fa-fw"></i>Assignments <span
-							id="alert"></span></a></li>
+				<li><a href="/tutor/add-assignments"><i class="fa fa-users fa-fw"></i>Assignments <label
+							id="alert"></label></a></li>
 				<li><a href="/tutor/upload-notes"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
-				<li><a href="/tutor/announcements"><i class="fa fa-eject fa-fw"></i>Announcement</a></li>
-				<li><a href="/tutor/events"><i class="fa fa-eject fa-fw"></i>Events</a></li>
+				<li><a href="#"><i class="fa fa-eject fa-fw"></i>Announcement</a></li>
+				<li><a href="#" class="active"><i class="fa fa-eject fa-fw"></i>Events</a></li>
 				<li><a href="#"><i class="fa fa-eject fa-fw"></i>Photos</a></li>
 			</ul>
 		</nav>
@@ -41,12 +38,34 @@
 		</div>
 		<br>
 		<br><br><br>
-		<div class="left-column" style="color:black">
-			<center><span>ANNOUNCEMENTS</span></center>
-			{{#each announcement}}
-			<a href="/tutor/announcements"><h5> => {{this.Announcement}} </h5></a>
+		<form action="/tutor/events" method="POST" enctype="multipart/form-data" style="margin-left: 20%;"
+			id="assignmentForm">
+			<input type="text" name="date" style="display: none;" value="{{this.present}}">
+			<input type="text" name="event" placeholder="Event" required><br>
+            <input type="text" name="conduct" placeholder="Conducted By" required><br>
+            <input type="text" name="topic" placeholder="Topic" required><br>
+            <input type="text" name="dateevent" placeholder="Date" required><br>
+            <input type="checkbox" name="paid" value="Paid Event">
+            <label for="paid">Paid Event</label><br>
+			<input type="submit" value="Submit">
+		</form>
+
+		<table>
+			<tr>
+				<th>Topic</th>
+				<th>File</th>
+				<th>Action</th>
+			</tr>
+			{{#each all_assignments}}
+			<tr>
+				<td>{{this.topic}}</td>
+				<td><a href="/data/assignments/{{this.topic}}.pdf"> {{this.topic}}.pdf</a></td>
+				<td><button onclick="remove('/tutor/delete-assignment/{{this._id}}','{{this.topic}}')"
+						type="button">Remove</button></td>
+			</tr>
 			{{/each}}
-		</div>
+		</table>
+
 	</div>
 </div>
 </div>
@@ -80,6 +99,18 @@ TABLE OF CONTENT
 		color: #8c929c;
 	}
 
+	#myProgress {
+		width: 60%;
+		background-color: #ddd;
+		margin-bottom: 5%;
+	}
+
+	#myBar {
+		width: 1%;
+		height: 30px;
+		background-color: black;
+	}
+
 	h1,
 	h2,
 	h3 {
@@ -89,18 +120,6 @@ TABLE OF CONTENT
 	h2 {
 		font-size: 1.6em;
 	}
-	.left-column {
-    width: 25%;
-    margin-bottom: 3%;
-    position: absolute;
-    margin-left: 7%;
-    border: 1px solid black;
-    background-color: rgba(255, 253, 253, 0.11);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin-top: -3%;
-	text-align: left;
-  }
-
 
 	h3 {
 		color: #7f7f7f;
@@ -111,6 +130,38 @@ TABLE OF CONTENT
 		list-style-type: none;
 		margin: 0;
 		padding: 0;
+	}
+
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 90%;
+		margin-left: 5%;
+		border-radius: 5%;
+		color: #008bc4;
+		margin-bottom: 20%;
+	}
+
+
+	td,
+	th {
+		border: 2px solid #ccc;
+		text-align: left;
+		padding: 8px;
+		text-align: center;
+	}
+
+	tr:nth-child(even) {
+		background-color: #008bc4;
+		color: white;
+	}
+
+	tr:nth-child(even) a {
+		color: white;
+	}
+
+	input[type=submit]:hover {
+		opacity: 0.7;
 	}
 
 	a:hover {
@@ -582,16 +633,19 @@ TABLE OF CONTENT
 		padding: 3px;
 	}
 
-	input[type=text] {
-		width: 40%;
+	input[type=text],
+	[type=file] {
+		width: 60%;
 		padding: 12px 20px;
 		margin: 8px 0;
 		display: inline-block;
 		border: 1px solid #ccc;
 		box-sizing: border-box;
 		border-radius: 10px;
+		background-color: white;
 	}
 
+	button,
 	input[type=submit] {
 		background-color: #008bc4;
 		color: white;
@@ -604,7 +658,7 @@ TABLE OF CONTENT
 		font-size: 15px;
 		font-family: Verdana, Geneva, Tahoma, sans-serif;
 		margin-bottom: 30px;
-		margin-left: 30px;
+		margin-left: 16%;
 	}
 
 	button:hover {
