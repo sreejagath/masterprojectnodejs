@@ -3,6 +3,18 @@ var router = express.Router();
 var notification=require('../config/notification')
 const tutorHelpers=require('../helpers/tutor-helpers');
 const studentHelpers=require('../helpers/student-helpers');
+const multer = require("multer");
+const { Path } = require('progressbar.js');
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname)
+  }
+})
+ 
+var upload = multer({ storage: storage })
 /* GET users listing. */
 const verifyLogin = (req, res,next) => {
   if (req.session.tutorLoggedIn) {
@@ -299,4 +311,23 @@ router.post('/events',(req,res)=>{
     res.redirect('/tutor/tutor-home')
   })
 })
+router.get("/uploadfile",(req,res)=>{
+  res.render("tutor/upload")
+})
+// Single file
+router.post("/uploadfile", upload.single('myFile'), (req, res, next) => {
+  const file = req.files
+  console.log(req.files);
+  if (!file) {
+    const error = new Error('Please upload a file')
+    error.httpStatusCode = 400
+    return next(error)
+  }
+    res.redirect('/tutor/uploadfile')
+
+})
+// router.post("/upload/single", uploadStorage.single("file"), (req, res) => {
+//   console.log(req.file)
+//   res.redirect("/tutor/upload")
+// })
 module.exports = router;
