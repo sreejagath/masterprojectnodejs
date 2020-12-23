@@ -3,18 +3,15 @@ var router = express.Router();
 var notification=require('../config/notification')
 const tutorHelpers=require('../helpers/tutor-helpers');
 const studentHelpers=require('../helpers/student-helpers');
-const multer = require("multer");
-const { Path } = require('progressbar.js');
+// const { Path } = require('progressbar.js');
+const multer = require('multer');
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads')
-  },
+  destination:'../uploads/',
   filename: function (req, file, cb) {
-    cb(null, file.fieldname)
+    cb(null, file.fieldname+'.jpg')
   }
 })
- 
-var upload = multer({ storage: storage })
+var upload = multer({storage:storage})
 /* GET users listing. */
 const verifyLogin = (req, res,next) => {
   if (req.session.tutorLoggedIn) {
@@ -324,7 +321,6 @@ router.post("/uploadfile", upload.single('myFile'), (req, res, next) => {
     return next(error)
   }
     res.redirect('/tutor/uploadfile')
-
 })
 // router.post("/upload/single", uploadStorage.single("file"), (req, res) => {
 //   console.log(req.file)

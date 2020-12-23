@@ -58,6 +58,12 @@ alert('Hi '+name+', You have an Assignment' )
 			<a href="/student/announcements"><h5> => {{this.Announcement}} <span style="background-color: red;color:white;"> NEW !</span></h5></a>
 			{{/each}}
 		</div>
+		<div class="right-column" style="color:black">
+			<center><span>EVENTS</span></center>
+			{{#each events}}
+			<a href="/student/events"><h5> => {{this.event}} <span style="background-color: red;color:white;"> NEW !</span></h5></a>
+			{{/each}}
+		</div>
 	</div>
 </div>
 </div>
@@ -110,6 +116,17 @@ TABLE OF CONTENT
     margin-bottom: 3%;
     position: absolute;
     margin-left: 7%;
+    border: 1px solid black;
+    background-color: rgba(255, 253, 253, 0.11);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin-top: -3%;
+	text-align: left;
+  }
+  .right-column {
+    width: 25%;
+    margin-bottom: 3%;
+    position: absolute;
+    margin-left: 37%;
     border: 1px solid black;
     background-color: rgba(255, 253, 253, 0.11);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

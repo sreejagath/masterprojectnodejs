@@ -70,9 +70,10 @@ router.get("/student-home", async (req, res) => {
   if (req.session.studentLoggedIn) {
     let student = req.session.student;
     let announcement=await tutorHelpers.getAnnouncements()
+    let events=await tutorHelpers.getEvents()
     console.log(student);
     console.log(notification);
-    res.render("student/student-home", { student, notification,announcement });
+    res.render("student/student-home", { student, notification,announcement,events });
   } else {
     res.render("student/student-login");
   }
