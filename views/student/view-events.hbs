@@ -43,18 +43,18 @@
 				<th>Event</th>
 				<th>Conducted By</th>
 				<th>Topic</th>
-                <th>Date</th>
-                <th>Posted On</th>
-                <th>Type</th>
+				<th>Date</th>
+				<th>Posted On</th>
+				<th>Type</th>
 			</tr>
 			{{#each events}}
 			<tr>
-				<td>{{this.event}}</td>
-				<td>{{this.conduct}}</td>
-				<td>{{this.topic}}</td>
-                <td>{{this.dateevent}}</td>
-                <td>{{this.posted_date}}</td>
-                <td>{{this.paid}}</td>
+				<td><a href="/student/event-details-{{this._id}}">{{this.event}}</a></td>
+				<td><a href="/student/event-details-{{this._id}}">{{this.conduct}}</a></td>
+				<td><a href="/student/event-details-{{this._id}}">{{this.topic}}</a></td>
+				<td><a href="/student/event-details-{{this._id}}">{{this.dateevent}}</a></td>
+				<td><a href="/student/event-details-{{this._id}}">{{this.posted_date}}</a></td>
+				<td><a href="/student/event-details-{{this._id}}">{{this.paid}}</a></td>
 			</tr>
 			{{/each}}
 		</table>

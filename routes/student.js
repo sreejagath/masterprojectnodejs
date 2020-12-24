@@ -252,4 +252,7 @@ router.get('/events',async(req,res)=>{
   let events=await tutorHelpers.getEvents()
   res.render("student/view-events",{events})
 })
+router.get('/event-details-:id',(req,res)=>{
+  res.render('student/event-details')
+})
 module.exports = router;
