@@ -68,7 +68,7 @@
       <p>Posted On: {{eventdetail.posted_date}}</p><br>
       {{#if eventdetail.paid}}
       Amount to join : Rs. {{eventdetail.amount}} <br>
-      <a href="/student/payment">Paid Event ✅ <br> Click to make payment</a>
+      <a href="/student/payment/{{eventdetail._id}}">Paid Event ✅ <br> Click to make payment</a>
       <br><br><br><a href="/student/events">Go Back</a>
       {{else}}
       <p>Amount to join : Free Event</p> 

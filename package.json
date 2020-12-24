@@ -27,6 +27,7 @@
     "nodemon": "^2.0.6",
     "progressbar.js": "^1.1.0",
     "pusher": "^4.0.2",
+    "razorpay": "^2.0.6",
     "require-stack": "^1.0.2",
     "twilio": "^3.53.0"
   },
