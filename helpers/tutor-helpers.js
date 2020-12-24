@@ -227,17 +227,17 @@ module.exports={
     getEvents:()=>{
         return new Promise(async(resolve,reject)=>{
             let all_events=await db.get().collection(collection.EVENTS).find().toArray()
-            let paid=await db.get().collection(collection.EVENTS).findOne({paid:"Paid Event"})
-            console.log(paid);
-            response={}
-            if(paid){
-                response.event=all_events
-                response.status=true
-                        resolve(response)
-            }else{
+            // let paid=await db.get().collection(collection.EVENTS).findOne({paid:"Paid Event"})
+            // console.log(paid);
+            // let response={}
+            // if(paid){
+            //     response.event=all_events
+            //     response.status=true
+            //             resolve(response)
+            // }else{
                 console.log("Events")
-                resolve({status:false},all_events)
-            }
+                resolve(all_events)
+            
         })
     }
    

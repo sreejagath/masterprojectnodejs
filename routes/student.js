@@ -248,4 +248,8 @@ router.get("/attendance",(req,res)=>{
  }
   res.render("student/attendance",{presentstudent})
 })
+router.get('/events',async(req,res)=>{
+  let events=await tutorHelpers.getEvents()
+  res.render("student/view-events",{events})
+})
 module.exports = router;

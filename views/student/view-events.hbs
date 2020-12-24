@@ -1,11 +1,11 @@
-
 <div class="templatemo-flex-row">
 	<div class="templatemo-sidebar">
 		<header class="templatemo-site-header">
 			<div class="square"></div>
 
 
-			<h1>Hi ,{{student.studentname}}!</h1>
+			<h1>Hi , student !</h1>
+
 		</header>
 		<!-- Search box -->
 
@@ -14,14 +14,12 @@
 		</div>
 		<nav class="templatemo-left-nav">
 			<ul>
-				<li><a href="/student/student-home" class="active"><i class="fa fa-home fa-fw"></i>Home</a></li>
-				<li><a href="/student/task-today"><i class="fa fa-bar-chart fa-fw"></i>Today's Task <label
-							id="alert"></label></a></li>
-				<li><a href="/student/attendance"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
-				<li><a href="/student/assignments/{{student._id}}"><i class="fa fa-users fa-fw"></i>Assignments</a></li>
-				<li><a href="/student/view-notes"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
+				<li><a href="/student/student-home"><i class="fa fa-home fa-fw"></i>Home</a></li>
+				<li><a href="/student/task-today"><i class="fa fa-bar-chart fa-fw"></i>Today's Task</a></li>
+				<li><a href="#"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
+				<li><a href="/student/assignments"><i class="fa fa-users fa-fw"></i>Assignments</a></li>
+				<li><a href="/student/view-notes" class="active"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
 				<li><a href="/student/announcements"><i class="fa fa-sliders fa-fw"></i>Announcements</a></li>
-				<li><a href="/student/events"><i class="fa fa-map-marker fa-fw"></i>Events</a></li>
 				<li><a href="#"><i class="fa fa-eject fa-fw"></i>Profile</a></li>
 			</ul>
 		</nav>
@@ -33,38 +31,34 @@
 				<nav class="templatemo-top-nav col-lg-12 col-md-12">
 					<ul class="text-uppercase">
 						<li><a href="#" class="active">Control Panel</a></li>
-						<li style="margin-left:470px"><a href="/student/logout">Log Out</a></li>
+						<li style="margin-left:470px"><a href="/tutor/logout">Log Out</a></li>
 					</ul>
 				</nav>
 			</div>
 		</div>
 		<br>
 		<br><br><br>
-<input type="text" value="{{notification.student}}" style="display: none;" id="notification">
-<input type="text" value="{{student.studentname}}" style="display: none;" id="studentName">
-<script>
-	var student=document.querySelector('#notification').value
-	console.log(student)
-	if(student==="true"){
-var name=document.getElementById("studentName").value
-alert('Hi '+name+', You have an Assignment' )
-	}else{
-		console.log('hi')
-	}
-</script>
-
-		<div class="left-column" style="color:black">
-			<center><span>ANNOUNCEMENTS</span></center>
-			{{#each announcement}}
-			<a href="/student/announcements"><h5> => {{this.Announcement}} <span style="background-color: red;color:white;"> NEW !</span></h5></a>
-			{{/each}}
-		</div>
-		<div class="right-column" style="color:black">
-			<center><span>EVENTS</span></center>
+		<table>
+			<tr>
+				<th>Event</th>
+				<th>Conducted By</th>
+				<th>Topic</th>
+                <th>Date</th>
+                <th>Posted On</th>
+                <th>Type</th>
+			</tr>
 			{{#each events}}
-			<a href="/student/events"><h5> => {{this.event}} <span style="background-color: red;color:white;"> NEW !</span></h5></a>
+			<tr>
+				<td>{{this.event}}</td>
+				<td>{{this.conduct}}</td>
+				<td>{{this.topic}}</td>
+                <td>{{this.dateevent}}</td>
+                <td>{{this.posted_date}}</td>
+                <td>{{this.paid}}</td>
+			</tr>
 			{{/each}}
-		</div>
+		</table>
+
 	</div>
 </div>
 </div>
@@ -112,33 +106,42 @@ TABLE OF CONTENT
 		color: #7f7f7f;
 		font-size: 1.4em;
 	}
-	.left-column {
-    width: 25%;
-    margin-bottom: 3%;
-    position: absolute;
-    margin-left: 7%;
-    border: 1px solid black;
-    background-color: rgba(255, 253, 253, 0.11);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin-top: -3%;
-	text-align: left;
-  }
-  .right-column {
-    width: 25%;
-    margin-bottom: 3%;
-    position: absolute;
-    margin-left: 37%;
-    border: 1px solid black;
-    background-color: rgba(255, 253, 253, 0.11);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin-top: -3%;
-	text-align: left;
-  }
 
 	ul {
 		list-style-type: none;
 		margin: 0;
 		padding: 0;
+	}
+
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 90%;
+		margin-left: 5%;
+		border-radius: 5%;
+		color: #008bc4;
+	}
+
+
+	td,
+	th {
+		border: 2px solid #ccc;
+		text-align: left;
+		padding: 8px;
+		text-align: center;
+	}
+
+	tr:nth-child(even) {
+		background-color: #008bc4;
+		color: white;
+	}
+
+	tr:nth-child(even) a {
+		color: white;
+	}
+
+	input[type=submit]:hover {
+		opacity: 0.7;
 	}
 
 	a:hover {
@@ -610,14 +613,17 @@ TABLE OF CONTENT
 		padding: 3px;
 	}
 
-	input[type=text] {
-		width: 40%;
+	input[type=text],
+	[type=file],
+	select {
+		width: 60%;
 		padding: 12px 20px;
 		margin: 8px 0;
 		display: inline-block;
 		border: 1px solid #ccc;
 		box-sizing: border-box;
 		border-radius: 10px;
+		background-color: white;
 	}
 
 	input[type=submit] {
@@ -632,7 +638,7 @@ TABLE OF CONTENT
 		font-size: 15px;
 		font-family: Verdana, Geneva, Tahoma, sans-serif;
 		margin-bottom: 30px;
-		margin-left: 30px;
+		margin-left: 16%;
 	}
 
 	button:hover {
