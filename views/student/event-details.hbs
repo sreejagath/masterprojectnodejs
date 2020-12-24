@@ -1,1 +1,637 @@
-This is event page
+<div class="templatemo-flex-row">
+	<div class="templatemo-sidebar">
+		<header class="templatemo-site-header">
+			<div class="square"></div>
+
+
+			<h1>Hi ,Student!</h1>
+		</header>
+		<!-- Search box -->
+
+		<div class="mobile-menu-icon">
+			<i class="fa fa-bars"></i>
+		</div>
+		<nav class="templatemo-left-nav">
+			<ul>
+				<li><a href="/student/student-home"><i class="fa fa-home fa-fw"></i>Home</a></li>
+				<li><a href="/student/task-today"><i class="fa fa-bar-chart fa-fw"></i>Today's Task <label
+							id="alert"></label></a></li>
+				<li><a href="/student/attendance"><i class="fa fa-map-marker fa-fw"></i>Attendance</a></li>
+				<li><a href="/student/assignments"><i class="fa fa-users fa-fw"></i>Assignments</a></li>
+				<li><a href="/student/view-notes"><i class="fa fa-sliders fa-fw"></i>Notes</a></li>
+				<li><a href="/student/announcements"><i class="fa fa-sliders fa-fw"></i>Announcements</a></li>
+				<li><a href="/student/events" class="active"><i class="fa fa-map-marker fa-fw"></i>Events</a></li>
+				<li><a href="#"><i class="fa fa-eject fa-fw"></i>Profile</a></li>
+			</ul>
+		</nav>
+	</div>
+	<!-- Main content -->
+	<div class="templatemo-content col-1 light-gray-bg">
+		<div class="templatemo-top-nav-container">
+			<div class="row">
+				<nav class="templatemo-top-nav col-lg-12 col-md-12">
+					<ul class="text-uppercase">
+						<li><a href="#" class="active">Control Panel</a></li>
+						<li style="margin-left:470px"><a href="/student/logout">Log Out</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<br>
+		<br><br><br>
+
+<!-- <div class="card">
+           <img src="/images/tutor-images/{{this._id}}.jpg" alt="Student Image" style="width:100%">
+            <h1 style="text-align:center;color:black;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;font-size:38px">{{this.tutorname}}</h1>
+            <p class="price">{{this.tutorcourse}}</p>
+            <p>Contact:{{this.tutorphone}},<br>{{this.tutormail}}</p>-->
+            <main class="container">
+ 
+  <!-- Left Column / Headphones Image -->
+  {{!-- <div class="left-column">
+    <img src="/images/tutor-images/{{this._id}}.jpg" alt="" class="active">
+  </div> --}}
+ 
+ 
+  <!-- Right Column -->
+  <div class="left-column">
+ 
+    <!-- Product Description -->
+    <div class="product-description">
+        
+      <span>EVENT</span>
+      <h1>{{eventdetail.event}}</h1>
+
+      <p>Topic      : {{eventdetail.topic}}</p><br>
+      <p>Conducted by : {{eventdetail.conduct}}</p><br>
+      <p>Date Of Event       : {{eventdetail.dateevent}}</p><br>
+      <p>Posted On: {{eventdetail.posted_date}}</p><br>
+      {{#if eventdetail.paid}}
+      <a href="">Paid Event ✅ <br> Click to make payment</a>
+      {{/if}}
+    </div>
+ 
+    
+</main>
+
+        </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+    <style>
+      /*
+
+Visual Admin Template
+
+
+
+
+TABLE OF CONTENT
+	1. Universal Styles
+	2. Left Column
+	3. Right Column
+	
+----------------------------------------------*/
+/* 1. Universal Styles
+----------------------------------------------*/
+* {	font-family: 'Open Sans', sans-serif; }
+body {	font-size: 13px; }
+body, .templatemo-left-nav { background:" #fff";color: #8c929c;  }
+h1, h2, h3 { margin: 0; }
+h2 { font-size: 1.6em; }
+h3 {
+	color: #7f7f7f;
+	font-size: 1.4em;
+}
+.left-column {
+  width: 65%;
+  position: relative;
+  margin-left: 7%;
+}
+ 
+.right-column {
+  width: 35%;
+  margin-top: 60px;
+  margin-left: 35%;
+}
+.left-column img {
+  width: absolute;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+ 
+.left-column img.active {
+  opacity: 1;
+}
+.product-description {
+  border-bottom: 1px solid #E1E8EE;
+  margin-bottom: 20px;
+}
+.product-description span {
+  font-size: 12px;
+  color: #358ED7;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.product-description h1 {
+  font-weight: 300;
+  font-size: 52px;
+  color: #43484D;
+  letter-spacing: -2px;
+}
+.product-description p {
+  font-size: 16px;
+  font-weight: 300;
+  color: #86939E;
+  line-height: 24px;
+}
+.product-color {
+  margin-bottom: 30px;
+}
+ 
+.color-choose div {
+  display: inline-block;
+}
+ 
+.color-choose input[type=&amp;quot;radio&amp;quot;] {
+  display: none;
+}
+ 
+.color-choose input[type=&amp;quot;radio&amp;quot;] + label span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+}
+ 
+.color-choose input[type=&amp;quot;radio&amp;quot;] + label span {
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.33);
+}
+ 
+.color-choose input[type=&amp;quot;radio&amp;quot;]#red + label span {
+  background-color: #C91524;
+}
+.color-choose input[type=&amp;quot;radio&amp;quot;]#blue + label span {
+  background-color: #314780;
+}
+.color-choose input[type=&amp;quot;radio&amp;quot;]#black + label span {
+  background-color: #323232;
+}
+ 
+.color-choose input[type=&amp;quot;radio&amp;quot;]:checked + label span {
+  background-image: url(images/check-icn.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.product-price {
+  display: flex;
+  align-items: center;
+}
+ 
+.product-price span {
+  font-size: 26px;
+  font-weight: 300;
+  color: #43474D;
+  margin-right: 20px;
+}
+ 
+.cart-btn {
+  display: inline-block;
+  background-color: #7DC855;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 12px 30px;
+  transition: all .5s;
+}
+.cart-btn:hover {
+  background-color: #64af3d;
+}
+/* Cable Configuration */
+.cable-choose {
+  margin-bottom: 20px;
+}
+ 
+.cable-choose button {
+  border: 2px solid #E1E8EE;
+  border-radius: 6px;
+  padding: 13px 20px;
+  font-size: 14px;
+  color: #5E6977;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all .5s;
+}
+ 
+.cable-choose button:hover,
+.cable-choose button:active,
+.cable-choose button:focus {
+  border: 2px solid #86939E;
+  outline: none;
+}
+ 
+.cable-config {
+  border-bottom: 1px solid #E1E8EE;
+  margin-bottom: 20px;
+}
+ 
+.cable-config a {
+  color: #358ED7;
+  text-decoration: none;
+  font-size: 12px;
+  position: relative;
+  margin: 10px 0;
+  display: inline-block;
+}
+.cable-config a:before {
+  content: &amp;quot;?&amp;quot;;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: 2px solid rgba(53, 142, 215, 0.5);
+  display: inline-block;
+  text-align: center;
+  line-height: 16px;
+  opacity: 0.5;
+  margin-right: 5px;
+}
+ .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+        margin-bottom: 2%;
+
+    }
+
+    .price {
+        color: grey;
+        font-size: 22px;
+    }
+
+    .card button {
+        border: none;
+        outline: 0;
+        padding: 12px;
+        color: white;
+        background-color: #008bc4;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+        border-radius: 0%;
+        margin-bottom: 2px;
+    }
+
+    .card button:hover {
+        opacity: 0.7;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+ul {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a:hover { text-decoration: none; }
+nav li {
+	font-size: 1.1em;
+	list-style: none;	
+	text-transform: uppercase;
+}
+.templatemo-inline-block {
+	display: inline-block;
+	vertical-align: middle;
+}
+.templatemo-block {	display: block; }
+.templatemo-position-relative {	position: relative; }
+.blue-text { color: #39ADB4; }
+.white-text { color: white; }
+.green-bg {	background-color: #39ADB4; }
+.yellow-bg { background-color: #D8D138; }
+.white-bg {	background-color: white; }
+.white-bg .fa-times { background-color: #d7d7d7; }
+.white-bg .fa-times:hover {	background: #83ccd1; }
+.orange-bg {
+	background-color: #F17A54;
+	color: white;
+}
+.orange-bg .fa-times {	background-color: #F0A790; }
+.orange-bg .fa-times:hover { background-color: #E14311; }
+.pink-bg {
+	background-color: #D7425C;
+	color: white;
+}
+.pink-bg .fa-times { background-color: #E57C8F;	}
+.pink-bg .fa-times:hover { background-color: #BD1F3B; }
+.blue-bg {
+	background-color: #3275BB;
+	color: white;
+}
+.blue-bg .fa-times { background-color: #6792C0; }
+.blue-bg .fa-times:hover { background-color: #2C639C; }
+.light-gray-bg { background-color: #efefef; }
+.padding-right-25 {	padding-right: 25px; }
+.margin-bottom-0 {	margin-bottom: 0; }
+.margin-bottom-5 {	margin-bottom: 5px; }
+.margin-bottom-10 {	margin-bottom: 10px; }
+.margin-bottom-30 {	margin-bottom: 30px; }
+.margin-bottom-70 {	margin-bottom: 70px; }
+.margin-right-15 { margin-right: 15px; }
+.margin-10 { margin: 10px; }
+.width-100 { width: 100%; }
+.no-border { border: none; }
+.border-radius-10 { border-radius: 10px; }
+footer { padding: 15px; }
+
+/* 2. Left Column
+-----------------------------*/
+.templatemo-sidebar { width: 300px; }
+.square {
+	width: 25px;
+	height: 25px;
+	border: 3px solid #008bc4;
+	display: inline-block;
+	vertical-align: middle;
+}
+.circle {
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+}
+.templatemo-site-header { margin: 25px 30px; }
+.templatemo-site-header h1 {
+	color: gray;
+	display: inline-block;
+	font-size: 1.8em;
+	font-weight: 300;
+	letter-spacing: 1.5px;
+	margin: 0 4px;	
+  margin-top: 3px;
+	text-transform: uppercase;
+	vertical-align: middle;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.profile-photo-container { position: relative; }
+.profile-photo-overlay {
+	background-color: rgba(4, 152, 114, 0.35);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transition: all 0.3s ease;
+}
+.profile-photo-overlay:hover { background-color: rgba(4, 152, 114, 0); }
+
+/* Search form */
+.templatemo-search-form {
+	font-size: 1.1em;
+	margin: 50px 20px;		
+}
+.templatemo-search-form .input-group { width: 100%; }
+.templatemo-search-form .input-group .form-control {
+	background-color: gray;
+	border: none;
+	border-radius: 10px;
+	color: #DDD;
+	padding-left: 30px;
+}
+.form-control:focus {
+  border-color: #008bc4;
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgba(19,137,95,.075),0 0 8px rgba(19,137,95,.6);
+}
+.form-control.highlight {
+	background-color: #39ADB4;
+	color: gray;
+}
+.form-control.highlight::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #ccc;
+}
+.form-control.highlight:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #ccc;
+   opacity:  1;
+}
+.form-control.highlight::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #ccc;
+   opacity:  1;
+}
+.form-control.highlight:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    #ccc;
+}
+.templatemo-search-form .input-group { position: relative; }
+.fa-search {
+    height:32px;
+    width:32px;
+    border: none;
+    cursor: pointer;
+    color:white;
+    background:transparent;
+    position:absolute;
+    top: 0;
+	left: 0;
+	z-index: 100;
+}
+.mobile-menu-icon { 
+	cursor:pointer;
+	display:none; 
+}
+.templatemo-left-nav li { font-weight: 300; }
+.templatemo-left-nav a.active,
+.templatemo-left-nav a:hover {
+	background: rgb(250, 248, 248);
+	border-left: 8px solid #008bc4;
+}
+.templatemo-left-nav a {
+	color: gray;
+	display: block;
+	padding: 30px;
+	transition: all 0.3s ease;
+}
+.templatemo-left-nav .fa { margin-right: 15px; }
+
+/* 3. Right Column
+------------------------------*/
+.templatemo-top-nav-container {
+	background-color: white;
+	padding: 28px 50px;
+ 	box-shadow: 0px 0px 2px 2px rgba(161, 159, 159, 0.18);
+}
+.templatemo-top-nav li {
+    float: left;
+    list-style: none;
+}
+.templatemo-top-nav a {
+	color: #7f7f7f;
+    display: block;
+    padding: 0 50px;
+    
+}
+
+.templatemo-top-nav a:hover,
+.templatemo-top-nav a.active {
+	color: #39ADB4;
+}
+
+/* Main Content Area */
+.templatemo-content {
+  margin-top: 0px;
+  min-height: 600px;
+  padding: 0;  
+  overflow-x: hidden;
+}
+.templatemo-content-container {	padding: 40px 50px; }
+.templatemo-flex-row {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+.col-1 {
+	-webkit-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+}
+.col-2 {
+	-webkit-flex: 2;
+	    -ms-flex: 2;
+	        flex: 2;
+}
+
+/* Content Widget */
+.templatemo-content-widget {
+	border-radius: 10px;
+	padding: 30px;	
+	position: relative;
+	margin: 10px;
+ 	box-shadow: 0px 0px 1px 1px rgba(161, 159, 159, 0.1);
+}
+.templatemo-content-widget.no-padding {	padding: 0; }
+.fa-times {
+	border-radius: 15px;
+  	color: white;
+  	cursor: pointer;
+	padding: 4px 5px;
+  	position: absolute;
+  	top: 15px;
+  	right: 15px;
+  	z-index: 100;
+  	transition: all 0.3s ease;
+}
+.fa-heart {
+  color: white;
+  cursor: pointer;
+  font-size: 1.4em;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+.fa-heart:hover { color: #39ADB4; }
+.progress {	display: block; }
+.panel-default>.panel-heading {
+	background-color: #39ADB4;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	color: white;
+	padding: 15px;
+}
+.panel-default .fa-times {
+	top: 12px;
+	background-color: #67B5B9;
+}
+.panel-default .fa-times:hover { background-color: #297B7F;	}
+.panel { border-radius: 10px; }
+.pagination-wrap {
+	margin-right: 10px;
+	text-align: right;
+}
+.pagination>li>a {
+	border-color: #E9E8E8;
+	color: #a6a6a6;
+	margin: 2px;
+	padding: 10px;	
+}
+.pagination>li>a,
+.pagination>li:first-child>a,
+.pagination>li:last-child>a {
+	border-radius: 10px;
+}
+.pagination>.active>a, 
+.pagination>.active>a:focus, 
+.pagination>.active>a:hover {
+	background-color: #39ADB4;
+	border-color: #E9E8E8;
+}
+.table { margin-bottom: 0; }
+.table>tbody>tr>td { padding: 10px 15px; }
+.table>thead>tr>td { padding: 15px; }
+.media { margin-top: 0; }
+.media-body { vertical-align: middle; }
+.badge {
+	background-color: #d6973d;
+	border-radius: 5px;
+	margin-left: 5px;
+	padding: 5px 10px;
+	vertical-align: top;
+}
+.templatemo-img-bordered {
+	border: 1px solid #ccc;
+	padding: 3px;
+}
+ input[type=text]{
+      width: 40%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 10px;
+    }
+
+    input[type=submit]{
+      background-color: #008bc4;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 30%;
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      margin-bottom: 30px;
+	  margin-left: 30px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+    img{
+        width: 30%;
+        height: auto;
+        
+    }
+    .card{
+        margin-left: 300px;
+    }
+    h4{
+        margin-left: 30px;
+    }
+
+    </style>

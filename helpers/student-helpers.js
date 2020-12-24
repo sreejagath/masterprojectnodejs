@@ -201,6 +201,13 @@ module.exports = {
                    }
                  }
       })
-  }  
+  },
+  getEventDetails:(id)=>{
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.EVENTS).findOne({_id:ObjectId(id)}).then((response)=>{
+            resolve(response)
+        })
+    })
+}  
 
 };
