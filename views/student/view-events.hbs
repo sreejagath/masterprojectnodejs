@@ -54,7 +54,11 @@
 				<td><a href="/student/event-details-{{this._id}}">{{this.topic}}</a></td>
 				<td><a href="/student/event-details-{{this._id}}">{{this.dateevent}}</a></td>
 				<td><a href="/student/event-details-{{this._id}}">{{this.posted_date}}</a></td>
+				{{#if this.paid}}
 				<td><a href="/student/event-details-{{this._id}}">{{this.paid}}</a></td>
+				{{else}}
+					<td>Free Event</td>
+				{{/if}}
 			</tr>
 			{{/each}}
 		</table>

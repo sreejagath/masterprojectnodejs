@@ -322,6 +322,7 @@ router.post("/uploadfile", upload.single('myFile'), (req, res, next) => {
   }
     res.redirect('/tutor/uploadfile')
 })
+
 // router.post("/upload/single", uploadStorage.single("file"), (req, res) => {
 //   console.log(req.file)
 //   res.redirect("/tutor/upload")

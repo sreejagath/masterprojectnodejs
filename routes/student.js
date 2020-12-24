@@ -256,6 +256,8 @@ router.get('/event-details-:id',async(req,res)=>{
   studentHelpers.getEventDetails(req.params.id).then((eventdetail)=>{
     res.render('student/event-details',{eventdetail})
   })
-  
+})
+router.get("/payment",(req,res)=>{
+  res.render("student/payment")
 })
 module.exports = router;

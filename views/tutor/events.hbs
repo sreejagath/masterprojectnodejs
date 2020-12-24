@@ -45,8 +45,10 @@
             <input type="text" name="conduct" placeholder="Conducted By" required><br>
             <input type="text" name="topic" placeholder="Topic" required><br>
             <input type="text" name="dateevent" placeholder="Date" required><br>
-            <input type="checkbox" name="paid" value="Paid Event">
+            <input type="checkbox" id="paid" name="paid" value="Paid Event" onclick="myFunction()">
             <label for="paid">Paid Event</label><br>
+			<p id="text" style="display:none">
+				<input type="text" placeholder="Amount" name="amount" required></p>
 			<input type="submit" value="Submit">
 		</form>
 
@@ -69,6 +71,17 @@
 	</div>
 </div>
 </div>
+<script>
+function myFunction() {
+  var checkBox = document.getElementById("paid");
+  var text = document.getElementById("text");
+  if (paid.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+}
+</script>
 <style>
 	/*
 

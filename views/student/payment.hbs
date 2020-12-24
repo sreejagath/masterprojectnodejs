@@ -59,21 +59,17 @@
     <!-- Product Description -->
     <div class="product-description">
         
-      <span>EVENT</span>
-      <h1>{{eventdetail.event}}</h1>
-
-      <p>Topic      : {{eventdetail.topic}}</p><br>
-      <p>Conducted by : {{eventdetail.conduct}}</p><br>
-      <p>Date Of Event       : {{eventdetail.dateevent}}</p><br>
-      <p>Posted On: {{eventdetail.posted_date}}</p><br>
-      {{#if eventdetail.paid}}
-      Amount to join : Rs. {{eventdetail.amount}} <br>
-      <a href="/student/payment">Paid Event ✅ <br> Click to make payment</a>
-      <br><br><br><a href="/student/events">Go Back</a>
-      {{else}}
-      <p>Amount to join : Free Event</p> 
-      <br><br><br><a href="/student/events">Go Back</a>
-      {{/if}}
+      <form action="">
+          <input type="text" placeholder="Name"><br>
+          <input type="text" placeholder="Course"><br>
+          <input type="text" placeholder="Event"><br>
+          <input type="text" placeholder="Amount"><br>
+          
+      </form>
+    </div>
+    </div>
+    <div class="right-column">
+<a href=""> Checkout</a>
     </div>
 </main>
 
@@ -109,16 +105,23 @@ h3 {
 	font-size: 1.4em;
 }
 .left-column {
-  width: 65%;
-  position: relative;
-  margin-left: 7%;
-}
- 
-.right-column {
-  width: 35%;
-  margin-top: 60px;
-  margin-left: 35%;
-}
+    width: 25%;
+    margin-bottom: 3%;
+    position: absolute;
+    margin-left: 7%;
+    background-color: rgba(255, 253, 253, 0.11);
+    margin-top: -3%;
+	text-align: left;
+  }
+  .right-column {
+    width: 25%;
+    margin-bottom: 3%;
+    position: absolute;
+    margin-left: 37%;
+    background-color: rgba(255, 253, 253, 0.11);
+    margin-top: -3%;
+	text-align: left;
+  }
 .left-column img {
   width: absolute;
   position: absolute;
@@ -598,7 +601,7 @@ footer { padding: 15px; }
 	padding: 3px;
 }
  input[type=text]{
-      width: 40%;
+      width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
       display: inline-block;
