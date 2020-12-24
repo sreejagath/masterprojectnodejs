@@ -59,18 +59,17 @@
                 <!-- Product Description -->
                 <div class="product-description">
                    <center><h3 style="color: black;font-family:'Open Sans', sans-serif;text-transform: uppercase;">Payment Details</h3></center>
-                    <form action="">
-                        <input type="text" placeholder="Name" value="{{student.studentname}}"><br>
-                        <input type="text" placeholder="Course" value="{{student.studentcourse}}"><br>
-                        <input type="text" placeholder="Event" value="{{event.event}}"><br>
-                        <input type="text" placeholder="Amount" value="{{event.amount}}"><br>
-                        <input type="text" placeholder="Contact Number" value="{{student.studentphone}}"><br>
-                    </form>
+                    <form action="/student/payment" method="POST">
+                        <input type="text" placeholder="Name" name="studentname" value="{{student.studentname}}"><br>
+                        <input type="text" placeholder="Course" name="studentcourse" value="{{student.studentcourse}}"><br>
+                        <input type="text" placeholder="Event" name="event" value="{{event.event}}"><br>
+                        <input type="text" placeholder="Amount" name="amount" value="{{event.amount}}"><br>
+                        <input type="text" placeholder="Contact Number" name="studentphone" value="{{student.studentphone}}"><br>
+                   
                 </div>
             </div>
             <div class="right-column">
-                <center>
-                    <form action="payment" >
+                <center> 
                 <h3 style="color: black;font-family:'Open Sans', sans-serif;text-transform: uppercase;">Make Payment</h3></center>
                 <br>
                 <input type="radio" name="payment" id="razorpay" value="Razorpay"><img src="/images/razor.png" alt="Razorpay"><br>

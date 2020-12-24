@@ -1,7 +1,12 @@
 var db = require("../config/connection");
 var collection = require("../config/collection");
 var ObjectId = require("mongodb").ObjectID;
+const Razorpay=require ('razorpay')
 const bcrypt = require("bcrypt");
+var instance = new Razorpay({
+  key_id: 'rzp_test_AlJ9X88FXMPBH4',
+  key_secret: 'aYRufLxIP1YA6sTUiIpb3LvS',
+});
 module.exports = {
   doSignup: (studentData) => {
     return new Promise(async (resolve, reject) => {
@@ -207,6 +212,27 @@ module.exports = {
         db.get().collection(collection.EVENTS).findOne({_id:ObjectId(id)}).then((response)=>{
             resolve(response)
         })
+    })
+  },
+  payment:(paymentDetails)=>{
+    return new Promise((resolve,reject)=>{
+      db.get().collection(collection.PAYMENT).insertOne(paymentDetails).then((response)=>{
+        console.log(response.ops[0]);
+        resolve(response.ops[0]._id)
+      })
+    })
+  },
+  generateRazorpay:(paymentId,amount)=>{
+    return new Promise((resolve,reject)=>{
+        var options = {
+            amount: amount*100,  // amount in the smallest currency unit
+            currency: "INR",
+            receipt: ""+paymentId
+          };
+          instance.orders.create(options, function(err, order) {
+            console.log("New Payment : ",order);
+            resolve(order)
+          });
     })
 }  
 

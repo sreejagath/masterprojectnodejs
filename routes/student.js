@@ -262,4 +262,15 @@ router.get("/payment/:id",async(req,res)=>{
   let event=await studentHelpers.getEventDetails(req.params.id)
   res.render("student/payment",{student,event})
 })
+router.post("/payment",async(req,res)=>{
+  let amount=req.body.amount
+  console.log(amount);
+  studentHelpers.payment(req.body).then((paymentId)=>{
+     if(req.body['payment']==='Razorpay'){
+       studentHelpers.generateRazorpay(paymentId,amount).then((response)=>{
+         res.json(response)
+       })
+     }
+  })
+})
 module.exports = router;
