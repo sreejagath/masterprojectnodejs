@@ -5,6 +5,14 @@ var notification = require("../config/notification");
 var multer  = require('multer')
 var upload = multer()
 var collection = require("../config/collection");
+var paypal = require('paypal-rest-sdk');
+// configure paypal with the credentials you got when you created your paypal app
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live 
+  'client_id': 'AbgGbrMGPscBPqpltF6L_K8E3Vin7YIzm9vrFRhyC0jbTqXUoVVW7232q3XfYM4w8fQLcDDh3xcygCV_', // please provide your client id here 
+  'client_secret': 'ELEW-2WUZLVtGa7s9FmnJLwMIk3w25heDSnPjmh8MCHOCnb2qGPRDCTk_wPQ8k64yZFczbEy6GR8rxR5' // provide your client secret here 
+});
+
 var twilio = require('twilio')(collection.ACCOUNTSID,collection.AUTHTOKEN)
 const verifyLogin = (req, res, next) => {
   if (req.session.studentLoggedIn) {
@@ -272,5 +280,8 @@ router.post("/payment",async(req,res)=>{
        })
      }
   })
+})
+router.get('/verify-payment',(req,res)=>{
+  console.log(req.body);
 })
 module.exports = router;

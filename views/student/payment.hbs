@@ -59,7 +59,7 @@
                 <!-- Product Description -->
                 <div class="product-description">
                    <center><h3 style="color: black;font-family:'Open Sans', sans-serif;text-transform: uppercase;">Payment Details</h3></center>
-                    <form action="/student/payment" method="POST">
+                    <form action="/student/payment" method="POST" id="payment-form">
                         <input type="text" placeholder="Name" name="studentname" value="{{student.studentname}}"><br>
                         <input type="text" placeholder="Course" name="studentcourse" value="{{student.studentcourse}}"><br>
                         <input type="text" placeholder="Event" name="event" value="{{event.event}}"><br>
@@ -84,6 +84,72 @@
 </div>
 </div>
 </div>
+
+<script>
+    $("#payment-form").submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/student/payment',
+            method: 'post',
+            data: $("#payment-form").serialize(),
+            success: (response) => {
+                alert(response)
+                console.log(response)
+                //if (response.codSuccess) {
+                  //  location.href = '/order-done'
+                //} else {
+                razorpayPayment(response)
+                //}
+            }
+        })
+    })
+    function razorpayPayment(payment) {
+        var options = {
+            "key": "rzp_test_AlJ9X88FXMPBH4", // Enter the Key ID generated from the Dashboard
+            "amount": payment.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Classroom Management",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": payment.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+
+                verifyPayment(response,payment)
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open(); 
+    }
+    function verifyPayment(response,payment){
+        $.ajax({
+            url:'/student/verify-payment',
+            data:{
+                response,
+                payment
+            },
+            method:'post',
+            success:(response)=>{
+                alert("payment success")
+                //if(response.status){
+                 //   location.href = '/order-done'
+                //}else{
+                  //  alert("Payment Failed!")
+                //}
+            }
+        })
+    }
+</script>
 <style>
     /*
 
