@@ -1,11 +1,17 @@
 var db = require("../config/connection");
 var collection = require("../config/collection");
 var ObjectId = require("mongodb").ObjectID;
-const Razorpay=require ('razorpay')
+const Razorpay = require("razorpay");
 const bcrypt = require("bcrypt");
+var paypal = require('paypal-rest-sdk');
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live 
+  'client_id': 'AbgGbrMGPscBPqpltF6L_K8E3Vin7YIzm9vrFRhyC0jbTqXUoVVW7232q3XfYM4w8fQLcDDh3xcygCV_', // please provide your client id here 
+  'client_secret': 'ELEW-2WUZLVtGa7s9FmnJLwMIk3w25heDSnPjmh8MCHOCnb2qGPRDCTk_wPQ8k64yZFczbEy6GR8rxR5' // provide your client secret here 
+});
 var instance = new Razorpay({
-  key_id: 'rzp_test_AlJ9X88FXMPBH4',
-  key_secret: 'aYRufLxIP1YA6sTUiIpb3LvS',
+  key_id: "rzp_test_AlJ9X88FXMPBH4",
+  key_secret: "aYRufLxIP1YA6sTUiIpb3LvS",
 });
 module.exports = {
   doSignup: (studentData) => {
@@ -151,36 +157,41 @@ module.exports = {
       // })
     });
   },
-  addAttendance:(id,attendance)=>{
+  addAttendance: (id, attendance) => {
     return new Promise(async (resolve, reject) => {
       console.log("student:");
       console.log(id);
-      if(attendance===true){
-        presentstudent="Present";
-         }else{
-        presentstudent="Absent";
+      if (attendance === true) {
+        presentstudent = "Present";
+      } else {
+        presentstudent = "Absent";
       }
-     console.log(attendance,presentstudent);
-      let student = await db.get().collection(collection.STUDENT_COLLECTION).findOne({ _id: ObjectId(id) });
-       if (student) {
-         let date_ob = new Date();
-         let date = ("0" + date_ob.getDate()).slice(-2);
-         let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-         let year = date_ob.getFullYear();
-         console.log(date + "/" + month + "/" + year);
-         let timestamp = date + "/" + month + "/" + year;
-         let attendance = {
-           id: ObjectId(id),
-           status:presentstudent,
-           date: timestamp,
-         };
-         console.log("printing date");
-         console.log(attendance.date);
-         let dateExist=student.attendance.findIndex(attendance=> attendance.date==timestamp)
-         console.log("date is present");
-            console.log(dateExist);
-           if (dateExist!=-1){
-             reject
+      console.log(attendance, presentstudent);
+      let student = await db
+        .get()
+        .collection(collection.STUDENT_COLLECTION)
+        .findOne({ _id: ObjectId(id) });
+      if (student) {
+        let date_ob = new Date();
+        let date = ("0" + date_ob.getDate()).slice(-2);
+        let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+        let year = date_ob.getFullYear();
+        console.log(date + "/" + month + "/" + year);
+        let timestamp = date + "/" + month + "/" + year;
+        let attendance = {
+          id: ObjectId(id),
+          status: presentstudent,
+          date: timestamp,
+        };
+        console.log("printing date");
+        console.log(attendance.date);
+        let dateExist = student.attendance.findIndex(
+          (attendance) => attendance.date == timestamp
+        );
+        console.log("date is present");
+        console.log(dateExist);
+        if (dateExist != -1) {
+          reject;
           //    console.log("present here");
           //                       db.get().collection(collection.STUDENT_COLLECTION).updateOne({ _id: ObjectId(id) },
           //                        {
@@ -188,52 +199,148 @@ module.exports = {
           //                          }).then((response) => {
           //                              resolve();
           //                             });
-           }else{
-            console.log("not present");
-            // let attendance = {
-            //   id: ObjectId(id),
-            //   status:presentstudent,
-            //   date: timestamp,
-            // };
-                    db.get().collection(collection.STUDENT_COLLECTION).updateOne({ _id: ObjectId(id) },
-                     {
-                     $push: {
-                     attendance,
-                    }
-                    }).then((response) => {
-                   resolve();
-                     });
-                   }
-                 }
-      })
+        } else {
+          console.log("not present");
+          // let attendance = {
+          //   id: ObjectId(id),
+          //   status:presentstudent,
+          //   date: timestamp,
+          // };
+          db.get()
+            .collection(collection.STUDENT_COLLECTION)
+            .updateOne(
+              { _id: ObjectId(id) },
+              {
+                $push: {
+                  attendance,
+                },
+              }
+            )
+            .then((response) => {
+              resolve();
+            });
+        }
+      }
+    });
   },
-  getEventDetails:(id)=>{
-    return new Promise((resolve,reject)=>{
-        db.get().collection(collection.EVENTS).findOne({_id:ObjectId(id)}).then((response)=>{
-            resolve(response)
-        })
-    })
+  getEventDetails: (id) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.EVENTS)
+        .findOne({ _id: ObjectId(id) })
+        .then((response) => {
+          resolve(response);
+        });
+    });
   },
-  payment:(paymentDetails)=>{
-    return new Promise((resolve,reject)=>{
-      db.get().collection(collection.PAYMENT).insertOne(paymentDetails).then((response)=>{
-        console.log(response.ops[0]);
-        resolve(response.ops[0]._id)
-      })
-    })
+  payment: (paymentDetails) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.PAYMENT)
+        .insertOne(paymentDetails)
+        .then((response) => {
+          console.log(response.ops[0]);
+          resolve(response.ops[0]._id);
+        });
+    });
   },
-  generateRazorpay:(paymentId,amount)=>{
-    return new Promise((resolve,reject)=>{
-        var options = {
-            amount: amount*100,  // amount in the smallest currency unit
-            currency: "INR",
-            receipt: ""+paymentId
-          };
-          instance.orders.create(options, function(err, order) {
-            console.log("New Payment : ",order);
-            resolve(order)
-          });
-    })
-}  
+  generateRazorpay: (paymentId, amount) => {
+    return new Promise((resolve, reject) => {
+      var options = {
+        amount: amount * 100, // amount in the smallest currency unit
+        currency: "INR",
+        receipt: "" + paymentId,
+      };
+      instance.orders.create(options, function (err, order) {
+        console.log("New Payment : ", order);
+        resolve(order);
+      });
+    });
+  },
+  createPay:() => {
+    return new Promise( ( resolve , reject ) => {
+      var amount=350
+      console.log(amount);
+      var payment = {
+        "intent": "sale",
+        "payer": {
+          "payment_method": "paypal",
+        },
+        "redirect_urls": {
+          "return_url": "http:/127.0.0.1:3000/student/events",
+          "cancel_url": "http://127.0.0.1:3000/err",
+        },
+        "transactions": [
+          {
+            "amount": amount,
+            "description": " a book on mean stack ",
+          },
+        ],
+      };
+      console.log("payment");
+        paypal.payment.create( payment , function( err , payment ) {
+         if ( err ) {
+             reject(err); 
+         }
+        else {
+          console.log(payment);
+            resolve(payment); 
+        }
+        }); 
+    });
+}
 
+
+
+//   generatePaypal: (paymentid,amount) => {
+//     return new Promise((resolve, reject) => {
+//       var payment = {
+//         "intent": "authorize",
+// "payer": {
+// "payment_method": "paypal"
+// },
+// "redirect_urls": {
+// "return_url": "http://127.0.0.1:3000/student/events",
+// "cancel_url": "http://127.0.0.1:3000/err"
+// },
+// "transactions": [{
+// "amount": {
+//   "total": amount,
+//   "currency": "INR"
+// },
+// "description": " a book on mean stack "
+// }]
+// }
+
+// // createPay( payment ) 
+// //         .then( ( transaction ) => {
+// //             var id = transaction.id; 
+// //             var links = transaction.links;
+// //             var counter = links.length; 
+// //             while( counter -- ) {
+// //                 if ( links[counter].method == 'REDIRECT') {
+// // 					// redirect to paypal where user approves the transaction 
+// //                     return res.redirect( links[counter].href )
+// //                 }
+// //             }
+// //         })
+// //         .catch( ( err ) => { 
+// //             console.log( err ); 
+// //             res.redirect('/err');
+// //         });
+
+//       var createPay = (payment) => {
+//         return new Promise( ( resolve , reject ) => {
+//             paypal.payment.create( payment , function( err , payment ) {
+//              if ( err ) {
+//                  reject(err); 
+//              }
+//             else {
+//                 resolve(payment); 
+//             }
+//           })
+//         })
+//       }
+//     })
+//   }
 };
