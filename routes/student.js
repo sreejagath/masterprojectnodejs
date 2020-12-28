@@ -276,45 +276,22 @@ router.post("/payment",async(req,res)=>{
   studentHelpers.payment(req.body).then((paymentId)=>{
      if(req.body['payment']==='Razorpay'){
        studentHelpers.generateRazorpay(paymentId,amount).then((response)=>{
-         res.json(response,{razor:true})
-         
+         res.json(response)
        })
      }else if(req.body['payment']==='Paypal'){
-       var payment = {
-         "intent": "sale",
-         "payer": {
-           "payment_method": "paypal",
-         },
-         "redirect_urls": {
-           "return_url": "http:/127.0.0.1:3000/student/events",
-           "cancel_url": "http://127.0.0.1:3000/err",
-         },
-         "transactions": [
-           {
-             "amount": amount,
-             "description": " a book on mean stack ",
-           },
-         ],
-       };
-     }
-       studentHelpers.createPay(amount) 
-        .then( ( transaction ) => {
-            var id = transaction.id; 
-            var links = transaction.links;
-            var counter = links.length; 
-            while( counter -- ) {
-                if ( links[counter].method == 'REDIRECT') {
-					// redirect to paypal where user approves the transaction 
-                    return res.redirect( links[counter].href )
-                }
-            }
+       studentHelpers.createPay(amount).then(( transaction ) => {
+          console.log(transaction);
+          return res.redirect( transaction )  
         })
         .catch( ( err ) => { 
             console.log( err ); 
             res.redirect('/err');
         });
-         res.json(response)
-       })
+    }
+  })
+  })
+      //    res.redirect(transaction)
+      //  })
       // call the create Pay method
       //  createPay(payment)
       //    .then((transaction) => {
@@ -332,8 +309,6 @@ router.post("/payment",async(req,res)=>{
       //      console.log(err);
       //      res.redirect("/err");
       //    });
-      
-    })
 router.get('/verify-payment',(req,res)=>{
   console.log(req.body);
 })
