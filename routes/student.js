@@ -315,4 +315,7 @@ router.post("/payment",async(req,res)=>{
 router.get('/verify-payment',(req,res)=>{
   console.log(req.body);
 })
+router.get('/chat',(req,res)=>{
+  res.render("student/chat")
+})
 module.exports = router;
