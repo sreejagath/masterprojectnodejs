@@ -276,9 +276,12 @@ router.post("/payment",async(req,res)=>{
   studentHelpers.payment(req.body).then((paymentId)=>{
      if(req.body['payment']==='Razorpay'){
        studentHelpers.generateRazorpay(paymentId,amount).then((response)=>{
-         res.json(response)
+        res.json(response)
+        console.log(response.status);
        })
-     }else if(req.body['payment']==='Paypal'){
+     }
+    
+     else if(req.body['payment']==='Paypal'){
        studentHelpers.createPay(amount).then(( transaction ) => {
           console.log(transaction);
           return res.redirect( transaction )  

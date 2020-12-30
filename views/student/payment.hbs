@@ -92,14 +92,10 @@
             url: '/student/payment',
             method: 'post',
             data: $("#payment-form").serialize(),
-            success: (response,status) => {
-                alert(response)
+            success: (response) => {
+                alert(response.razor)
                 console.log(response)
-            if (status){
-                razorpayPayment(response)
-            }else{
-                alert(response)
-            }
+                razorpayPayment(response)    
         })
     })
     function razorpayPayment(payment) {

@@ -31,6 +31,7 @@
     "pusher": "^4.0.2",
     "razorpay": "^2.0.6",
     "require-stack": "^1.0.2",
+    "socket.io": "^3.0.4",
     "twilio": "^3.53.0"
   },
   "devDependencies": {
