@@ -1,4 +1,9 @@
 const { response } = require("express");
+var http = require('http')
+const io = require('socket.io')(http)
+
+
+
 var express = require("express");
 var router = express.Router();
 var notification = require("../config/notification");
@@ -316,6 +321,16 @@ router.get('/verify-payment',(req,res)=>{
   console.log(req.body);
 })
 router.get('/chat',(req,res)=>{
-  res.render("student/chat")
+  tutorHelpers.getTutorDetails().then((tutor)=>{
+    io.on('connection', (socket) => {
+      console.log('a user connected');
+      socket.on('disconnect', () => {
+        console.log('user disconnected');
+      });
+    });
+    res.render("student/chat",{tutor})
+  })
+  
 })
+
 module.exports = router;

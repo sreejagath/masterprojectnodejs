@@ -4,11 +4,10 @@ var notification=require('../config/notification')
 const tutorHelpers=require('../helpers/tutor-helpers');
 const studentHelpers=require('../helpers/student-helpers');
 // const { Path } = require('progressbar.js');
+var fs = require('file-system');
 var multer  = require('multer')
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '../public/data/uploads/')
-  },
+  destination: '../public/data/uploads/',
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
     cb(null, file.fieldname + '-' + uniqueSuffix)
@@ -321,6 +320,9 @@ router.post('/uploadfile', upload.single('avatar'), function (req, res, next) {
   console.log(req.files);
   console.log(upload);
   console.log(upload.storage.DiskStorage);
+  if(req.files.avatar.mimetype=='image/jpeg'){
+    
+  }
     res.redirect('/tutor/uploadfile')
 })
 

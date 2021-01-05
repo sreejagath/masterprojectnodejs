@@ -17,6 +17,8 @@
     "express-fileupload": "^1.2.0",
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
+    "file-system": "^2.2.2",
+    "fs": "0.0.1-security",
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
     "messagebird": "^3.5.0",

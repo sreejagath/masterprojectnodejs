@@ -40,49 +40,34 @@
 		</div>
 		<br>
 		<br><br><br>
-                <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
-  <script defer src="script.js"></script>
-  <style>
-    #message-container {
-      width: 80%;
-      max-width: 1200px;
-    }
+                
 
-    #message-container div {
-      background-color: #CCC;
-      padding: 5px;
-    }
-
-    #message-container div:nth-child(2n) {
-      background-color: #FFF;
-    }
-
-    #send-container {
-      padding-bottom: 30px;
-      bottom: 0;
-      background-color: white;
-      max-width: 1200px;
-      width: 100%;
-      display: flex;
-    }
-    #send-button{
-        width: 10%;
-    }
-    #message-input {
-      width: 90%;
-    }
-  </style>
 </head>
 <body>
+	<div id="chatsquare">
+		
+	{{#each tutor}}
+	<div id="contact">
+		<img src="/images/tutor-images/{{this._id}}.jpg" alt="Profile" style="width:5%;height:auto;border-radius:50%">
+{{this.tutorname}}
+	</div><br>{{/each}}
   <div id="message-container"></div>
   <form id="send-container">
     <input type="text" id="message-input">
-    <button type="submit" id="send-button">Send</button>
+	<input type="submit" value="Submit" id="submit" name="submit">
+	{{!-- <a href=""><img src="/images/send.png" alt="" style="width:50%;height:auto" id="send-button"></a> --}}
+    
   </form>
+  
+	</div>
 		</div>
 	</div>
 </div>
 </div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+</script>
 <style>
 	/*
 
@@ -149,7 +134,49 @@ TABLE OF CONTENT
     margin-top: -3%;
 	text-align: left;
   }
+  #message-container {
+      width: 80%;
+      max-width: 1200px;
+    }
 
+    #message-container div {
+      background-color: #CCC;
+      padding: 5px;
+    }
+
+    #message-container div:nth-child(2n) {
+      background-color: #FFF;
+    }
+
+    #send-container {
+      padding-bottom: 30px;
+      bottom: 0;
+      background-color: white;
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+	  margin-top: flex;
+    }
+    
+    #message-input {
+      width: 100%;
+      flex-grow: 1;
+    
+    }
+	#contact{
+		width: 100%;
+		background-color: white;
+		height: 7%;
+		margin-top: 0%;
+		 justify-content: center;
+	}
+	#chatsquare{
+		width: 60%;
+		margin-top: -8%;
+		margin-left: 20%;
+		height: 50%;
+		border: 1px solid grey;
+	}
 	ul {
 		list-style-type: none;
 		margin: 0;
